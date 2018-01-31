@@ -15,7 +15,7 @@ public class MainController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("?12313233213132");
 				
-		mav.setViewName("index/index");
+		mav.setViewName("test/fileUpload");
 		return mav;
 	}
 	

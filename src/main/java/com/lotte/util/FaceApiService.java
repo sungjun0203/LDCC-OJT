@@ -32,7 +32,7 @@ public class FaceApiService
     //
     // NOTE: Free trial subscription keys are generated in the westcentralus region, so if you are using
     // a free trial subscription key, you should not need to change this region.
-    public static final String uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
+    public static final String uriBase = "https://westcentra lus.api.cognitive.microsoft.com/face/v1.0/detect";
 
 
     public static void main()
