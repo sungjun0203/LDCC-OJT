@@ -17,12 +17,13 @@ public class KakaoApiService {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
 			HttpPost httpPost = new HttpPost(meesagePlatformUrl);
-
+			
+			String myPhone = "01035660203";
 			
 			httpPost.setHeader("Authorization", "Basic " + authKey);
 			httpPost.setHeader("Content-Type", "application/json; charset=EUC-KR");
 			String body2 = "{ \"msg_id\" : \"iot\", \"dest_phone\" : \"" + send_phone + "\", \"send_phone\" : \""
-					+ send_phone + "\", \"sender_key\" : \"" + sender_key + "\", \"msg_body\" : \"" + message
+					+ myPhone + "\", \"sender_key\" : \"" + sender_key + "\", \"msg_body\" : \"" + message
 					+ "\", \"ad_flag\" : \"N\" }";
 
 			ByteArrayEntity entity = new ByteArrayEntity(body2.getBytes("UTF-8"));

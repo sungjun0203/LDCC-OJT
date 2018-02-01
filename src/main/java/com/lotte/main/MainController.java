@@ -18,7 +18,7 @@ public class MainController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("test/fileUpload");
+		mav.setViewName("test2/test21");
 		return mav;
 	}
 	

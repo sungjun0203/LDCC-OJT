@@ -23,3 +23,12 @@
 <script src="/resources/assets/js/morris/morris.js"></script>
   <!-- CUSTOM SCRIPTS -->
 <script src="/resources/assets/js/custom.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+<%
+	if(session.getAttribute("SID")==null){
+		response.sendRedirect("/");  
+	}
+%>

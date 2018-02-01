@@ -18,13 +18,13 @@ body {
 
  #wrapper {
     width: 100%;
-    background:#202020;
+    background:#E20411;
 }
 
 #page-wrapper {
     padding: 15px 15px;
     min-height: 600px;
-    background:#F3F3F3;
+    background:#F0F3F8;
    
 }
 #page-inner {
@@ -207,15 +207,17 @@ max-width:170px;
 
 .navbar-cls-top .navbar-brand {
 	color: #fff;
-background: #C90000;
-width: 260px;
+background: white;
+width: 120px;
 text-align: center;
-height: 60px;
+height: 80px;
 font-size: 30px;
 font-weight: 700;
 }
 .active-menu {
-    background-color:#C90000!important;
+    text-align: center;
+    background-color:#fff !important;
+    color:#E20411 !important;
 }
 
 .arrow {
@@ -251,7 +253,7 @@ font-weight: 700;
 }
 .sidebar-collapse .nav > li > a {
 	color:#fff;
-	background:#202020;
+	background:#E20411;
 	text-shadow:none;
 	
 }
@@ -259,12 +261,13 @@ font-weight: 700;
 	padding:15px 10px;
 }
 .sidebar-collapse > .nav > li {
-	border-bottom: 1px solid rgba(107, 108, 109, 0.19);
+	border-bottom: 0px solid rgba(255, 255, 255, 1);
 }
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
 	
-	background:#0A0A0A;
+	background:#fff;
+	color:#E20411;
 	outline:0;
 }
 
@@ -305,8 +308,10 @@ font-weight: 700;
 	
 }
 .navbar-cls-top {
-	background:#4D4D4D;
+	background:#F9F9FC;
 	border-bottom:none;
+	box-shadow: 5px 5px 5px lightgray;
+
 	
 }
 .navbar-cls-top .navbar-brand:hover {
@@ -318,10 +323,9 @@ color:#fff;
 
 .navbar-default {
 border:0px solid black;
-     
 }
 .navbar-header {
-    background: #A70303;
+    background: white;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
 background-color: #B40101;
@@ -357,7 +361,7 @@ line-height: 1.428571429;
  
  @media(min-width:768px) {
      #page-wrapper{
-               margin: 0 0 0 260px;
+               margin: 0 0 0 120px;
         padding: 15px 30px;
         min-height: 1200px;
 		
@@ -367,7 +371,7 @@ line-height: 1.428571429;
     .navbar-side {
         z-index: 1;
         position: absolute;
-        width: 260px;
+        width: 120px;
     }
 
    .navbar {
