@@ -20,7 +20,7 @@
 	
 	<H1>얼굴인식 테스트</H1>
 	
-	<form id="machineForm" name="machineForm"  action="/abcd" enctype="multipart/form-data"  method="POST">
+	<form id="machineForm" name="machineForm"  action="/test12/" enctype="multipart/form-data"  method="POST">
 		<div class="form-group">
 	      <label for="exampleInputFile">File input</label>
 	      <input type="file" id="file" name="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">

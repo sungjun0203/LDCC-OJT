@@ -7,7 +7,7 @@
 	<select id="adminLoginCheck" parameterType="AdminDto" resultType="Integer">
 		select count(*)
 		from admin
-		where id=#{adminId} and password=#{adminPw}
+		where admin_id=#{adminId} and admin_password=#{adminPw}
 	</select>
 	
 

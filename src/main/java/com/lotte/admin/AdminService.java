@@ -1,5 +1,7 @@
 package com.lotte.admin;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,17 +11,21 @@ public class AdminService {
 	@Autowired
 	AdminDao adminDao;
 	
-	public String adminLoginCheck(AdminDto adminDto) {
+	// 작성자 : 박성준
+	// 로그인 체크
+	public String adminLoginCheck(HttpSession session, AdminDto adminDto) {
 		
-		System.out.println("Admin Id : " + adminDto.getAdminId());
-		System.out.println("Admin Pw : " + adminDto.getAdminPw());
-		
-		System.out.println("admin check : " + adminDao.adminLoginCheck(adminDto));
-		
-		if(adminDao.adminLoginCheck(adminDto)==0)
+		// 아이디와 비밀번호 둘다 일치하는 개수 검색
+		if(adminDao.adminLoginCheck(adminDto)==0) {
 			return "fail";
-		else
+		}
+			
+		else {
+			//로그인 성공시 세션 저장(SID)
+			session.setAttribute("SID", adminDto.getAdminId());
 			return "success";
+		}
+			
 		
 	}
 

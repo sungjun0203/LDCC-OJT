@@ -38,6 +38,29 @@
     </script>
     
     
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['정상',     ${vendingCount.normalVendingCount}],
+          ['에러',      ${vendingCount.errVendingCount}],
+        ]);
+
+        var options = {
+                title: '자판기 현황',
+                pieHole: 0.4,
+         };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    
 </head>
 <body>
 
@@ -56,6 +79,8 @@
 	<div class="col-lg-12" style="margin-bottom:20px">
 	
 		<div id="piechart" style="height: 400px;"></div>
+		
+		<div id="donutchart" style="height: 400px;"></div>
 		
 		<button type="button" class="btn btn-primary">Primary</button>
 		<button type="button" class="btn btn-secondary">Secondary</button>
@@ -81,43 +106,3 @@
 
 </body>
 </html>
-
-<script>
-
-function test(){
-	
-	var msgId = "01035660203";
-	var msgBody = "test";
-	var destPhone="01035660203";
-	
-	$.ajax({
-		url:"http://210.93.181.229:9000/v1/send/kakao-friend",
-		type:"POST",
-		dataType:"JSON",
-		headers:{
-			"cache-control" : "no-cache",
-			"Content-Type" : "application/json",
-			"Authorization" : "Y2xhc3M6c2VjcmV0MTIhQA=="
-		},
-		data:{
-			msg_id : msgId,
-			msg_body : msgBody,
-			send_time : "",
-			dest_phone : destPhone,
-			send_phone : "01035660203",
-			sender_key : "d6b73318d4927aa80df1022e07fecf06c55b44bf",
-			ad_flag : "N"
-		},
-		
-		success:function(code){		
-			alert(code);
-			
-		},
-		error:function(code,msg,data){
-			alert("code"+code.val+" msg" + msg + " data" + data);
-		}
-	});
-	
-}
-
-</script>

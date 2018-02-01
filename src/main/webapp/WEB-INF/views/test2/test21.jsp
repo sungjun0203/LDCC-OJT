@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Binary admin</a> 
+                <a class="navbar-brand" href="index.html"><img src="assets/img/logo-new.jpg" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a> 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
@@ -37,33 +37,29 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-				<li class="text-center">
-                    <img src="/resources/assets/img/find_user.png" class="user-image img-responsive"/>
-					</li>
-				
-					
+               
                     <li>
-                        <a class="active-menu"  href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                        <a class="active-menu"  href="index.html" ><i class="fa fa-home fa-3x"></i> <br>Home</a>
                     </li>
                      <li>
-                        <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
+                        <a  class="text-center" href="ui.html"><i class="fa fa-users fa-3x"></i> <br>Member</a>
                     </li>
-                    <li>
-                        <a  href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
+                     <li>
+                        <a  class="text-center" href="tab-panel.html"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
                     </li>
-						   <li  >
-                        <a   href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
-                    </li>	
+                     <li  >
+                        <a  class="text-center" href="chart.html"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
+                    </li>   
                       <li  >
-                        <a  href="table.html"><i class="fa fa-table fa-3x"></i> Table Examples</a>
+                        <a  class="text-center" href="table.html"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
                     </li>
                     <li  >
-                        <a  href="form.html"><i class="fa fa-edit fa-3x"></i> Forms </a>
-                    </li>				
-					
-					                   
+                        <a  class="text-center" href="form.html"><i class="fa fa-bullhorn fa-3x"></i> <br>Notice </a>
+                    </li>            
+               
+                                  
                     <li>
-                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                        <a  class="text-center" href="#"><i class="fa fa-sitemap fa-3x"></i> <br>Multi-Level Dropdown<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="#">Second Level Link</a>
@@ -90,8 +86,8 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         </ul>
                       </li>  
                   <li  >
-                        <a  href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
-                    </li>	
+                        <a   class="text-center" href="blank.html"><i class="fa fa-square-o fa-3x"></i> <br>Blank Page</a>
+                    </li>      
                 </ul>
                
             </div>
@@ -110,7 +106,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                   <hr />
                 <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
+         <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-red set-icon">
                     <i class="fa fa-envelope-o"></i>
                 </span>
@@ -119,9 +115,9 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <p class="text-muted">Messages</p>
                 </div>
              </div>
-		     </div>
+           </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
+         <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-green set-icon">
                     <i class="fa fa-bars"></i>
                 </span>
@@ -130,9 +126,9 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <p class="text-muted">Remaining</p>
                 </div>
              </div>
-		     </div>
+           </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
+         <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-blue set-icon">
                     <i class="fa fa-bell-o"></i>
                 </span>
@@ -141,9 +137,9 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <p class="text-muted">Notifications</p>
                 </div>
              </div>
-		     </div>
+           </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
+         <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-brown set-icon">
                     <i class="fa fa-rocket"></i>
                 </span>
@@ -152,13 +148,13 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <p class="text-muted">Pending</p>
                 </div>
              </div>
-		     </div>
-			</div>
+           </div>
+         </div>
                  <!-- /. ROW  -->
                 <hr />                
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">           
-			<div class="panel panel-back noti-box">
+         <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-blue">
                     <i class="fa fa-warning"></i>
                 </span>
@@ -175,7 +171,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     </p>
                 </div>
              </div>
-		     </div>
+           </div>
                     
                     
                     <div class="col-md-3 col-sm-12 col-xs-12">
@@ -208,7 +204,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <p class="text-muted">Looking Good</p>
                 </div>
              </div>
-			
+         
     </div>
                         
         </div>
@@ -383,7 +379,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                             <ul class="chat-box">
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="/resources/assets/img/1.png" alt="User" class="img-circle" />
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body">                                        
                                             <strong >Jack Sparrow</strong>
@@ -398,7 +394,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
 
-                                        <img src="/resources/assets/img/2.png" alt="User" class="img-circle" />
+                                        <img src="assets/img/2.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                         
@@ -413,7 +409,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 </li>
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                         <img src="/resources/assets/img/3.png" alt="User" class="img-circle" />
+                                         <img src="assets/img/3.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                         
@@ -428,7 +424,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                         <img src="/resources/assets/img/4.png" alt="User" class="img-circle" />
+                                         <img src="assets/img/4.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                       
@@ -443,7 +439,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 </li>
                                     <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="/resources/assets/img/1.png" alt="User" class="img-circle" />
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body">                                        
                                             <strong >Jack Sparrow</strong>
@@ -457,7 +453,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                       <img src="/resources/assets/img/2.png" alt="User" class="img-circle" />
+                                       <img src="assets/img/2.png" alt="User" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                         
@@ -520,8 +516,8 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
          <!-- /. PAGE WRAPPER  -->
         </div>
      <!-- /. WRAPPER  -->
-    
-    
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
     
    
 </body>

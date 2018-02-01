@@ -1,12 +1,11 @@
 package com.lotte.admin;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.lotte.util.FaceApiService;
 
 @Controller
 @RequestMapping("/admin")
@@ -15,22 +14,11 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
-	@Autowired
-	FaceApiService faceApiService;
-	
-	@RequestMapping("/")
-	public ModelAndView loginPage() {
-		return new ModelAndView("/index/indexTemp");
-	}
-	
-	
+	// 로그인 체크
 	@RequestMapping("/loginCheck")
 	@ResponseBody
-	public String siginInCheck(AdminDto adminDto) {
-		
-		//faceApiService.main();
-		
-		return adminService.adminLoginCheck(adminDto);
+	public String siginInCheck(HttpSession session, AdminDto adminDto) {
+		return adminService.adminLoginCheck(session,adminDto);
 	}	
 	
 	

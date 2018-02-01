@@ -12,9 +12,13 @@
 
 	<typeAliases>
 		<package name="com.lotte.admin" />
+		<package name="com.lotte.test" />
+		<package name="com.lotte.vending" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/adminSql.xml" />
+		<mapper resource="mapper/vendingSql.xml" />
+		<mapper resource="mapper/testSql.xml" />
 	</mappers>
 
 </configuration>

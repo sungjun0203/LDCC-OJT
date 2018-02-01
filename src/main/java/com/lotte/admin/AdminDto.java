@@ -2,7 +2,7 @@ package com.lotte.admin;
 
 public class AdminDto {
 	
-	String adminId;
+	String adminId;			
 	String adminPw;
 	String adminPhone;
 	String adminNm;

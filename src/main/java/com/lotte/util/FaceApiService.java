@@ -1,102 +1,111 @@
 package com.lotte.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.FileEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class FaceApiService
-{
-    // **********************************************
-    // *** Update or verify the following values. ***
-    // **********************************************
+public class FaceApiService {
 
-    // Replace the subscriptionKey string value with your valid subscription key.
-    public static final String subscriptionKey = "d5617c8889434123bfb79e7c1fe55808";
+	public static final String subscriptionKey = "d5617c8889434123bfb79e7c1fe55808";
+	public static final String uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
 
-    // Replace or verify the region.
-    //
-    // You must use the same region in your REST API call as you used to obtain your subscription keys.
-    // For example, if you obtained your subscription keys from the westus region, replace
-    // "westcentralus" in the URI below with "westus".
-    //
-    // NOTE: Free trial subscription keys are generated in the westcentralus region, so if you are using
-    // a free trial subscription key, you should not need to change this region.
-    public static final String uriBase = "https://westcentra lus.api.cognitive.microsoft.com/face/v1.0/detect";
+	public HashMap<String,Object> faceAnalysis(@RequestParam("file") MultipartFile file) {
+		
+		
+		HashMap<String,Object> faceResult = new HashMap<String,Object>();
 
+		HttpClient httpclient = new DefaultHttpClient();
 
-    public static void main()
-    {
-        HttpClient httpclient = new DefaultHttpClient();
-        
-        System.out.println("?????????????????");
+		try {
+			URIBuilder builder = new URIBuilder(uriBase);
 
-        try
-        {
-            URIBuilder builder = new URIBuilder(uriBase);
+			// Request parameters. All of them are optional.
+			builder.setParameter("returnFaceId", "true");
+			builder.setParameter("returnFaceLandmarks", "false");
+			builder.setParameter("returnFaceAttributes", "age,gender");
 
-            // Request parameters. All of them are optional.
-            builder.setParameter("returnFaceId", "true");
-            builder.setParameter("returnFaceLandmarks", "false");
-            builder.setParameter("returnFaceAttributes", "age,gender");
+			// Prepare the URI for the REST API call.
+			URI uri = builder.build();
+			HttpPost request = new HttpPost(uri);
 
-            // Prepare the URI for the REST API call.
-            URI uri = builder.build();
-            HttpPost request = new HttpPost(uri);
+			// Request headers.
+			request.setHeader("Content-Type", "application/octet-stream");
+			request.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
 
-            // Request headers.
-            request.setHeader("Content-Type", "application/json");
-            request.setHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+			// Request body.
 
-            // Request body.
-            StringEntity reqEntity = new StringEntity("{\"url\":\"https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-9/27459626_1547841088666471_7974844365165681073_n.jpg?oh=09e1218df52a79ffa99b7bdebfcd7258&oe=5ADDBA0A\"}");
-            request.setEntity(reqEntity);
+			System.out.println(file.getName());
 
-            // Execute the REST API call and get the response entity.
-            HttpResponse response = httpclient.execute(request);
-            HttpEntity entity = response.getEntity();
+			FileEntity reqEntity = new FileEntity(convert(file), ContentType.APPLICATION_OCTET_STREAM);
+			request.setEntity(reqEntity);
 
-            if (entity != null)
-            {
-                // Format and display the JSON response.
-                System.out.println("REST Response:\n");
+			HttpResponse response = httpclient.execute(request);
+			HttpEntity entity = response.getEntity();
+			System.out.println(response.getStatusLine());
 
-                String jsonString = EntityUtils.toString(entity).trim();
-                
-                System.out.println("123 : " + jsonString);
-                if (jsonString.charAt(0) == '[') {
-                    JSONArray jsonArray = new JSONArray(jsonString);
-                    System.out.println(jsonArray.toString(2));
-                    
-                    System.out.println("json : " + jsonArray.get(0).toString());
-                }
-                else if (jsonString.charAt(0) == '{') {
-                    JSONObject jsonObject = new JSONObject(jsonString);
-                    
-                    System.out.println("json : " + jsonObject.get("gender"));
-                    System.out.println(jsonObject.toString(2));
-                } else {
-                    System.out.println(jsonString);
-                }
-            }
-            
-            
-            
-        }
-        catch (Exception e)
-        {
-            // Display error message.
-            System.out.println(e.getMessage());
-        }
-    }
+			if (entity != null) {
+				// Format and display the JSON response.
+				System.out.println("REST Response:\n");
+
+				String jsonString = EntityUtils.toString(entity).trim();
+
+				if (jsonString.charAt(0) == '[') {
+					JSONArray jsonArray = new JSONArray(jsonString);
+					System.out.println(jsonArray.toString(2));
+				} else if (jsonString.charAt(0) == '{') {
+					JSONObject jsonObject = new JSONObject(jsonString);
+
+					System.out.println(jsonObject.toString(2));
+				} else {
+					System.out.println(jsonString);
+				}
+				
+				JSONArray arr = new JSONArray(jsonString);
+				JSONObject faceAttributes = arr.getJSONObject(0).getJSONObject("faceAttributes");;
+				
+				String gender = faceAttributes.getString("gender");
+				String age = faceAttributes.getString("age");
+				
+				faceResult.put("age", age);
+				faceResult.put("gender",gender);
+			}
+			else {
+				faceResult.put("age", null);
+				faceResult.put("gender",null);
+			}
+
+		} catch (Exception e) {
+			// Display error message.
+			System.out.println(e.getMessage());
+		}
+		
+		return faceResult;
+	}
+
+	public File convert(MultipartFile file) throws IOException {
+		File convFile = new File(file.getOriginalFilename());
+		convFile.createNewFile();
+		FileOutputStream fos = new FileOutputStream(convFile);
+		fos.write(file.getBytes());
+		fos.close();
+		return convFile;
+	}
 }
