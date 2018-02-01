@@ -29,9 +29,7 @@ public class testService {
 	public static final String uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
 
 	@RequestMapping("/abcd")
-	public String machineFileTest(@RequestParam("file")MultipartFile file)
-{
-		
+	public String machineFileTest(@RequestParam("file") MultipartFile file) {
 
 		HttpClient httpclient = new DefaultHttpClient();
 
@@ -67,18 +65,30 @@ public class testService {
 				System.out.println("REST Response:\n");
 
 				String jsonString = EntityUtils.toString(entity).trim();
+
+				System.out.println("123 : " + jsonString);
 				if (jsonString.charAt(0) == '[') {
 					JSONArray jsonArray = new JSONArray(jsonString);
 					System.out.println(jsonArray.toString(2));
 				} else if (jsonString.charAt(0) == '{') {
 					JSONObject jsonObject = new JSONObject(jsonString);
+
 					System.out.println(jsonObject.toString(2));
 				} else {
 					System.out.println(jsonString);
 				}
 				
-				System.out.println(file.getOriginalFilename());
+				JSONArray arr = new JSONArray(jsonString);
+				JSONObject faceAttributes = arr.getJSONObject(0).getJSONObject("faceAttributes");;
+				
+				String gender = faceAttributes.getString("gender");
+				String age = faceAttributes.getString("age");
+				
+				System.out.println("gender :" + gender);
+				System.out.println("age :" + age);
+
 			}
+
 		} catch (Exception e) {
 			// Display error message.
 			System.out.println(e.getMessage());

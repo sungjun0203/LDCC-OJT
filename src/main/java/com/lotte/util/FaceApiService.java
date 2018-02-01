@@ -38,6 +38,8 @@ public class FaceApiService
     public static void main()
     {
         HttpClient httpclient = new DefaultHttpClient();
+        
+        System.out.println("?????????????????");
 
         try
         {
@@ -70,17 +72,26 @@ public class FaceApiService
                 System.out.println("REST Response:\n");
 
                 String jsonString = EntityUtils.toString(entity).trim();
+                
+                System.out.println("123 : " + jsonString);
                 if (jsonString.charAt(0) == '[') {
                     JSONArray jsonArray = new JSONArray(jsonString);
                     System.out.println(jsonArray.toString(2));
+                    
+                    System.out.println("json : " + jsonArray.get(0).toString());
                 }
                 else if (jsonString.charAt(0) == '{') {
                     JSONObject jsonObject = new JSONObject(jsonString);
+                    
+                    System.out.println("json : " + jsonObject.get("gender"));
                     System.out.println(jsonObject.toString(2));
                 } else {
                     System.out.println(jsonString);
                 }
             }
+            
+            
+            
         }
         catch (Exception e)
         {

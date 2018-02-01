@@ -49,11 +49,14 @@
 	
 	<H1>로그인성공</H1>
 	
-	<div id="piechart" style="width: 900px; height: 500px;"></div>
+	
 	
 	
 
 	<div class="col-lg-12" style="margin-bottom:20px">
+	
+		<div id="piechart" style="height: 400px;"></div>
+		
 		<button type="button" class="btn btn-primary">Primary</button>
 		<button type="button" class="btn btn-secondary">Secondary</button>
 		<button type="button" class="btn btn-success">Success</button>
