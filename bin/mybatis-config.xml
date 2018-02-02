@@ -2,8 +2,6 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-
-
 <configuration>
 
 	<settings>
@@ -14,11 +12,13 @@
 		<package name="com.lotte.admin" />
 		<package name="com.lotte.test" />
 		<package name="com.lotte.vending" />
+		<package name="com.lotte.member" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/adminSql.xml" />
 		<mapper resource="mapper/vendingSql.xml" />
 		<mapper resource="mapper/testSql.xml" />
+		<mapper resource="mapper/memberSql.xml" />
 	</mappers>
 
 </configuration>

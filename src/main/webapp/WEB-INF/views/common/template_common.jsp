@@ -27,8 +27,54 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
-<%
-	if(session.getAttribute("SID")==null){
-		response.sendRedirect("/");  
-	}
-%>
+
+
+
+
+
+
+<script src="/resources/sweetalert/sweetalert.js"></script>
+
+
+        
+        
+        <script>
+
+function moveHome(id){
+	
+	
+	location.href="/main/main"
+	
+}
+
+function moveMember(id){
+	
+		location.href="/member/list"
+}
+
+function moveMachine(){
+	
+}
+
+
+function moveAnalysis(){
+	
+}
+
+function moveSales(){
+	
+	
+}
+
+function moveNotice(){
+	
+	
+	
+}
+
+
+
+
+</script>
+
+

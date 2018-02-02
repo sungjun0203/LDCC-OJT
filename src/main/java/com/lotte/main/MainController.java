@@ -3,23 +3,29 @@ package com.lotte.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.lotte.util.FaceApiService;
-import com.lotte.util.KakaoApiService;
+import com.lotte.analysis.VendingAnalysisService;
 @Controller
 @RequestMapping("/main")
 public class MainController {
 	
+	@Autowired 
+	VendingAnalysisService vendingAnalysisService;
+	
+	
 	// 메인 페이지
-	@RequestMapping("/")
-	public ModelAndView index() throws Exception {
+	@RequestMapping("/main")
+	public ModelAndView index(Model model) throws Exception {
 		
-		ModelAndView mav = new ModelAndView();
 		
-		mav.setViewName("test2/test21");
-		return mav;
+		model.addAttribute("vendingCount", vendingAnalysisService.vendingCount());
+		model.addAttribute("problemVending", vendingAnalysisService.problemVending());
+		
+		return new ModelAndView("admin/main");
 	}
+	
 	
 }

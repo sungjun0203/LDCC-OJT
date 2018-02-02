@@ -9,12 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 	
-	// 인덱스 페이지
+	// 인덱스
 	@RequestMapping("/")
 	public ModelAndView index() {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index/index");
+		mav.setViewName("/index/index");
 		return mav;
 	}
 	

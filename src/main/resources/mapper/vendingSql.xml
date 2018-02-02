@@ -4,7 +4,7 @@
 
 <mapper namespace="com.lotte.vending.VendingDao">
 
-	<select id="normalityVendingCount" resultType="Integer">
+	<select id="allVendingCount" resultType="Integer">
 		select count(*)
 		from vending
 	</select>
@@ -12,6 +12,24 @@
 	<select id="errVendingCount" resultType="Integer">
 		select count(*)
 		from errorInfo
+	</select>
+	
+	
+	<select id="problemVending" resultType="HashMap">
+	
+	<![CDATA[
+		SELECT 		errorinfo.vending_id, asinfo.as_name,asinfo.as_id, asinfo.as_phone,'고장' as 'state'
+		FROM 		asinfo,errorinfo
+		WHERE 		(errorinfo.vending_id=errorinfo.vending_id and
+					 asinfo.as_id=errorinfo.as_id)
+		union
+		
+		SELECT 		stocks.vending_id, asinfo.as_name,asinfo.as_id, asinfo.as_phone, '재고 부족	' as 'state'
+		FROM 		ojt.stocks, asinfo
+		WHERE 		stocks.stock_quantity<6
+		GROUP BY 	stocks.vending_id;
+		
+	]]>
 	</select>
 	
 
