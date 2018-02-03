@@ -9,9 +9,9 @@
 <title>Insert title here</title>
 <jsp:include page="../common/common.jsp"></jsp:include>
 
-
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -39,7 +39,6 @@
     
     
     
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -51,11 +50,45 @@
         ]);
 
         var options = {
-                title: '자판기 현황',
-                pieHole: 0.4,
+                pieHole: 0.8,
+                pieSliceText : 'none',
+              	slices: {
+                      0: { color: 'blue' },
+                      1: { color: 'red' }
+                },
+                legend: 'none',
          };
+        
+        
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['weekDay', '일 매출'],
+          ['일',  1000],      
+          ['월',  1170],
+          ['화',  660],
+          ['수',  1030],
+          ['목',  10],
+          ['금',  600],
+          ['토',  200],
+        ]);
+
+        var options = {
+          hAxis: {title: 'weekDay',  titleTextStyle: {color: '#777'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
     </script>
@@ -82,6 +115,14 @@
 		
 		<div id="donutchart" style="height: 400px;"></div>
 		
+		
+		<p>정상작동 수 : ${vendingCount.normalVendingCount} /  ${vendingCount.allVendingCount} </p>
+		<p>결함수 : ${vendingCount.errVendingCount}</p>
+		
+		
+		<div id="chart_div" style="width: 100%; height: 500px;"></div>
+		
+		
 		<button type="button" class="btn btn-primary">Primary</button>
 		<button type="button" class="btn btn-secondary">Secondary</button>
 		<button type="button" class="btn btn-success">Success</button>
@@ -92,6 +133,9 @@
 	
 	
 	<button type="button" onclick="test()">hello</button>
+	
+	
+    
 	
 	
 	

@@ -1,16 +1,19 @@
 package com.lotte.vending;
 
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface VendingDao {
 	
-	Integer normalityVendingCount();
+	Integer allVendingCount();
 	Integer errVendingCount();
 	
+	
+	ArrayList<HashMap<String,Object>> problemVending();
 	
 }
 
