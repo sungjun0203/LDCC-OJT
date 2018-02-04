@@ -61,6 +61,11 @@ function moveAnalysis(){
 	
 }
 
+function moveRank(){
+	
+	location.href= "/allAnalysis/main"
+}
+
 function moveSales(){
 	
 	
