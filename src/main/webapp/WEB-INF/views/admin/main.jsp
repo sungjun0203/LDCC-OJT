@@ -22,7 +22,7 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
   var data = google.visualization.arrayToDataTable([
     ['Task', 'Hours per Day'],
-    ['정상',    ${vendingCount.allVendingCount} ],
+    ['정상',    ${vendingCount.normalVendingCount} ],
     ['에러',    ${vendingCount.errVendingCount}   ],
   ]);
   
@@ -36,6 +36,7 @@ function drawChart() {
                 0: { color: 'blue' },
                 1: { color: 'red' }
           },
+          chartArea:{width:'90%',height:'90%'},
           legend: 'none',
           backgroundColor : '#F8F8F8',
    };
@@ -46,7 +47,6 @@ function drawChart() {
   chart.draw(data, options);
 }
 </script>
-
 
  <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -113,25 +113,23 @@ function drawChart() {
                         <a  class="text-center" onclick="moveMember(this.id)" id="navi2"><i class="fa fa-users fa-3x"></i> <br>Member</a>
                     </li>
                      <li>
-                        <a  class="text-center" onclick="moveHome()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
+                        <a  class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
                     </li>
 						   <li  >
 						   <a  class="text-center" href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
                     </li>	
+                    
+                    <li><a class="text-center" onclick="moveRank()"><i
+						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
                       <li  >
                         <a  class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
                     </li>
                     <li  >
                         <a  class="text-center" onclick="moveHome()" id="navi6"><i class="fa fa-bullhorn fa-3x"></i> <br>Notice </a>
                     </li>				
-					
-					                   
                 </ul>
-               
             </div>
-            
         </nav>  
-
 
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >

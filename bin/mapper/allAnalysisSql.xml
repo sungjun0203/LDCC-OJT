@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.lotte.allAnalysis.AllAnalysisDao">
+
+	
+	<select id="manAndWomanCnt" resultType="HashMap">
+		SELECT count(*) as cnt, customer_gender as gender
+		FROM sellinfo
+		WHERE CUSTOMER_GENDER = '남'
+		UNION 
+		SELECT count(*) as cnt, customer_gender as gender
+		FROM sellinfo
+		WHERE CUSTOMER_GENDER = '여';
+	</select>
+	
+	<select id="manSellRank" resultType="com.lotte.drink.DrinkDto">
+		SELECT s.drink_id,count(s.drink_id) as sell_cnt , d.drink_name, d.drink_category , d.drink_price
+		FROM sellinfo s , drinks d
+		where CUSTOMER_GENDER='남'
+		and d.drink_id = s.drink_id
+		
+		GROUP BY drink_id
+		order by sell_cnt desc LIMIT 5;
+	</select>
+	
+	<select id="womanSellRank" resultType="com.lotte.drink.DrinkDto">
+		SELECT s.drink_id,count(s.drink_id) as sell_cnt , d.drink_name, d.drink_category , d.drink_price
+		FROM sellinfo s , drinks d 
+		where CUSTOMER_GENDER='여'
+		and d.drink_id = s.drink_id
+		
+		GROUP BY drink_id
+		order by sell_cnt desc LIMIT 5;
+	</select>
+	
+	<select id="locationSellRank" resultType="HashMap">
+		SELECT vending.vending_location , count(vending.vending_location) as cnt
+		FROM sellinfo, vending
+		where sellInfo.vending_id= vending.vending_id
+		
+		GROUP BY vending.vending_location
+		ORDER BY cnt DESC;
+	</select>
+	
+	<select id="fieldSellRank" resultType="HashMap">
+		SELECT vending.vending_field , count(vending.vending_location) as cnt
+		FROM sellinfo, vending
+		where sellInfo.vending_id= vending.vending_id
+		
+		GROUP BY vending.vending_field
+		ORDER BY cnt DESC;
+	</select>
+	
+
+</mapper>
+
+
+        
+   

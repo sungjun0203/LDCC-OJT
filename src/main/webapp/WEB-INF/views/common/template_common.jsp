@@ -53,12 +53,18 @@ function moveMember(id){
 }
 
 function moveMachine(){
+	location.href="/vending"
 	
 }
 
 
 function moveAnalysis(){
 	
+}
+
+function moveRank(){
+	
+	location.href= "/allAnalysis/main"
 }
 
 function moveSales(){

@@ -3,26 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
-
 	<typeAliases>
-		<package name="com.lotte.admin" />
-		<package name="com.lotte.test" />
 		<package name="com.lotte.vending" />
 		<package name="com.lotte.member" />
 		<package name="com.lotte.analysis"/>
+		<package name="com.lotte.allAnalysis" />
+		<package name="com.lotte.admin" />
+		
+>>>>>>> branch 'master' of https://github.com/sungjun0203/LDCC-OJT.git
 	</typeAliases>
 	<mappers>
-		<mapper resource="mapper/adminSql.xml" />
 		<mapper resource="mapper/vendingSql.xml" />
 		<mapper resource="mapper/testSql.xml" />
 		<mapper resource="mapper/memberSql.xml" />
 		<mapper resource="mapper/analysisSql.xml"/>
+		<mapper resource="mapper/allAnalysisSql.xml" />
+		<mapper resource="mapper/adminSql.xml" />
 	</mappers>
-
 </configuration>
 
 

@@ -1,21 +1,13 @@
-package com.lotte.drink;
+package com.lotte.allAnalysis;
 
-public class DrinkDto {
+public class AllAnalysisDto {
 	
 	Integer drinkId;
 	String drinkName;
 	Integer drinkPrice;
 	String drinkCategory;
-	Integer sales;
 	
-	Integer sellCnt;
 	
-	public Integer getSales() {
-		return sales;
-	}
-	public void setSales(Integer sales) {
-		this.sales = sales;
-	}
 	public Integer getDrinkId() {
 		return drinkId;
 	}
@@ -40,13 +32,5 @@ public class DrinkDto {
 	public void setDrinkCategory(String drinkCategory) {
 		this.drinkCategory = drinkCategory;
 	}
-	public Integer getSellCnt() {
-		return sellCnt;
-	}
-	public void setSellCnt(Integer sellCnt) {
-		this.sellCnt = sellCnt;
-	}
-	
-	
 	
 }

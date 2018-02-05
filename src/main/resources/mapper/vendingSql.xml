@@ -4,6 +4,79 @@
 
 <mapper namespace="com.lotte.vending.VendingDao">
 
+	<select id="getVendingMachineInfo" resultType="com.lotte.vending.VendingDto">
+		select * from
+		vending
+
+	</select>
+
+
+	<select id="getStocks" parameterType="int"
+		resultType="com.lotte.vending.VendingDto">
+		select s.vending_id, d.drink_id, d.drink_name,
+		s.stock_quantity
+		from drinks d inner join stocks s
+		on d.drink_id=s.drink_id
+		where s.vending_id = #{vendingId}
+	</select>
+
+	<select id="getDrinkSales" parameterType="int"
+		resultType="com.lotte.vending.VendingDto">
+		select vending_id, s.drink_id, d.drink_name, count(s.drink_id),
+		count(case
+		when s.customer_gender = '남' then 1 end) as countForMale,
+		count(case when s.customer_gender = '여' then 1 end) as countForFemale
+		from sellinfo s inner join drinks d
+		on s.drink_id = d.drink_id
+		where vending_id = #{vendingId}
+		group by 1,2 order by vending_id;
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<select id="allVendingCount" resultType="Integer">
 		select count(*)
 		from vending
@@ -31,7 +104,6 @@
 		
 	]]>
 	</select>
-	
 
 </mapper>
 
