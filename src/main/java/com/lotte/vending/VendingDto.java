@@ -1,7 +1,5 @@
 package com.lotte.vending;
 
-import java.util.ArrayList;
-
 import com.lotte.drink.DrinkDto;
 
 public class VendingDto {
@@ -11,7 +9,7 @@ public class VendingDto {
 	Integer vendingAsInfo;
 	String vendingField;
 	Integer sales;
-	ArrayList<DrinkDto> drinkList;
+	DrinkDto drinkDto;
 	
 	private int stockId;
 	private int drinkId;
@@ -72,16 +70,6 @@ public class VendingDto {
 
 	public void setSales(Integer sales) {
 		this.sales = sales;
-	}
-
-
-	public ArrayList<DrinkDto> getDrinkList() {
-		return drinkList;
-	}
-
-
-	public void setDrinkList(ArrayList<DrinkDto> drinkList) {
-		this.drinkList = drinkList;
 	}
 
 

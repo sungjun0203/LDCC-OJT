@@ -33,44 +33,43 @@
                     $('div.sidebar-collapse').removeClass('collapse')
                 }
             });
-
             /*====================================
             MORRIS BAR CHART
          ======================================*/
             Morris.Bar({
                 element: 'morris-bar-chart',
                 data: [{
-                    y: '2006',
+                    y: '0-9',
                     a: 100,
                     b: 90
                 }, {
-                    y: '2007',
+                    y: '10대',
                     a: 75,
                     b: 65
                 }, {
-                    y: '2008',
+                    y: '20대',
                     a: 50,
                     b: 40
                 }, {
-                    y: '2009',
+                    y: '30대',
                     a: 75,
                     b: 65
                 }, {
-                    y: '2010',
+                    y: '40대',
                     a: 50,
                     b: 40
                 }, {
-                    y: '2011',
+                    y: '50대',
                     a: 75,
                     b: 65
                 }, {
-                    y: '2012',
+                    y: '60세이상',
                     a: 100,
                     b: 90
                 }],
                 xkey: 'y',
                 ykeys: ['a', 'b'],
-                labels: ['Series A', 'Series B'],
+                labels: ['남성', '여성'],
                 hideHover: 'auto',
                 resize: true
             });

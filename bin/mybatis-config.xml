@@ -12,8 +12,6 @@
 		<package name="com.lotte.analysis"/>
 		<package name="com.lotte.allAnalysis" />
 		<package name="com.lotte.admin" />
-		
->>>>>>> branch 'master' of https://github.com/sungjun0203/LDCC-OJT.git
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/vendingSql.xml" />

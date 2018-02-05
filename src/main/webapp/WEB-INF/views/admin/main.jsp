@@ -116,7 +116,7 @@ function drawChart() {
                         <a  class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
                     </li>
 						   <li  >
-						   <a  class="text-center" href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
+						   <a  class="text-center"  onclick="moveAnalysis()"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
                     </li>	
                     
                     <li><a class="text-center" onclick="moveRank()"><i

@@ -1,8 +1,6 @@
 package com.lotte.sell;
 
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

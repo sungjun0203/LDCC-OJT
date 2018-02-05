@@ -60,6 +60,8 @@ function moveMachine(){
 
 function moveAnalysis(){
 	
+	location.href="/analysis/getIndividualAnalysisData.do"
+	
 }
 
 function moveRank(){
