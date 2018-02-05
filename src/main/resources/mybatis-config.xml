@@ -11,6 +11,8 @@
 		<package name="com.lotte.member" />
 		<package name="com.lotte.allAnalysis" />
 		<package name="com.lotte.admin" />
+		<package name="com.lotte.user" />
+		<package name="com.lotte.common" />
 		
 	</typeAliases>
 	<mappers>
@@ -19,6 +21,8 @@
 		<mapper resource="mapper/memberSql.xml" />
 		<mapper resource="mapper/allAnalysisSql.xml" />
 		<mapper resource="mapper/adminSql.xml" />
+		<mapper resource="mapper/userSql.xml" />
+		<mapper resource="mapper/commonSql.xml" />
 	</mappers>
 </configuration>
 

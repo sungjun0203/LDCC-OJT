@@ -29,6 +29,8 @@ public class FaceApiService {
 
 	public HashMap<String,Object> faceAnalysis(@RequestParam("file") MultipartFile file) {
 		
+		System.out.println("hello");
+		
 		
 		HashMap<String,Object> faceResult = new HashMap<String,Object>();
 
