@@ -42,16 +42,7 @@
     	 ['s', 'Male', 'Female'],
     	
        	<c:forEach var="sellInfo" items="${sellInfoList}">
-       		<c:set var="maleCount" value="${sellInfo.maleCount}"/>
-       		<c:set var="femaleCount" value="${sellInfo.femaleCount}"/>
-       		<c:if test="${sellInfo.maleCount==null}">
-       			<c:set var="maleCount" value="0"/>
-       			
-       		</c:if>
-       		<c:if test="${sellInfo.femaleCount==null}">
-       			<c:set var="femaleCount" value="0"/>
-       		</c:if>
-  	 	 	["${sellInfo.customerAge}",${maleCount}, ${femaleCount}],
+  	 	 	["${sellInfo.customerAge}",${sellInfo.maleCount}, ${sellInfo.femaleCount}],
 		</c:forEach>
   
 

@@ -29,13 +29,22 @@ public class AnalysisService {
 	
 	public ArrayList<CustomerVO> getAgeAndGenderAnalysis(VendingDto vendingDto){
 		ArrayList<CustomerVO> ageAndGenderList= analysisDao.getAgeAndGenderInfo(vendingDto);
-		for(int i =0; i<ageAndGenderList.size();i++){
-			if(ageAndGenderList.get(i).getCustomerGender().equals("남")){
-				ageAndGenderList.get(i).setMaleCount(ageAndGenderList.get(i).getCustomerCount());
-			}else{
-				ageAndGenderList.get(i).setFemaleCount(ageAndGenderList.get(i).getCustomerCount());
+		ArrayList<CustomerVO> reAgeAndGenderList= new ArrayList<CustomerVO>();
+		for(int i=0; i<7;i++){
+			reAgeAndGenderList.add(new CustomerVO(i*10, 0, 0));
+		}
+		for(int i=0;i<reAgeAndGenderList.size();i++){
+			int age=reAgeAndGenderList.get(i).getCustomerAge();
+			for(int j=0;j<ageAndGenderList.size();j++){
+				if(ageAndGenderList.get(j).getCustomerAge()==age){
+					if(ageAndGenderList.get(j).getCustomerGender().equals("남")){
+						reAgeAndGenderList.get(i).setMaleCount(ageAndGenderList.get(j).getCustomerCount());
+					}else if(ageAndGenderList.get(j).getCustomerGender().equals("여")){
+						reAgeAndGenderList.get(i).setFemaleCount(ageAndGenderList.get(j).getCustomerCount());
+					}
+				}
 			}
 		}
-		return ageAndGenderList;
+		return reAgeAndGenderList;
 	}
 }
