@@ -50,7 +50,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                         <a  class="text-center" href="tab-panel.html"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
                     </li>
 						   <li  >
-                        <a  class="text-center" href="chart.html"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
+                        <a  class="text-center" href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
                     </li>	
                       <li  >
                         <a  class="text-center" href="table.html"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>

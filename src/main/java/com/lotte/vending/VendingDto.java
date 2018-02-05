@@ -1,15 +1,27 @@
 package com.lotte.vending;
 
+import java.util.ArrayList;
+
+import com.lotte.drink.DrinkDto;
+
 public class VendingDto {
 
 	Integer vendingId;
 	String vendingLocation;
 	Integer vendingAsInfo;
 	String vendingField;
+	Integer sales;
+	ArrayList<DrinkDto> drinkList;
 	
 	//
 	
 	String asName;
+	public ArrayList<DrinkDto> getDrinkList() {
+		return drinkList;
+	}
+	public void setDrinkList(ArrayList<DrinkDto> drinkList) {
+		this.drinkList = drinkList;
+	}
 	String asPhone;
 	
 	
@@ -48,6 +60,12 @@ public class VendingDto {
 	}
 	public void setAsPhone(String asPhone) {
 		this.asPhone = asPhone;
+	}
+	public Integer getSales() {
+		return sales;
+	}
+	public void setSales(Integer sales) {
+		this.sales = sales;
 	}
 	
 	
