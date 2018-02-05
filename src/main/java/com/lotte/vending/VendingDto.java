@@ -21,6 +21,42 @@ public class VendingDto {
 	private int countForMale;
 	private int countForFemale;
 	
+	private int countForTen;
+	private int countForTwenty;
+	private int countForThrity;
+	private int countForForthy;
+	
+	public int getCountForTen() {
+		return countForTen;
+	}
+	public void setCountForTen(int countForTen) {
+		this.countForTen = countForTen;
+	}
+	public int getCountForTwenty() {
+		return countForTwenty;
+	}
+	public void setCountForTwenty(int countForTwenty) {
+		this.countForTwenty = countForTwenty;
+	}
+	public int getCountForThrity() {
+		return countForThrity;
+	}
+	public void setCountForThrity(int countForThrity) {
+		this.countForThrity = countForThrity;
+	}
+	public int getCountForForthy() {
+		return countForForthy;
+	}
+	public void setCountForForthy(int countForForthy) {
+		this.countForForthy = countForForthy;
+	}
+	public int getCountForFifty() {
+		return countForFifty;
+	}
+	public void setCountForFifty(int countForFifty) {
+		this.countForFifty = countForFifty;
+	}
+	private int countForFifty;
 	
 	String asName;
 
