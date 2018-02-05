@@ -12,6 +12,8 @@ public interface VendingDao {
 	public ArrayList<VendingDto> getVendingMachineInfo();
 	public ArrayList<VendingDto> getStocks(int vendingId);
 	public ArrayList<VendingDto> getDrinkSales(int vendingId);
+	public ArrayList<VendingDto> getState(int vendingId);
+
 	Integer allVendingCount();
 	Integer errVendingCount();
 	
