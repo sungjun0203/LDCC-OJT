@@ -213,7 +213,7 @@ function drawMaterial() {
                         <a  class="text-center" onclick="moveMember(this.id)" id="navi2"><i class="fa fa-users fa-3x"></i> <br>Member</a>
                     </li>
                      <li>
-                        <a  class="text-center" onclick="moveHome()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
+                        <a  class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
                     </li>
 						   <li  >
                         <a  class="text-center" onclick="moveHome()" id="navi4"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>

@@ -22,17 +22,11 @@ public class VendingController {
 	private VendingService vService;
 	
 	@RequestMapping("/vending")
-	public String intro(@RequestParam("page") String page, HttpSession ses, Model d) {
-		System.out.println("vending test and page : "+page);
-		ses.setAttribute("page", page);
+	public String intro(HttpSession ses, Model d) {
 		
-		if(page.equals("machine")) {
-			System.out.println("page = machine");
 			d.addAttribute("item",vService.getVendingMachineInfo());
-		}
 		
-		
-		return "test2/test21";
+		return "admin/vending";
 	}
 	
 	@RequestMapping("/getDrinks")
