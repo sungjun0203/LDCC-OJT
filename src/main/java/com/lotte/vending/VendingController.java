@@ -49,11 +49,5 @@ public class VendingController {
 		return vService.getDrinkSales(vendingId);
 	}
 	
-	/*@RequestMapping("/getVendingMachineInfo")
-	@ResponseBody
-	public ArrayList<VendingDto> getVendingMachineInfo() {
-		System.out.println("getVendingMachineInfo page");
-		ArrayList<VendingDto> vDto = service.getVendingMachineInfo();
-		return vDto;
-	}*/
+	
 }

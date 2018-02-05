@@ -15,18 +15,33 @@ public class VendingDto {
 	private int countForFemale;
 	
 	
+	String asName;
+	String asPhone;
 	
-	public int getCountForMale() {
-		return countForMale;
+	
+	public String getVendingLocation() {
+		return vendingLocation;
 	}
-	public void setCountForMale(int countForMale) {
-		this.countForMale = countForMale;
+	public void setVendingLocation(String vendingLocation) {
+		this.vendingLocation = vendingLocation;
 	}
-	public int getCountForFemale() {
-		return countForFemale;
+	public int getVendingId() {
+		return vendingId;
 	}
-	public void setCountForFemale(int countForFemale) {
-		this.countForFemale = countForFemale;
+	public void setVendingId(int vendingId) {
+		this.vendingId = vendingId;
+	}
+	public int getVendingAsInfo() {
+		return vendingAsInfo;
+	}
+	public void setVendingAsInfo(int vendingAsInfo) {
+		this.vendingAsInfo = vendingAsInfo;
+	}
+	public String getVendingField() {
+		return vendingField;
+	}
+	public void setVendingField(String vendingField) {
+		this.vendingField = vendingField;
 	}
 	public int getStockId() {
 		return stockId;
@@ -52,31 +67,30 @@ public class VendingDto {
 	public void setDrinkName(String drinkName) {
 		this.drinkName = drinkName;
 	}
-	public String getVendingLocation() {
-		return vendingLocation;
+	public int getCountForMale() {
+		return countForMale;
 	}
-	public void setVendingLocation(String vendingLocation) {
-		this.vendingLocation = vendingLocation;
+	public void setCountForMale(int countForMale) {
+		this.countForMale = countForMale;
 	}
-	public int getVendingId() {
-		return vendingId;
+	public int getCountForFemale() {
+		return countForFemale;
 	}
-	public void setVendingId(int vendingId) {
-		this.vendingId = vendingId;
+	public void setCountForFemale(int countForFemale) {
+		this.countForFemale = countForFemale;
 	}
-	public int getVendingAsInfo() {
-		return vendingAsInfo;
+	public String getAsName() {
+		return asName;
 	}
-	public void setVendingAsInfo(int vendingAsInfo) {
-		this.vendingAsInfo = vendingAsInfo;
+	public void setAsName(String asName) {
+		this.asName = asName;
 	}
-	public String getVendingField() {
-		return vendingField;
+	public String getAsPhone() {
+		return asPhone;
 	}
-	public void setVendingField(String vendingField) {
-		this.vendingField = vendingField;
+	public void setAsPhone(String asPhone) {
+		this.asPhone = asPhone;
 	}
-	
 	
 	
 	
@@ -84,4 +98,3 @@ public class VendingDto {
 	
 
 }
-

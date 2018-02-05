@@ -12,15 +12,24 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lotte.util.FaceApiService;
 import com.lotte.util.KakaoApiService;
 
+import com.lotte.analysis.VendingAnalysisService;
 @Controller
 public class MainController {
+	
+	@Autowired 
+	VendingAnalysisService vendingAnalysisService;
+	
+	
 	// 메인 페이지
 	@RequestMapping("/main")
-	public String main_intro(HttpSession ses) {
-		System.out.println("main_intro page ");
-		ses.invalidate();
-		return "test2/test21";
+	public ModelAndView index(Model model) throws Exception {
+		
+		
+		model.addAttribute("vendingCount", vendingAnalysisService.vendingCount());
+		model.addAttribute("problemVending", vendingAnalysisService.problemVending());
+		
+		return new ModelAndView("admin/main");
 	}
-
-
+	
+	
 }

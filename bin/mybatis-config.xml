@@ -2,17 +2,20 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-
-
 <configuration>
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 	<typeAliases>
 		<package name="com.lotte.vending" />
+		<package name="com.lotte.member" />
+		<package name="com.lotte.allAnalysis" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/vendingSql.xml" />
+		<mapper resource="mapper/testSql.xml" />
+		<mapper resource="mapper/memberSql.xml" />
+		<mapper resource="mapper/allAnalysisSql.xml" />
 	</mappers>
 </configuration>
 

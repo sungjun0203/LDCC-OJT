@@ -166,7 +166,7 @@ function login(){
 		success : function(data) {
 			
 			if(data=="success"){
-				location.href = "/main/";
+				location.href = "/main/main";
 			}
 			
 			else{

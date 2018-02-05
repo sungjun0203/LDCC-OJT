@@ -2,9 +2,7 @@
 /*=============================================================
     Authour URI: www.binarycart.com
     License: Commons Attribution 3.0
-
     http://creativecommons.org/licenses/by/3.0/
-
     100% To use For Personal And Commercial Use.
     IN EXCHANGE JUST GIVE US CREDITS AND TELL YOUR FRIENDS ABOUT US
    
@@ -14,6 +12,10 @@
     =============================================*/
 body {
     font-family: 'Open Sans', sans-serif;
+}
+
+table {
+    overflow-y: scroll;
 }
 
  #wrapper {
@@ -32,7 +34,7 @@ body {
     margin:10px 20px 10px 0px;
     background-color:#fff!important;
     padding:10px;
-    min-height:1200px;
+    min-height:1000px;
 }
 
 .text-center {
@@ -57,7 +59,7 @@ border-radius: 0px;
 p {
     font-size:16px;
     line-height:25px;
-    padding-top:20px;
+    padding-top:10px;
 }
 /*==============================================
    DASHBOARD STYLES    
@@ -86,7 +88,7 @@ font-size: 40px;
     margin: 0 0 3px;
 }
 .main-text {
-    font-size: 25px;
+    font-size: 15px;
     font-weight:600;
 }
 .set-icon {
@@ -218,6 +220,7 @@ font-weight: 700;
     text-align: center;
     background-color:#fff !important;
     color:#E20411 !important;
+	box-shadow: 0px 5px 8px lightgray;
 }
 
 .arrow {
@@ -304,8 +307,7 @@ font-weight: 700;
 }
 .navbar-side {
 	border:none;
-	background-color: #202020;
-	
+	background-color: #E20411;
 }
 .navbar-cls-top {
 	background:#F9F9FC;
@@ -381,3 +383,14 @@ line-height: 1.428571429;
 }
 
 
+/*==============================================
+    Top Notice    
+    =============================================*/
+.notice-badge{
+    position: absolute; 
+    top: 50%; 
+    right: 50%; 
+    margin-top: -15px;
+    margin-right:8px;
+    background-color:#E20411;
+}
