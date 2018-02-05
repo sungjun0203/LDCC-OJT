@@ -35,13 +35,11 @@
 <script src="/resources/sweetalert/sweetalert.js"></script>
 
 <script>
+	function moveAnalysis() {
 
+		location.href = "/analysis/getIndividualAnalysisData.do"
 
-function moveAnalysis(){
-	
-	location.href="/analysis/getIndividualAnalysisData.do"
-	
-}
+	}
 	function moveHome(id) {
 
 		location.href = "/main/main"
@@ -55,10 +53,6 @@ function moveAnalysis(){
 
 	function moveMachine() {
 		location.href = "/vending"
-
-	}
-
-	function moveAnalysis() {
 
 	}
 
