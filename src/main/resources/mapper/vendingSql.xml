@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-
 <mapper namespace="com.lotte.vending.VendingDao">
 
 	<select id="getVendingMachineInfo" resultType="com.lotte.vending.VendingDto">
@@ -23,9 +21,13 @@
 	<select id="getDrinkSales" parameterType="int"
 		resultType="com.lotte.vending.VendingDto">
 		select vending_id, s.drink_id, d.drink_name, count(s.drink_id),
-		count(case
-		when s.customer_gender = '남' then 1 end) as countForMale,
-		count(case when s.customer_gender = '여' then 1 end) as countForFemale
+		count(case when s.customer_gender = '남' then 1 end) as countForMale,
+		count(case when s.customer_gender = '여' then 1 end) as countForFemale,
+		count(case when s.customer_age = 10 then 1 end) as countForTen,
+		count(case when s.customer_age = 20 then 1 end) as countForTwenty,
+		count(case when s.customer_age = 30 then 1 end) as countForThirty,
+		count(case when s.customer_age = 40 then 1 end) as countForForthy,
+        count(case when s.customer_age = 50 then 1 end) as countForFifty
 		from sellinfo s inner join drinks d
 		on s.drink_id = d.drink_id
 		where vending_id = #{vendingId}
@@ -99,7 +101,7 @@
 		
 		SELECT 		stocks.vending_id, asinfo.as_name,asinfo.as_id, asinfo.as_phone, '재고 부족	' as 'state'
 		FROM 		ojt.stocks, asinfo
-		WHERE 		stocks.stock_quantity<6
+		WHERE 		stocks.stock_quantity<5
 		GROUP BY 	stocks.vending_id;
 		
 	]]>

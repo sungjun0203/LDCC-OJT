@@ -72,6 +72,12 @@ function drawChart() {
         var chart = new google.visualization.AreaChart(document.getElementById('allSalesStatus'));
         chart.draw(data, options);
       }
+      
+      
+     function moveToMachine(no){
+    	// alert(no);
+    	$(location).attr("href","/vending?machineNum="+no);
+     }
    </script>
 
 </head>
@@ -186,8 +192,8 @@ function drawChart() {
   
   	<c:forEach var="problem" items="${problemVending}">
   	
-  	<tr>
-	    <td>${problem.as_id}</td>
+  	<tr onclick="moveToMachine(${problem.vending_id})" id="${problem.vending_id}">
+	    <td>${problem.vending_id}</td>
 	    <td>${problem.state}</td>
 	    <td>${problem.as_name}</td>
 	    <td>${problem.as_phone}</td>

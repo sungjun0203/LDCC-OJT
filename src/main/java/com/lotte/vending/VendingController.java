@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lotte.analysis.VendingAnalysisService;
 import com.lotte.drink.DrinkDto;
 import com.lotte.drink.DrinkService;
 
@@ -20,27 +21,32 @@ import com.lotte.drink.DrinkService;
 public class VendingController {
 	@Autowired(required=false)
 	private VendingService vService;
+	VendingAnalysisService vendingAnalysisService;
 	
 	@RequestMapping("/vending")
-	public String intro(HttpSession ses, Model d) {
-		
+	public String intro(@RequestParam(value = "machineNum", defaultValue = "0") int machineNum, HttpSession ses, Model d) {
 			d.addAttribute("item",vService.getVendingMachineInfo());
-		
+			d.addAttribute("problemVending", vendingAnalysisService.problemVending());
+			ses.setAttribute("machineNum",machineNum);
 		return "admin/vending";
 	}
 	
 	@RequestMapping("/getDrinks")
 	@ResponseBody
-	public ArrayList<VendingDto> getStocks(@RequestParam("vendingId") int vendingId) {
-		System.out.println("GetDrinks and vendingId : "+vendingId);
+	public ArrayList<VendingDto> getStocks(@RequestParam("vendingId") int vendingId, HttpSession ses) {
+		ses.setAttribute("machineNum",vendingId);
 		return vService.getStocks(vendingId);
 	}
 	
 	@RequestMapping("/getDrinkSales")
 	@ResponseBody
 	public ArrayList<VendingDto> getDrinkSales(@RequestParam("vendingId") int vendingId) {
-		System.out.println("getDrinkSales and vendingId : "+vendingId);
 		return vService.getDrinkSales(vendingId);
+	}
+	@RequestMapping("/getState")
+	@ResponseBody
+	public ArrayList<VendingDto> getState(@RequestParam("vendingId") int vendingId) {
+		return vService.getState(vendingId);
 	}
 	
 	
