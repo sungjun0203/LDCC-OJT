@@ -9,6 +9,26 @@ public class CustomerVO {
 	
 	
 	
+	public CustomerVO() {
+		super();
+	}
+	
+	public CustomerVO(Integer customerAge, String customerGender, Integer customerCount, Integer maleCount,
+			Integer femaleCount) {
+		super();
+		this.customerAge = customerAge;
+		this.customerGender = customerGender;
+		this.customerCount = customerCount;
+		this.maleCount = maleCount;
+		this.femaleCount = femaleCount;
+	}
+
+	public CustomerVO(Integer customerAge, Integer maleCount, Integer femaleCount) {
+		super();
+		this.customerAge = customerAge;
+		this.maleCount = maleCount;
+		this.femaleCount = femaleCount;
+	}
 	public Integer getMaleCount() {
 		return maleCount;
 	}
