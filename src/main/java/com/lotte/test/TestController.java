@@ -39,7 +39,7 @@ public class TestController {
 		String gender = (String) faceValue.get("gender");
 		
 
-		KakaoApiService.sendMesageAPI("http://210.93.181.229:9090/v1/send/kakao-friend", "01035660203", "Y2xhc3M6c2VjcmV0MTIhQA==", "d6b73318d4927aa80df1022e07fecf06c55b44bf", "당신의 나이는 : " + age + " 당신의 성별은 : " + gender);
+		KakaoApiService.sendMesageAPI("01035660203", "당신의 나이는 : " + age + " 당신의 성별은 : " + gender);
 
 				
 		mav.setViewName("test/fileUpload");

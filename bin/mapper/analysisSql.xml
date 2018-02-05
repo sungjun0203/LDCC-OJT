@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.lotte.analysis.AnalysisDao">
+
+<select id="getVendingMachineRanking" resultType="com.lotte.vending.VendingDto">
+	select sellinfo.vending_id, sum(drinks.drink_price) as 'sales'
+	from sellinfo inner join drinks on sellinfo.drink_id = drinks.drink_id
+	group by sellinfo.vending_id order by sales desc
+</select>
+
+<select id="getDrinkRankingById"  parameterType="Integer" resultType="com.lotte.drink.DrinkDto">
+select   drinks.drink_id, drink_name, drink_category, sum(drinks.drink_price) as 'sales' 
+from drinks left join sellinfo on drinks.drink_id=sellinfo.drink_id 
+where vending_id = #{vendingId}
+group by drink_id
+order by sales desc
+</select>
+
+<select id="getZeroToNineMale" parameterType="com.lotte.vending.vendingDto" resultType="Integer">
+	select  count(customer_gender) as '남성 고객'
+	from sellinfo
+	where customer_gender='남'
+	group by vending_id,drink_id
+</select>
+
+
+
+</mapper>
+
+
+        
+   

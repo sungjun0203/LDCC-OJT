@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.lotte.util.CommonDao">
+
+	<select id="getVendingAllLocation" resultType="HashMap">
+		SELECT distinct vending_location
+		FROM vending;
+	</select>
+	
+	<select id="getVendingId" resultType="Integer" parameterType="String">
+		
+		SELECT vending.vending_id
+		FROM VENDING
+		where vending.vending_location=#{vendingLocation};
+	
+	</select>
+	
+
+</mapper>
+
+
+        
+   

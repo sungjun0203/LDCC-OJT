@@ -25,8 +25,6 @@ public class AdminService {
 			session.setAttribute("SID", adminDto.getAdminId());
 			return "success";
 		}
-			
-		
 	}
 
 }
