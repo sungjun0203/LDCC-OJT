@@ -99,7 +99,7 @@ function memberDelete(id){
       <img src="/resources/assets/img/profile.jpg" style="width:50px; height:50px; border-radius:50%; "/>
       </div>
      
-        </nav>   
+       </nav>   
   
   
            <!-- /. NAV TOP  -->
@@ -114,14 +114,13 @@ function memberDelete(id){
                         <a  class="active-menu" onclick="moveMember(this.id)" id="navi2"><i class="fa fa-users fa-3x"></i> <br>Member</a>
                     </li>
                      <li>
-                        <a  class="text-center" onclick="moveHome()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
+                        <a  class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
                     </li>
 						   <li  >
                         <a  class="text-center" onclick="moveHome()" id="navi4"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
                     </li>
                      <li><a class="text-center" onclick="moveRank()"><i
 						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
-                      <li  >
                       <li  >
                         <a  class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
                     </li>
@@ -134,7 +133,7 @@ function memberDelete(id){
                
             </div>
             
-        </nav>  
+        </nav>
 
 
 		<!-- /. NAV SIDE  -->

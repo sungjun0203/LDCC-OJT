@@ -12,9 +12,5 @@ public class LotteProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LotteProjectApplication.class, args);
 	}
-	
-
-
-
 
 }

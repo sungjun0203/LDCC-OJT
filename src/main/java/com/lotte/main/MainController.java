@@ -14,22 +14,19 @@ import com.lotte.util.KakaoApiService;
 
 import com.lotte.analysis.VendingAnalysisService;
 @Controller
+@RequestMapping("/main")
 public class MainController {
 	
 	@Autowired 
 	VendingAnalysisService vendingAnalysisService;
 	
-	
 	// 메인 페이지
 	@RequestMapping("/main")
 	public ModelAndView index(Model model) throws Exception {
-		
 		
 		model.addAttribute("vendingCount", vendingAnalysisService.vendingCount());
 		model.addAttribute("problemVending", vendingAnalysisService.problemVending());
 		
 		return new ModelAndView("admin/main");
 	}
-	
-	
 }

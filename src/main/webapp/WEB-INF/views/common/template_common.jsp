@@ -53,6 +53,7 @@ function moveMember(id){
 }
 
 function moveMachine(){
+	location.href="/vending"
 	
 }
 
