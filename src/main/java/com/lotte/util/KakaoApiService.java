@@ -11,8 +11,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class KakaoApiService {
 	
-	public static int sendMesageAPI(String meesagePlatformUrl, String send_phone, String authKey, String sender_key,
-			String message) throws Exception {
+	public static int sendMesageAPI(String send_phone,String message) throws Exception {
+		
+		String meesagePlatformUrl = "http://210.93.181.229:9090/v1/send/kakao-friend";
+		String authKey = "Y2xhc3M6c2VjcmV0MTIhQA==";
+		String sender_key = "d6b73318d4927aa80df1022e07fecf06c55b44bf";
 
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {

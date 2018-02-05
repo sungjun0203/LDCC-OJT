@@ -14,6 +14,16 @@ public class IndexController {
 	public ModelAndView index() {
 		
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("user/main");
+		
+		return mav;
+	}
+	
+	// 인덱스
+	@RequestMapping("/admin")
+	public ModelAndView adminPage() {
+		
+		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/index/index");
 		return mav;
 	}
