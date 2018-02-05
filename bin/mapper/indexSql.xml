@@ -4,7 +4,7 @@
 
 <mapper namespace="com.lotte.admin.AdminDao">
 
-	<select id="adminLoginCheck" parameterType="AdminDto" resultType="Integer">
+	<select id="userLoginCheck" parameterType="AdminDto" resultType="Integer">
 		select count(*)
 		from admin
 		where admin_id=#{adminId} and admin_password=#{adminPw}
