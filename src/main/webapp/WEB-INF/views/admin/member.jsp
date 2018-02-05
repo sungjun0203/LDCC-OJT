@@ -118,7 +118,10 @@ function memberDelete(id){
                     </li>
 						   <li  >
                         <a  class="text-center" onclick="moveHome()" id="navi4"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
-                    </li>	
+                    </li>
+                     <li><a class="text-center" onclick="moveRank()"><i
+						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
+                      <li  >
                       <li  >
                         <a  class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
                     </li>
