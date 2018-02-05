@@ -20,7 +20,10 @@
 
 <body>
     <div class="row" id="vmbgimg" style="overflow-x:hidden; background-color: #018226;">
-        <div style="display:block;background-color:#fff; border-radius:12px; width:80%; height:1000px;margin-left:10%; margin-top:35px;">
+        <div class="row" style="text-align:center;">
+          <img src="/resources/assets/img_mobile/lense.png" style="height:25px; margin:10px;text-align:center">
+        </div>
+        <div style="display:block;background-color:#fff; border-radius:12px; width:80%; height:1000px;margin-left:10%;">
         <!--<img src="assets/img_mobile/bg_vm.png" style="position:absolute; left:0px; top:0px; width:100%; height:218.5%;z-index:1;">-->
         <div class="row" style="height:160px; vertical-align: bottom; align-items: flex-end; display: flex; flex-direction: row;">
                 <img src="/resources/assets/img_mobile/isis.png" style="width:12%; margin-left:12%;">
@@ -30,22 +33,18 @@
         </div>
         <div clss="row" style="background-color:#092382;height:20px;width:100%;font-color:transparent;"> </div>
         <div clss="row" style="background-color:#fff;height:40px;width:100%;font-color:transparent;">
-            <label class="switch" style="margin-left:9%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            <button class="vm_button" style="margin-left:9%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
+            </button>
         </div>
         <div style="background-color:#999999; opacity:0.3; height:5px;width:100%; filter: blur(1px);"></div>
         
@@ -57,22 +56,18 @@
         </div>
         <div clss="row" style="background-color:#092382;height:20px;font-color:transparent;"> </div>
         <div clss="row" style="background-color:#fff;height:40px;font-color:transparent;">
-            <label class="switch" style="margin-left:9%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            <button class="vm_button" style="margin-left:9%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
+            </button>
         </div>
         <div style="background-color:#999999; opacity:0.3; height:5px;width:100%; filter: blur(1px);"></div>
 
@@ -84,22 +79,18 @@
         </div>
         <div clss="row" style="background-color:#092382;height:20px;font-color:transparent;"> </div>
         <div clss="row" style="background-color:#fff;height:40px;font-color:transparent;">
-            <label class="switch" style="margin-left:9%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            <button class="vm_button" style="margin-left:9%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
+            </button>
         </div>
         <div style="background-color:#999999; opacity:0.3; height:5px;width:100%; filter: blur(1px);"></div>
 
@@ -111,22 +102,18 @@
         </div>
         <div clss="row" style="background-color:#092382;height:20px;font-color:transparent;"> </div>
         <div clss="row" style="background-color:#fff;height:40px;font-color:transparent;">
-            <label class="switch" style="margin-left:9%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            <button class="vm_button" style="margin-left:9%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
+            </button>
         </div>
         <div style="background-color:#999999; opacity:0.3; height:5px;width:100%; filter: blur(1px);"></div>
 
@@ -138,35 +125,28 @@
         </div>
         <div clss="row" style="background-color:#092382;height:20px;font-color:transparent;"> </div>
         <div clss="row" style="background-color:#fff;height:40px;font-color:transparent; border-radius:12px;">
-            <label class="switch" style="margin-left:9%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            <button class="vm_button" style="margin-left:9%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-            <label class="switch" style="margin-left:6.5%; position: relative;top: 50%;transform:translateY(-50%);">
-              <input type="checkbox">
+            </button>
+            <button class="vm_button" style="margin-left:6.5%;">
               <span class="slider round"></span>
-            </label>
-        </div>
-
+            </button>
+            </div>
         </div>
                 <div style="margin:30px;"></div>
                 <div style="text-align:center;">
-                    <button style="background-color:#2F2725; border: none; color: white; padding: 10px 32px; text-align: center; text-decoration: none;  display: inline-block; font-size: 16px; margin: 4px 2px; width:79%">선택제품 주문하기</button>
-                </div>
-                <div style="margin:20px;"></div>
-                <div style="text-align:center;">
                     <img src="/resources/assets/img_mobile/cider_ad.PNG" style="width:79%;text-align: center;display: inline-block; ">
                 </div>
+                <button style="width:80%;height:5px;color:transparent;margin-left:10%;opacity:0.1;"></button>
                 <div style="margin:40px;"></div>
     </div>  
+    
 </body>
 </html>
 
