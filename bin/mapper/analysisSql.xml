@@ -18,7 +18,7 @@ group by drink_id
 order by sales desc
 </select>
 
-<select id="getZeroToNineMale" parameterType="com.lotte.vending.vendingDto" resultType="Integer">
+<select id="getZeroToNineMale" parameterType="com.lotte.vending.VendingDto" resultType="Integer">
 	select  count(customer_gender) as '남성 고객'
 	from sellinfo
 	where customer_gender='남'

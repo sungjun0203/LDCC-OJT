@@ -14,6 +14,7 @@
 		<package name="com.lotte.admin" />
 		<package name="com.lotte.user" />
 		<package name="com.lotte.common" />
+		<package name="com.lotte.index" />
 		
 	</typeAliases>
 	<mappers>
@@ -25,6 +26,7 @@
 		<mapper resource="mapper/adminSql.xml" />
 		<mapper resource="mapper/userSql.xml" />
 		<mapper resource="mapper/commonSql.xml" />
+		<mapper resource="mapper/indexSql.xml" />
 	</mappers>
 </configuration>
 
