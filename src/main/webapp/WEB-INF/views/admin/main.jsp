@@ -13,7 +13,13 @@
 <!-- 템플릿 공통 끝 -->
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+		  div { font-family: 'Noto Sans KR'; }
+		  p {font-family: 'Noto Sans KR';}
+		  h2 {font-family: 'Noto Sans KR'; }
+		  h5 {font-family: 'Noto Sans KR'; }
+</style>
 
 <script>
 
@@ -30,15 +36,17 @@ function drawChart() {
   // ${vendingCount.errVendingCount}
 
   var options = {
-          pieHole: 0.8,
+          pieHole: 0.7,
           pieSliceText : 'none',
-        	slices: {
-                0: { color: 'blue' },
-                1: { color: 'red' }
+          slices: {
+                0: { color: '#292c44' },
+                1: { color: '#ff5349' }
           },
-          chartArea:{width:'90%',height:'90%'},
+      	fontName:'Noto Sans KR',
+    	fontSize:17,
+          chartArea:{width:'100%',height:'100%'},
           legend: 'none',
-          backgroundColor : '#F8F8F8',
+          backgroundColor : 'transparent'
    };
   
   
@@ -74,8 +82,8 @@ function getTodayLabel() {
         ]);
 
         var options = {
-          hAxis: {title: 'weekDay',  titleTextStyle: {color: '#777'}},
-          vAxis: {minValue: 0}
+        backgroundColor: 'transparent',
+        colors: ['#292c44']
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('allSalesStatus'));
@@ -103,16 +111,10 @@ function getTodayLabel() {
                 </button>
                 <a class="navbar-brand" href="index.html"><img src="/resources/assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a> 
             </div>
-            <div>
-  
  
-  <div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px; position: relative;top: 50%;">
-            <a href ="#">
-          <i class="fa fa-bell fa-2x"style ="position: relative;top: 50%;transform:translateY(25%); color:#424242" ></i><span class="notice-badge badge">3</span></a>
-          <span style="margin:3px;"></span>
-      <img src="/resources/assets/img/profile.jpg" style="width:50px; height:50px; border-radius:50%; "/>
-      </div>
-     
+  <div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
+            <span style="color:#ED3A2E; font-size:30pt; font-weight:600;">L.SMO</span>
+      </div>     
         </nav>   
   
   
@@ -159,37 +161,39 @@ function getTodayLabel() {
                   <hr />
                 <div class="row">
 <!--                    upper row
--->                <div class="col-md-6 col-sm-6 col-xs-6">           
+-->                <div class="col-md-6 col-sm-12 col-xs-12">           
 			<div class="panel panel-back noti-box" style="height:300px;">
-           <!--     <span class="icon-box bg-color-red set-icon">
-                    <i class="fa fa-envelope-o"></i>
-                </span>-->
                 <div class="text-box" >
                     <p class="main-text">실시간 자판기 총현황</p>
+                    <hr />
                    <!-- <p class="text-muted">Messages</p>-->
                 </div>
-                <div><span class="text-muted" style="font-size:8pt; font-weight:bold">가동률</span>
-                <div class="row">
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                    
-                    	<div id="nowVendingStatus"></div>
-                    
+                <div>
+                    <div class="col-md-5 col-sm-12 col-xs-12" style="padding:10px 10px 0px 10px;">
+                    	<div id="nowVendingStatus" style="height:200px;" ></div>
+   	  	                    <div style="text-align: center; z-index:10; height:200px; transform:translateY(-65%); font-size:30pt; font-weight:600;color:#292c44;">${vendingCount.normalVendingCount/vendingCount.allVendingCount*100}%       	</div>
                     </div>
-                    <div class="col-md-4 col-sm-4 col-xs-4"><p class="text-muted">정상 작동 <br>${vendingCount.normalVendingCount} /  ${vendingCount.allVendingCount}<br><br><br>결함 발견<br>${vendingCount.errVendingCount}대</p></div>
-                </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6" style="transform:translateY(100%);">
+                    	<p><text style="font-size:15pt; font-weight:500;">정상 작동</text></p>
+                    	<p><text style="font-size:35pt; font-weight:700; color:#5E5D5C;">${vendingCount.normalVendingCount}/</text>
+                    	     <text style="font-size:20pt; font-weight:700; color:#5E5D5C;">${vendingCount.allVendingCount}대</text></p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" style="transform:translateY(100%);">
+                      	<p><text style="font-size:15pt; font-weight:500;">결함 발견</text></p>
+                      	<p><text style="font-size:35pt; font-weight:700; color:#E20411;">${vendingCount.errVendingCount}</text>
+	                      	<text style="font-size:20pt; font-weight:700; color:#E20411;">대</text></p>
+					</div>
                 </div>
              </div>
 		     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">           
+                    <div class="col-md-6 col-sm-12 col-xs-12">           
 			<div class="panel panel-back noti-box">
-                <span class="icon-box bg-color-blue set-icon">
-                    <i class="fa fa-bell-o"></i>
-                </span>
-                <div class="text-box" >
-                    
+			<div>
                     <p class="main-text">실시간 이상 작동 현황</p>
+                    <hr/>
+                    </div>
                     <div style="height:220px; overflow-y:scroll;">
-                    <table class="table table-hover">
+                    <table class="table table-hover col-md-12 col-sm-12 col-xs-12">
                         <thead><tr>
     <th>기기 번호</th>
     <th>이상 코드</th>
@@ -215,31 +219,26 @@ function getTodayLabel() {
                 </div>
              </div>
 		     </div>
-                    
+                                 <!-- /. ROW  -->
+                                 <hr/>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-back noti-box" style="min-height: 380px;">
+						<div class="text-box">
+							<p class="main-text">총 매출 현황</p>
+							<hr />
+
+							<div id="allSalesStatus" style="width: 100%; height: 400px;"></div>
+
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>    
 			</div>
-                 <!-- /. ROW  -->
-                <hr />                
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">           
-			<div class="panel panel-back noti-box">
-<!--                <span class="icon-box bg-color-blue">
-                    <i class="fa fa-warning"></i>
-                </span>-->
-                <div class="text-box" >
-                    <p class="main-text">총 매출 현황 </p>
-                    <hr />
-                    
-                    <div id="allSalesStatus"></div>
-                    
-                    
-                </div>
-             </div>
-		     </div>
-                    
-                    
-    </div>
-                        
-        </div>
+		</div>
                     </div>
                     </div>
                 </div>     
