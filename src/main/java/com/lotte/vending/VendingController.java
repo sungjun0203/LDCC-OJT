@@ -26,7 +26,7 @@ public class VendingController {
 	@RequestMapping("/vending")
 	public String intro(@RequestParam(value = "machineNum", defaultValue = "0") int machineNum, HttpSession ses, Model d) {
 			d.addAttribute("item",vService.getVendingMachineInfo());
-			d.addAttribute("problemVending", vendingAnalysisService.problemVending());
+			//d.addAttribute("problemVending", vendingAnalysisService.problemVending());
 			ses.setAttribute("machineNum",machineNum);
 		return "admin/vending";
 	}
@@ -34,7 +34,8 @@ public class VendingController {
 	@RequestMapping("/getDrinks")
 	@ResponseBody
 	public ArrayList<VendingDto> getStocks(@RequestParam("vendingId") int vendingId, HttpSession ses) {
-		ses.setAttribute("machineNum",vendingId);
+		ArrayList<VendingDto> test = vService.getStocks(vendingId);
+		
 		return vService.getStocks(vendingId);
 	}
 	

@@ -15,6 +15,7 @@ public class VendingDto {
 	private int drinkId;
 	private int stockQuantity;
 	private String drinkName;
+	private String drinkPic;
 	
 	private int countForMale;
 	private int countForFemale;
@@ -24,6 +25,15 @@ public class VendingDto {
 	private int countForThrity;
 	private int countForForthy;
 	
+	
+	
+	
+	public String getDrinkPic() {
+		return drinkPic;
+	}
+	public void setDrinkPic(String drinkPic) {
+		this.drinkPic = drinkPic;
+	}
 	public int getCountForTen() {
 		return countForTen;
 	}

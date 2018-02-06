@@ -11,8 +11,7 @@
 
 	<select id="getStocks" parameterType="int"
 		resultType="com.lotte.vending.VendingDto">
-		select s.vending_id, d.drink_id, d.drink_name,
-		s.stock_quantity
+		select s.vending_id, d.drink_id, d.drink_name,s.stock_quantity,d.drink_pic
 		from drinks d inner join stocks s
 		on d.drink_id=s.drink_id
 		where s.vending_id = #{vendingId}

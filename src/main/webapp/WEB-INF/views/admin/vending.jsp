@@ -20,7 +20,7 @@ th {
 }
 
 .cImg {
-	width: 150px;
+	width: 60px;
 }
 
 </style>
@@ -57,13 +57,15 @@ function callDrinks(no){
 			var show_ul = "";
 			for (var i = 0; i < data.length; i++) {
 				var img = data[i].drinkName + '.jpg';
-				show_ul += "<td class='drinkImg' id='"+data[i].drinkId+"' style='text-align:center'><img class='cImg' src='./././resources/image/"+img+"'/><br/>"
+				show_ul += "<td class='drinkImg' id='"+data[i].drinkId+"' style='text-align:center'><img class='cImg' src='./././"+data[i].drinkPic+"'/><br/>"
 						+ data[i].drinkName
 						+ "<br/>재고 수 : "
 						+ data[i].stockQuantity + "</td>"
 			}
 			$(".tb-stocks > ").find("tr").html(show_ul);
 			callGraphGender(no);
+			$("#btn-gender").attr("onclick","callGraphGender("+no+")");
+			$("#btn-age").attr("onclick","callGraphAge("+no+")");
 		}
 	});
 
