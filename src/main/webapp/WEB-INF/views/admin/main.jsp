@@ -48,6 +48,16 @@ function drawChart() {
 }
 </script>
 
+<script>
+function getTodayLabel() { 
+	var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'); 
+	var today = new Date().getDay(); 
+	var todayLabel = week[today]; 
+	return todayLabel; 
+}
+
+</script>
+
  <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -55,13 +65,12 @@ function drawChart() {
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['weekDay', '일 매출'],
-          ['일',  1000],      
-          ['월',  1170],
-          ['화',  660],
-          ['수',  1030],
-          ['목',  10],
-          ['금',  600],
-          ['토',  200],
+          
+          <c:forEach var="allSalesInfo" items="${allSalesInfo}">
+          
+        	["${allSalesInfo.date}", ${allSalesInfo.price}],
+
+      	   </c:forEach>
         ]);
 
         var options = {

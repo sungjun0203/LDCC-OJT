@@ -53,6 +53,45 @@
 		ORDER BY cnt DESC;
 	</select>
 	
+	
+	
+	
+	<update id="viewCreate" parameterType="HashMap">
+	<![CDATA[
+		create view  ${viewNm} as select distinct date_format(ojt.calendar.datefield,"%Y-%m-%d") as '날짜', calendar.price,
+		if(CONVERT(date_format(ojt.calendar.datefield,"%Y-%m-%d"),CHAR CHARACTER SET utf8)
+		in(convert(date_format(sell_date,"%Y-%m-%d"),CHAR CHARACTER SET utf8)),sum(drinks.drink_price),calendar.price)as 'sales'
+		 from sellinfo inner join drinks on sellinfo.drink_id=drinks.drink_id,calendar
+		where datediff(ojt.calendar.datefield,now())>-7 and datediff(ojt.calendar.datefield,now())<1 and datediff(sell_date,now())>-7 and datediff(sell_date,now())<1
+		group by date_format(ojt.calendar.datefield,"%Y-%m-%d"),date_format(sell_date,"%Y-%m-%d");
+	]]>
+	</update>
+
+	
+	<update id="viewDelete" parameterType="HashMap">
+		drop view ${viewNm};
+	</update>
+	
+	
+	<select id="allSalesInfo" resultType="HashMap">
+		select 날짜 as date,sum(sales) as price from ${viewNm}
+		group by 날짜;
+	</select>
+	
+	<update id="timeSellViewCreate" parameterType="HashMap">
+	<![CDATA[
+		create view ${viewNm} as 
+		select timetable.timefield,drink_id,count(sellinfo.drink_id) as '총판매'
+		from timetable left join sellinfo on date_format(timetable.timefield,"%H:00") = Date_format(sellinfo.sell_date,"%H:00")
+		group by timetable.timefield,drink_id;
+	]]>
+	</update>
+	
+	<select id="timeSellRank" resultType="HashMap">
+		select date_format(timefield,"%H:00") as time,ifnull(drink_id,0) drinkId ,max(총판매) sellCnt
+		from ${viewNm}
+		group by timefield;
+	</select>
 
 </mapper>
 

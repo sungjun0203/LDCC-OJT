@@ -11,7 +11,7 @@
 
 	<select id="getStocks" parameterType="int"
 		resultType="com.lotte.vending.VendingDto">
-		select s.vending_id, d.drink_id, d.drink_name,s.stock_quantity,d.drink_pic
+		select s.vending_id, d.drink_id, d.drink_name,s.stock_quantity,d.drink_pic_id
 		from drinks d inner join stocks s
 		on d.drink_id=s.drink_id
 		where s.vending_id = #{vendingId}
@@ -110,6 +110,17 @@
 		select 	* 
 		from 	vending
 		where   vending_id = #{vendingId}
+	</select>
+	
+	<select id="getVmDrinksInfo" resultType="HashMap" parameterType="Integer">
+		SELECT *
+		FROM VENDING V, STOCKS S, DRINKS D, drinks_pic DP
+		WHERE V.VENDING_ID = S.VENDING_ID
+		AND S.DRINK_ID = D.DRINK_ID
+		AND D.DRINK_PIC_ID = DP.pic_id
+		AND V.VENDING_ID = #{vendingId}
+	
+	
 	</select>
 	
 	

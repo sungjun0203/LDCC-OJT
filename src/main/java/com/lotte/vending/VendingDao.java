@@ -31,7 +31,7 @@ public interface VendingDao {
 	
 	
 	
-	
-	public ArrayList<VendingDto> getVMInfo(Integer vendingId);
+	public ArrayList<HashMap<String,Object>> getVmDrinksInfo(Integer vendingId);
+	public VendingDto getVMInfo(Integer vendingId);
 }
 

@@ -169,6 +169,37 @@ function drawMaterial() {
 </script>
 
 
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['시간', '판매량'],
+          
+          	<c:forEach var="timeSellRank" items="${timeSellRank}">
+  				["${timeSellRank.time}", ${timeSellRank.sellCnt}],
+  			</c:forEach>
+  		
+        ]);
+
+        var options = {
+          curveType: 'function',
+          vAxis: {
+              minValue:0,
+              viewWindow: {
+                  min: 0
+              }
+          },
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('timeSellChart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+
 </head>
 
 <body>
@@ -346,6 +377,7 @@ function drawMaterial() {
 							<div class="text-box">
 								<p class="main-text">시간대별 판매 랭킹</p>
 								<hr />
+								 <div id="timeSellChart"></div>
 							</div>
 						</div>
 					</div>

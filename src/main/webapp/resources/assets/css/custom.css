@@ -495,3 +495,15 @@ input:checked + .slider:before {
 .slider.round:hover {
     background-color: #E20411;
 }
+
+
+/*vm-cost*/
+.cost{
+    background-color: #fff;
+    font-size: 9pt;
+    border: none;
+    position: relative;
+    margin:0px;
+    transform:translateY(-10%);
+    height: 18px;
+}
