@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Free Bootstrap Admin Template : Binary Admin</title>
+<!-- BOOTSTRAP STYLES-->
+<link href="assets/css/bootstrap.css" rel="stylesheet"/>
+<!-- FONTAWESOME STYLES-->
+<link href="assets/css/font-awesome.css" rel="stylesheet"/>
+<link href="assets/css/fontawesome-all.css" rel="stylesheet"/>
+<!-- MORRIS CHART STYLES-->
+<link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet"/>
+<!-- CUSTOM STYLES-->
+<link href="assets/css/custom.css" rel="stylesheet"/>
+<!-- GOOGLE FONTS-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+<body>
+<div id="wrapper">
+   <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src="assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a>
+   </div>
+   <div>
+      <div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px; position: relative;top: 50%;">
+         <a href="#">
+         <i class="fa fa-bell fa-2x" style="position: relative;top: 50%;transform:translateY(25%); color:#424242"></i><span class="notice-badge badge">3</span></a>
+         <span style="margin:3px;"></span>
+         <img src="assets/img/profile.jpg" style="width:50px; height:50px; border-radius:50%; "/>
+      </div>
+      </nav>
+      <!-- /. NAV TOP  -->
+      <nav class="navbar-default navbar-side" role="navigation">
+      <div class="sidebar-collapse">
+         <ul class="nav" id="main-menu">
+            <li>
+            <a class="text-center" href="home.html"><i class="fa fa-home fa-3x"></i><br>
+            Home</a>
+            </li>
+            <li>
+            <a class="active-menu" href="member.html"><i class="fa fa-users fa-3x"></i><br>
+            Member</a>
+            </li>
+            <li>
+            <a class="text-center" href="machine.html"><i class="fa fa-calculator fa-3x"></i><br>
+            Machine</a>
+            </li>
+            <li>
+            <a class="text-center" href="analysis.html"><i class="fa fa-chart-pie fa-3x"></i><br>
+            Analysis</a>
+            </li>
+            <li>
+            <a class="text-center" href="rank.html"><i class="fa fa-chart-bar fa-3x"></i><br>
+            Rank</a>
+            </li>
+            <li>
+            <a class="text-center" href="sales.html"><i class="fa fa-chart-line fa-3x"></i><br>
+            Sales</a>
+            </li>
+            <li>
+            <a class="text-center" href="notice.html"><i class="fa fa-bullhorn fa-3x"></i><br>
+            Notice </a>
+            </li>
+         </ul>
+      </div>
+      </nav>
+      <!-- /. NAV SIDE  -->
+      <div id="page-wrapper">
+         <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <h2>직원 목록</h2>
+                  <h5>직원 리스트입니다. </h5>
+                  <!--member table-->
+                  <div class="col-md-7 col-sm-12 col-xs-12">
+                  <div class="panel panel-back noti-box">
+                     <div class="text-box">
+                        <div class="row">
+                           <div class="col-md-1">
+                           </div>
+                           <div class="col-md-12">
+                              <button type="button" class="btn btn-default" style="margin-bottom:20px; margin-right:10px; float: right; background-color:#EDEDED">추가</button>
+                           </div>
+                           <div class="col-md-1">
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-1">
+                           </div>
+                           <div class="col-md-12" style="height:650px; overflow-y:scroll;">
+                              <table class="table table-hover" style="100%;">
+                              <thead>
+                              <tr>
+                                 <th style="widht:20%; text-align:center;">
+                                    사번
+                                 </th>
+                                 <th style="width:30%; text-align:center;">
+                                    이름
+                                 </th>
+                                 <th style="width:35%; text-align:center;">
+                                    연락처
+                                 </th>
+                                 <th style="width:15%; text-align:center;">
+                                    관리구역
+                                 </th>
+                                 <th>
+                                 </th>
+                              </tr>
+                              </thead>
+                              <tbody style="text-align:center;">
+                              <tr>
+                                 <td>
+                                    1002
+                                 </td>
+                                 <td>
+                                    박성준
+                                 </td>
+                                 <td>
+                                    010-0203-0203
+                                 </td>
+                                 <td>
+                                    경기도 죽전
+                                 </td>
+                                 <td>
+                                    <a href="#"><i class="fa fa-trash-alt fa-2x" style="width:15px; height:15px; position:relative;transform:translateY(-25%);"></i></a>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    1002
+                                 </td>
+                                 <td>
+                                    박성준
+                                 </td>
+                                 <td>
+                                    010-0203-0203
+                                 </td>
+                                 <td>
+                                    경기도 죽전
+                                 </td>
+                                 <td>
+                                    <a href="#"><i class="fa fa-trash-alt fa-2x" style="width:15px; height:15px; position:relative;transform:translateY(-25%);"></i></a>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    1002
+                                 </td>
+                                 <td>
+                                    박성준
+                                 </td>
+                                 <td>
+                                    010-0203-0203
+                                 </td>
+                                 <td>
+                                    경기도 죽전
+                                 </td>
+                                 <td>
+                                    <a href="#"><i class="fa fa-trash-alt fa-2x" style="width:15px; height:15px; position:relative;transform:translateY(-25%);"></i></a>
+                                 </td>
+                              </tr>
+                              </tbody>
+                              </table>
+                              <div class="col-md-1">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!--vm table-->
+               <div class="col-md-5 col-sm-12 col-xs-12">
+                    <div class="panel panel-back noti-box">
+                     <div class="text-box">
+                        <div class="row">
+                           <div class="col-md-1">
+                           </div>
+                           <div class="col-md-12" style="height:55px;">
+                           </div>
+                           <div class="col-md-1">
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-1">
+                           </div>
+                           <div class="col-md-12" style="height:650px; overflow-y:scroll;">
+                              <table class="table table-hover" style="100%;">
+                              <thead>
+                              <tr>
+                                 <th style="widht:20%; text-align:center;">
+                                    자판기번호
+                                 </th>
+                                 <th style="width:30%; text-align:center;">
+                                    관리구역
+                                 </th>
+                                 <th style="width:35%; text-align:center;">
+                                    세부위치
+                                 </th>
+                              </tr>
+                              </thead>
+                              <tbody style="text-align:center;">
+                              <tr>
+                                 <td>
+                                    34754
+                                 </td>
+                                 <td>
+                                    서울 금천구
+                                 </td>
+                                 <td>
+                                    롯데정보통신 1층 로비
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    34754
+                                 </td>
+                                 <td>
+                                    서울 금천구
+                                 </td>
+                                 <td>
+                                    롯데정보통신 1층 로비
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    34754
+                                 </td>
+                                 <td>
+                                    서울 금천구
+                                 </td>
+                                 <td>
+                                    롯데정보통신 1층 로비
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    34754
+                                 </td>
+                                 <td>
+                                    서울 금천구
+                                 </td>
+                                 <td>
+                                    롯데정보통신 1층 로비
+                                 </td>
+                              </tr>
+                              </tbody>
+                              </table>
+                              <div class="col-md-1">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr/>
+         </div>
+         <!-- /. PAGE INNER  -->
+      </div>
+      <!-- /. PAGE WRAPPER  -->
+   </div>
+   <!-- /. WRAPPER  -->
+   <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+   <!-- JQUERY SCRIPTS -->
+   <script src="assets/js/jquery-1.10.2.js"></script>
+   <!-- BOOTSTRAP SCRIPTS -->
+   <script src="assets/js/bootstrap.min.js"></script>
+   <!-- METISMENU SCRIPTS -->
+   <script src="assets/js/jquery.metisMenu.js"></script>
+   <!-- CUSTOM SCRIPTS -->
+   <script src="assets/js/custom.js"></script>
+   </body>
+   </html>

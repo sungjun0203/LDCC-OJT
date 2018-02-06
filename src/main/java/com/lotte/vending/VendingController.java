@@ -1,6 +1,7 @@
 package com.lotte.vending;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,7 +35,6 @@ public class VendingController {
 	@RequestMapping("/getDrinks")
 	@ResponseBody
 	public ArrayList<VendingDto> getStocks(@RequestParam("vendingId") int vendingId, HttpSession ses) {
-		ArrayList<VendingDto> test = vService.getStocks(vendingId);
 		
 		return vService.getStocks(vendingId);
 	}
@@ -44,11 +44,13 @@ public class VendingController {
 	public ArrayList<VendingDto> getDrinkSales(@RequestParam("vendingId") int vendingId) {
 		return vService.getDrinkSales(vendingId);
 	}
-	@RequestMapping("/getState")
+	@RequestMapping("/getVendingState")
 	@ResponseBody
-	public ArrayList<VendingDto> getState(@RequestParam("vendingId") int vendingId) {
-		return vService.getState(vendingId);
+	public HashMap<String,Object> getVendingState(@RequestParam("vendingId") int vendingId) {
+		HashMap<String,Object> test = vService.getVendingState(vendingId);
+		return test;
 	}
+	
 	
 	
 }

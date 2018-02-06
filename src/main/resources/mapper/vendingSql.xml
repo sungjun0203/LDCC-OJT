@@ -106,6 +106,23 @@
 	]]>
 	</select>
 	
+	<select id="getVendingState" parameterType="int" resultType="HashMap">
+	
+	<![CDATA[
+		SELECT 		errorinfo.vending_id, '고장' as 'state'
+		FROM 		asinfo,errorinfo
+		WHERE 		(errorinfo.vending_id=errorinfo.vending_id and
+					 asinfo.as_id=errorinfo.as_id) and vending_id = #{vendingId}
+		union
+		
+		SELECT 		stocks.vending_id, '재고' as 'state'
+		FROM 		ojt.stocks, asinfo
+		WHERE 		stocks.stock_quantity<5
+		GROUP BY 	stocks.vending_id;
+		
+	]]>
+	</select>
+	
 	
 	
 	

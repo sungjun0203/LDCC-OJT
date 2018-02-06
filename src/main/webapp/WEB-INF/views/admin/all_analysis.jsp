@@ -11,166 +11,106 @@
 <!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
 <!-- 템플릿 공통 끝 -->
-
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js">
-	</script>
-
-
-<script type="text/javascript">
-google.charts.load("current", {packages:["corechart"]});
-google.charts.setOnLoadCallback(drawChart);
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
-    ['남자',     ${humanInfo.manCnt} ],
-    ['여자',     ${humanInfo.womanCnt} ],
-  ]);
-
-  var options = {
-		  sliceVisibilityThreshold: .2,
-    legend:'none',
-    backgroundColor:'#F8F8F8',
-    chartArea:{width:'100%',height:'100%'},
-    pieSliceText:'label',
-    pieSliceTextStyle:{fontSize:'15',},
-  };
-
-  var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-  chart.draw(data, options);
-}
-</script>
-
-
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['table']});
-      google.charts.setOnLoadCallback(drawTable);
-
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', '음료이름');
-        data.addColumn('number', '가격');
-        data.addColumn('number', '판매 개수');
-        data.addColumn('number', '총 판매액');
-        data.addRows([
-        	
-        	<c:forEach var="manSellRank" items="${manSellRank}">
-        	  ["${manSellRank.drinkName}",  ${manSellRank.drinkPrice}, ${manSellRank.sellCnt}, ${manSellRank.drinkPrice} * ${manSellRank.sellCnt}],
-     		</c:forEach>
-        
-        ]);
-
-        var table = new google.visualization.Table(document.getElementById('manSellRank'));
-
-        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-      }
-</script>
-
-
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['table']});
-      google.charts.setOnLoadCallback(drawTable);
-
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', '음료이름');
-        data.addColumn('number', '가격');
-        data.addColumn('number', '판매 개수');
-        data.addColumn('number', '총 판매액');
-        data.addRows([
-        	
-        	<c:forEach var="womanSellRank" items="${womanSellRank}">
-        	  ["${womanSellRank.drinkName}",  ${womanSellRank.drinkPrice}, ${womanSellRank.sellCnt}, ${womanSellRank.drinkPrice} * ${womanSellRank.sellCnt}],
-     		</c:forEach>
-        
-        ]);
-
-        var table = new google.visualization.Table(document.getElementById('womanSellRank'));
-
-        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-      }
-</script>
-
-
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
-google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawMaterial);
+$(function(){
+	google.charts.load('current', {'packages' : [ 'corechart' ]});
+	google.charts.setOnLoadCallback(drawChart_locationField());
 
-function drawMaterial() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', '지역');
-      data.addColumn('number', '판매량');
+		function drawChart_locationField() {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', '지역');
+				data.addColumn('number', '대학교');
+				data.addColumn('number', '중학교');
+				data.addColumn('number', '지하철');
+				data.addColumn('number', '회사');
+				data.addRows([
+					<c:forEach var="locationField" items="${locationField}">
+			        	['${locationField.vendingLocation}', ${locationField.vendingLocation}, selectHandler_Year('${earthYear.eq_year}','${earthYear.eq_countyear}')],
+			      	</c:forEach>
+				]);
 
-      data.addRows([
-    	  
-    	 	 <c:forEach var="locationSellRank" items="${locationSellRank}">
-        		["${locationSellRank.vending_location}", ${locationSellRank.cnt}],
-        	</c:forEach>
-        
-      ]);
+				var options = {
+					height : 400,
+					color : 'white',
+					animation: { startup: true, duration: 2500, easing: 'out' },
+					crosshair:{
+						orientation:'both',
+						trigger:'both'
+					  },
+					legend:{
+						position: 'top',
+					  textStyle:{
+						  	fontName:'Jeju Gothic',
+			    		    color: 'white',
+			    		    fontSize: 12,
+			    		    bold: false,
+			    		    italic: false
+						  }
+					  },
+					 lineWidth: 5,
+					  pointSize: 20,
+					  dataOpacity: 0.01,
+					backgroundColor: { fill:'transparent' },
+					chartArea:{
+						width: '85%',
+						height: '75%'
+					},
+					hAxis : {
+						title : '시간',
+						textStyle : {
+							fontName:'Jeju Gothic',
+			    		    color: 'white',
+			    		    fontSize: 12,
+			    		    bold: false,
+			    		    italic: false
+						},
+						titleTextStyle: {
+		    				fontName:'Jeju Gothic',
+			    		    color: 'white',
+			    		    fontSize: 16,
+			    		    bold: false,
+			    		    italic: true
+			    		  },
+						gridlines : {
+							color : 'lightgrey',
+							count : 9
+						},
 
-      var options = {
-        title: 'Motivation and Energy Level Throughout the Day',
-        hAxis: {
-          title: 'Time of Day',
-          format: 'h:mm a',
-          viewWindow: {
-            min: [7, 30, 0],
-            max: [17, 30, 0]
-          }
-        },
-        vAxis: {
-          title: 'Rating (scale of 1-10)'
-        }
-      };
+					},
+					vAxis : {
+						title : "빈도수",
+						textStyle : {
+							fontName:'Jeju Gothic',
+			    		    color: 'white',
+			    		    fontSize: 12,
+			    		    bold: false,
+			    		    italic: false
+						},
+						gridlines : {
+							color : 'lightgrey',
+							count : 9
+						},
+						titleTextStyle: {
+		    				fontName:'Jeju Gothic',
+			    		    color: 'white',
+			    		    fontSize: 16,
+			    		    bold: false,
+			    		    italic: true
+			    		  }
+					}
+				};
 
-      var materialChart = new google.charts.Bar(document.getElementById('locationSellRank'));
-      materialChart.draw(data, options);
-    }
+				var chart = new google.visualization.LineChart(document
+						.getElementById('placeholder2'));
+				chart.draw(data, options);
+			}
+	
+});
 
 </script>
-
-<script>
-google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawMaterial);
-
-function drawMaterial() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', '위치');
-      data.addColumn('number', '판매량');
-
-      data.addRows([
-    	  
-    	 	 <c:forEach var="fieldSellRank" items="${fieldSellRank}">
-        		["${fieldSellRank.vending_field}", ${fieldSellRank.cnt}],
-        	</c:forEach>
-        
-      ]);
-
-      var options = {
-        title: 'Motivation and Energy Level Throughout the Day',
-        hAxis: {
-          title: 'Time of Day',
-          format: 'h:mm a',
-          viewWindow: {
-            min: [7, 30, 0],
-            max: [17, 30, 0]
-          }
-        },
-        vAxis: {
-          title: 'Rating (scale of 1-10)'
-        }
-      };
-
-      var materialChart = new google.charts.Bar(document.getElementById('fieldSellRank'));
-      materialChart.draw(data, options);
-    }
-
-</script>
-
-
 </head>
-
 <body>
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-cls-top " role="navigation"

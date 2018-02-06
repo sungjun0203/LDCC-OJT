@@ -53,7 +53,12 @@
 		ORDER BY cnt DESC;
 	</select>
 	
-
+	
+	<select id="getLocation" resultType="com.lotte.vending.VendingDto">
+		select vending_location vendingLocation
+		from vending
+		group by vending_location
+	</select> 
 </mapper>
 
 

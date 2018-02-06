@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lotte.drink.DrinkDto;
+import com.lotte.vending.VendingDto;
 
 @Service
 public class AllAnalysisService {
@@ -53,5 +54,7 @@ public class AllAnalysisService {
 	
 	return allAnalysisDao.fieldSellRank();
 	}
+	
+
 
 }

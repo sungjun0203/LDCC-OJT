@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.lotte.drink.DrinkDto;
+import com.lotte.vending.VendingDto;
 
 @Mapper
 public interface AllAnalysisDao {
@@ -19,6 +20,7 @@ public interface AllAnalysisDao {
 	
 	public ArrayList<HashMap<String,Object>> locationSellRank();
 	public ArrayList<HashMap<String,Object>> fieldSellRank();
+
 	
 }
 

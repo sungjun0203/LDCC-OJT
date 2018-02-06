@@ -20,9 +20,15 @@
 		WHERE as_id = #{asId}
 	</delete>
 	
+	<select id="detailed" parameterType="int" resultType="com.lotte.member.MemberDto">
+	    select as_id, vending_id, as_location, vending_location, vending_field 
+	    from asinfo inner join vending 
+			on asinfo.as_id = vending.vending_as_info
+		where as_id = #{asId}
+	</select>
 	
 	
-
+	
 </mapper>
 
 

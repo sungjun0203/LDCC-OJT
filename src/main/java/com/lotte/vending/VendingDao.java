@@ -18,6 +18,10 @@ public interface VendingDao {
 	Integer errVendingCount();
 	
 	ArrayList<HashMap<String,Object>> problemVending();
+	HashMap<String,Object> getVendingState(int vendingId);
+	
+	ArrayList<VendingDto> getLocation(String vendingLocation);
+	
 	
 }
 

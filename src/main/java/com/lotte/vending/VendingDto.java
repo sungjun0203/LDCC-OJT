@@ -25,9 +25,15 @@ public class VendingDto {
 	private int countForThrity;
 	private int countForForthy;
 	
+	int	saleNum;
 	
 	
-	
+	public int getSaleNum() {
+		return saleNum;
+	}
+	public void setSaleNum(int saleNum) {
+		this.saleNum = saleNum;
+	}
 	public String getDrinkPic() {
 		return drinkPic;
 	}

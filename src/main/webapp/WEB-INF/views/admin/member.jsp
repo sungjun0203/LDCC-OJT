@@ -15,6 +15,30 @@
 
 
 <script>
+function detailed(no){
+	$.ajax({
+		url : "/member/detailed",
+		dataType : "json",
+		type : "POST",
+		data : "asId="+no,
+		success : function(data) {
+			console.log(data);
+			var show_ul = "";
+			for(var i = 0; i<data.length; i++){
+				show_ul += "<tr><td>"+data[i].vendingId+"</td><td>"+data[i].asLocation+"</td><td>"+data[i].vendingLocation+", "+data[i].vendingField+"</td></tr>";
+				
+			}
+			$("#memberTable > ").find("tbody").eq(1).html(show_ul);		
+			
+			
+			
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "error:" + error);
+		}
+	});
+	
+}
 function memberSubmit(){
 	
 	var asName = $("#asName").val();
@@ -71,9 +95,6 @@ function memberDelete(id){
 
 
 </script>
-
-
-
 </head>
 
 <body>
@@ -140,15 +161,16 @@ function memberDelete(id){
 		<div id="page-wrapper">
 			<div id="page-inner">
 				<div class="row">
+				
 					<div class="col-md-12">
 						<h2>직원 목록</h2>
-						<h5>직원 리스트입니다.</h5>
+						<h4>직원 리스트입니다.</h4>
 						<!--button row-->
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10">
 								<button type="button" class="btn btn-default"
-									style="margin-bottom: 20px; margin-right: 10px; float: right; background-color: #EDEDED" data-toggle="modal" data-target="#myModal">추가</button>
+									style="margin-bottom: 10px; margin-left: 60%; float: left; background-color: #EDEDED" data-toggle="modal" data-target="#myModal">추가</button>
 									
 									
 							</div>
@@ -191,9 +213,10 @@ function memberDelete(id){
 						</div>
 						
 						
-						<div class="row" id="memberTable">
+						<div class="row" id="memberTable">	
+	
 							<div class="col-md-1"></div>
-							<div class="col-md-10" style="height: 650px; overflow-y: scroll;">
+							<div class="col-md-10" style="height: 650px; width:57%; overflow-y: scroll;">
 								<table class="table table-hover">
 									<thead>
 										<tr>
@@ -206,24 +229,41 @@ function memberDelete(id){
 									</thead>
 									<tbody>
 										<c:forEach var="member" items="${memberList}">
-
-											<tr>
+											<tr onclick="detailed(${member.asId})">
 												<td>${member.asId}</td>
 												<td>${member.asName}</td>
 												<td>${member.asPhone}</td>
 												<td>${member.asLocation}</td>
 												<td><a onclick="memberDelete(${member.asId})"><i class="fa fa-trash-alt fa-2x" style="width:15px; height:15px; position:relative;transform:translateY(-25%);"></i></a></td>
 											</tr>
-
 										</c:forEach>
-
 									</tbody>
 								</table>
 								<div class="col-md-1"></div>
 							</div>
+							
+							<div class="col-md-10" style="height: 650px; width: 39.333333%; overflow-y: scroll;">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>자판기 번호</th>
+											<th>관리 구역</th>
+											<th>세부 위치</th>
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+								</table>
+							</div>
+							
+							
+							
+							
+							
 						</div>
 					</div>
-				</div>
+			
 				<!-- /. ROW  -->
 				<hr />
 

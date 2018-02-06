@@ -57,7 +57,6 @@
 	}
 
 	function moveRank() {
-
 		location.href = "/allAnalysis/main"
 	}
 

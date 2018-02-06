@@ -24,7 +24,19 @@ order by sales desc
 	where vending_id=#{vendingId} and drink_id=#{drinkId}
 	group by customer_age,customer_gender
 </select>
-
+	
+	<select id="getLocation" resultType="com.lotte.vending.VendingDto">
+		select vending_location 
+		from vending
+		group by vending_location
+	</select> 
+	
+	<select id="getField" parameterType="String" resultType="com.lotte.vending.VendingDto">
+		select vending_field
+		from vending
+		where vending_location=#{vendingLocation}
+		group by vending_field
+	</select> 
 
 </mapper>
 

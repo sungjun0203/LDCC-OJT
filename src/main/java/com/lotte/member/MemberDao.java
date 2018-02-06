@@ -10,9 +10,11 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberDao {
 	
 	ArrayList<MemberDto> memberList();
+	ArrayList<MemberDto> detailed(int asId);
 	
 	void memberAdd(MemberDto memberDto);
 	void memberDelete(MemberDto memberDto);
+	
 	
 	
 }
