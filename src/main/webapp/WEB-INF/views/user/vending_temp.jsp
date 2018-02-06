@@ -30,6 +30,8 @@ function drinkSelect(id){
 		$("#selectDrinkId").val(id);
 	}
 	
+	alert(id);
+	
 }
 
 function troubleCheck(){
@@ -70,10 +72,36 @@ function troubleCheck(){
 
 function vendingTrouble(){
 	
-	swal("고장.. 전원Off", "죄송합니다 다음에 이용해주세요","error")
-	.then((value) => {
-		$("#vendingMachineInfo").attr("action","/user/vendingTrouble");
-		$("#vendingMachineInfo").submit();
+	
+var vendingId = $("#vendingId").val();
+	
+	$.ajax({
+		url : "/user/troubleCheck",
+		dataType : "text",
+		type : "POST",
+		data : {
+			"vendingId" : vendingId
+		},
+		success : function(data) {
+			
+			if(data>0){
+				swal("고장.. 전원Off", "죄송합니다 다음에 이용해주세요","error")
+				.then((value) => {
+					location.href="/"
+				});
+			}
+			else{
+				swal("고장.. 전원Off", "죄송합니다 다음에 이용해주세요","error")
+				.then((value) => {
+					$("#vendingMachineInfo").attr("action","/user/vendingTrouble");
+					$("#vendingMachineInfo").submit();
+				});
+			}
+
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "error:" + error);
+		}
 	});
 	
 }
