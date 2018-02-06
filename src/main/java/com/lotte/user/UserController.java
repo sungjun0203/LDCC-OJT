@@ -98,6 +98,8 @@ public class UserController {
 		
 		HashMap<String,Object> faceResult = faceApiService.faceAnalysis(file);
 		
+		model.addAttribute("faceResult", faceResult);
+		
 		return new ModelAndView("user/vending");
 	}
 	

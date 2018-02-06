@@ -17,37 +17,51 @@
 
     
 </head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	function getDrinkRanking(id){
-		$.ajax({
-			url : "${pageContext.request.contextPath}/analysis/getDrinkRankingByVendingId.do",
-			data : "vendingId="+id,
-			success : function(data){
-				//var drink=JSON.stringify(data);
-				var table = $("#drinksRanking");
-				var html="";
-				$.each(data,function(key,value) {
-					alert('key:'+key+', value:'+value.drinkName+', sales:'+value.sales);
-					html+=("<tr id="+key+" onclick=getAgeAndGenderAnalysis(this.id,"+id+")><td>"+value.drinkName+"</td>"
-							+"<td>"+value.sales+"</td></tr>");
-				});
-				table.html(html);
-			}
-		});
+		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
 	}
-	
-	function getAgeAndGenderAnalysis(drinkId,vendingId){
-		alert(drinkId+"     "+vendingId);
-		$.ajax({
-			url : "${pageContext.request.contextPath}/analysis/getAgeAndGenderAnalysis.do",
-			data : "vendingId="+vendingId+"&drinkId="+drinkId,
-			success : function(data){
-				alert(1);
-			}
-		});
+	function getAgeAndGender(drinkId, vendingId){
+		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+vendingId+"&drinkId="+drinkId;
 	}
-	
+
+    
 </script>
+
+  <script type="text/javascript">
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawStuff);
+  
+  
+
+  function drawStuff() {
+ 
+	  var age="";
+    var data = new google.visualization.arrayToDataTable([
+    	 ['s', 'Male', 'Female'],
+    	
+       	<c:forEach var="sellInfo" items="${sellInfoList}">
+  	 	 	["${sellInfo.customerAge}",${sellInfo.maleCount}, ${sellInfo.femaleCount}],
+		</c:forEach>
+  
+
+    ]);
+    var options = {
+      width: 800,
+      chart: {
+        title: 'Nearby galaxies',
+      },
+      bars: 'horizontal', // Required for Material Bar Charts.
+
+    };
+
+  var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
+  chart.draw(data, options);
+};
+  </script>
+
+      
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
@@ -66,128 +80,206 @@ float: right;
 font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->
-                <nav class="navbar-default navbar-side" role="navigation">
+                <!-- /. NAV TOP  -->
+                <nav class="navbar-default navbar-side" role="navigation" >
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-					
                     <li>
-                        <a class="active-menu"  href="index.html" ><i class="fa fa-home fa-3x"></i> <br>Home</a>
+                        <a class="text-center"  onclick="moveHome(this.id)" id="navi1"><i class="fa fa-home fa-3x"></i> <br>Home</a>
                     </li>
                      <li>
-                        <a  class="text-center" href="ui.html"><i class="fa fa-users fa-3x"></i> <br>Member</a>
+                        <a  class="text-center" onclick="moveMember(this.id)" id="navi2"><i class="fa fa-users fa-3x"></i> <br>Member</a>
                     </li>
                      <li>
-                        <a  class="text-center" href="tab-panel.html"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
+                        <a  class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
                     </li>
 						   <li  >
-						    <a  class="text-center" href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
+						   <a  class="active-menu"  onclick="moveAnalysis()"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
                     </li>	
+                    
+                    <li><a class="text-center" onclick="moveRank()"><i
+						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
                       <li  >
-                        <a  class="text-center" href="table.html"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
+                        <a  class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
                     </li>
                     <li  >
-                        <a  class="text-center" href="form.html"><i class="fa fa-bullhorn fa-3x"></i> <br>Notice </a>
+                        <a  class="text-center" onclick="moveHome()" id="navi6"><i class="fa fa-bullhorn fa-3x"></i> <br>Notice </a>
                     </li>				
-					
-					                   
-                    <!--<li>
-                        <a  class="text-center" href="#"><i class="fa fa-sitemap fa-3x"></i> <br>Multi-Level Dropdown<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-
-                                </ul>
-                               
-                            </li>
-                        </ul>
-                      </li>  
-                  <li  >
-                        <a   class="text-center" href="blank.html"><i class="fa fa-square-o fa-3x"></i> <br>Blank Page</a>
-                    </li>		-->
                 </ul>
-               
             </div>
-            
-        </nav>  
+        </nav> 
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                
-                
-                		<div class="row" id="memberTable">
-							<div class="col-md-1"></div>
-							<div class="col-md-10" style="height: 650px; overflow-y: scroll;">
-								<table class="table table-hover">
-									<thead>
-										<tr>
-											<th>자판기ID</th>
-											<th>매출액</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${vmRankingList}" var="vendingDto" varStatus="status">
-											<tr id="${vendingDto.vendingId}" onclick="getDrinkRanking(this.id)">
-												<td>${vendingDto.vendingId}</td>
-												<td>${vendingDto.sales}</td>
-											</tr>
+                	<div class="col-md-12">
+						<h2>분석</h2>
+						<h5>칠성에서 음료 개발 및 마케팅 정보로 활용할 수 있는 자판기 판매 분석 랭킹 보는곳이라는 말을 예쁘게
+							고쳐주세요.</h5>
+					</div>
+					</div>
+                	<hr>
+                	<div class="col-md-3 col-sm-3 col-xs-3">
+						<div class="panel panel-back noti-box" style="height: 600px;">
+							<!--     <span class="icon-box bg-color-red set-icon">
+                    <i class="fa fa-envelope-o"></i>
+                </span>-->
+							<div class="text-box">
+								<p class="main-text">자판기 매출 순위</p>
+								<hr />
+								<div class="row">
+								<div style="height: 500px; overflow-y: scroll;">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th>자판기ID</th>
+														<th>매출액</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${vmRankingList}" var="vendingDto"
+														varStatus="status">
+														<tr id="${vendingDto.vendingId}"
+															onclick="getDrinkRanking(this.id)">
+															<td>${vendingDto.vendingId}</td>
+															<td>${vendingDto.sales}</td>
+														</tr>
 
-										</c:forEach>
+													</c:forEach>
 
-									</tbody>
-								</table>
-								<div class="col-md-1" style="height: 650px; overflow-y: scroll;">
-									<table class="table table-hover">
-										<thead>
-											<tr>
-												<td>음료</td>
-												<td>매출</td>
-											</tr>
-										</thead>
-										<tbody id="drinksRanking"></tbody>
-									</table>
+												</tbody>
+											</table>
+									</div>
 								</div>
+								<!-- <p class="text-muted">Messages</p>-->
 							</div>
+
 						</div>
-                
-                	<div id="drinkRanking"> </div>
-                </div>              
-                 <!-- /. ROW  -->
-                <hr />                
-                <div class="row"> 
-                    
-                      
-                               <div class="col-md-9 col-sm-12 col-xs-12">                     
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Bar Chart Example
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-bar-chart"></div>
-                        </div>
-                    </div>            
-                </div>
-           </div>
-                 <!-- /. ROW  -->    
-    </div>
-             <!-- /. PAGE INNER  -->
-            </div>
+					</div>
+					
+					<div class="col-md-3 col-sm-3 col-xs-3">
+						<div class="panel panel-back noti-box" style="height: 600px;">
+							<!--     <span class="icon-box bg-color-red set-icon">
+                    <i class="fa fa-envelope-o"></i>
+                </span>-->
+							<div class="text-box">
+								<p class="main-text"> ${vendingId} / 음료 매출 순위</p>
+								<hr />
+								<div class="row">
+								<div style="height: 500px; overflow-y: scroll;">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th>음료</th>
+														<th>매출액</th>
+													</tr>
+												</thead>
+												<tbody id="drinksRanking">
+																			<c:if test="${drinkRankingList != null}">
+																				<c:forEach items="${drinkRankingList}"
+																					var="drinkRank" varStatus="status">
+																					<tr id="${drinkRank.drinkId}"
+																						onclick="getAgeAndGender(this.id,${vendingId})">
+																						<td>${drinkRank.drinkName}</td>
+																						<td>${drinkRank.sales}</td>
+																					</tr>
+																				</c:forEach>
+																			</c:if>
+																		</tbody>
+											</table>
+									</div>
+								</div>
+								<!-- <p class="text-muted">Messages</p>-->
+							</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<div id="dual_x_div" style="width: 300px; height: 500px;"></div>
+					</div>
+
+
+						</div>
+					</div>
+					
+					
+					
+					</div>
+					</div>
+					
+					
+					
+                	<%-- 	<div class="row" id="memberTable">
+                		     <div class="col-md-4 col-sm-12 col-xs-12">
+                         
+                         			<div class="panel panel-back noti-box" style="height:680px;">
+							<div class="text-box">
+								<p class="main-text">자판기 매출 순위</p>
+								<hr />
+								<!-- <p class="text-muted">Messages</p>-->
+							</div>
+							<div>
+								<div class="row">
+									<div style="height: 550px; overflow-y: scroll;">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th>자판기ID</th>
+														<th>매출액</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${vmRankingList}" var="vendingDto"
+														varStatus="status">
+														<tr id="${vendingDto.vendingId}"
+															onclick="getDrinkRanking(this.id)">
+															<td>${vendingDto.vendingId}</td>
+															<td>${vendingDto.sales}</td>
+														</tr>
+
+													</c:forEach>
+
+												</tbody>
+											</table>
+									</div>
+
+									
+
+
+																<div class="col-md-10">
+																	<table class="table table-hover">
+																		<thead>
+																			<tr>
+																				<td>음료</td>
+																				<td>매출</td>
+																			</tr>
+																		</thead>
+																		<tbody id="drinksRanking">
+																			<c:if test="${drinkRankingList != null}">
+																				<c:forEach items="${drinkRankingList}"
+																					var="drinkRank" varStatus="status">
+																					<tr id="${drinkRank.drinkId}"
+																						onclick="getAgeAndGender(this.id,${vendingId})">
+																						<td>${drinkRank.drinkName}</td>
+																						<td>${drinkRank.sales}</td>
+																					</tr>
+																				</c:forEach>
+																			</c:if>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+
+														<div id="drinkRanking"></div>
+										</div>
+
+										<div id="dual_x_div" style="width: 900px; height: 500px;"></div>
+
+								<!-- /. ROW  -->
+								<hr />
+
+								<!-- /. ROW  -->
+							</div>
+							<!-- /. PAGE INNER  -->
+            </div> --%>
          <!-- /. PAGE WRAPPER  -->
         </div>
      <!-- /. WRAPPER  -->

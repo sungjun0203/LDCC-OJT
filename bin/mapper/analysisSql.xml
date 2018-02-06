@@ -10,7 +10,7 @@
 	group by sellinfo.vending_id order by sales desc
 </select>
 
-<select id="getDrinkRankingById"  parameterType="Integer" resultType="com.lotte.drink.DrinkDto">
+<select id="getDrinkRankingById"  parameterType="com.lotte.vending.VendingDto" resultType="com.lotte.drink.DrinkDto">
 select   drinks.drink_id, drink_name, drink_category, sum(drinks.drink_price) as 'sales' 
 from drinks left join sellinfo on drinks.drink_id=sellinfo.drink_id 
 where vending_id = #{vendingId}
@@ -18,13 +18,12 @@ group by drink_id
 order by sales desc
 </select>
 
-<select id="getZeroToNineMale" parameterType="com.lotte.vending.VendingDto" resultType="Integer">
-	select  count(customer_gender) as '남성 고객'
-	from sellinfo
-	where customer_gender='남'
-	group by vending_id,drink_id
+<select id="getAgeAndGenderInfo" parameterType="com.lotte.vending.VendingDto" resultType="com.lotte.sell.CustomerVO">
+	select customer_age, customer_gender, count(*) as 'customer_count'
+	from sellinfo 
+	where vending_id=#{vendingId} and drink_id=#{drinkId}
+	group by customer_age,customer_gender
 </select>
-
 
 
 </mapper>

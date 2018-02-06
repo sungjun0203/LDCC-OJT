@@ -479,3 +479,19 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/*vm-button*/
+.vm_button{
+    background-color:black;
+    border: none;
+    border-radius: 34px;
+    position: relative;
+    display: inline-block;
+    width: 47px;
+    height: 25px;
+    top: 50%;
+    transform:translateY(-50%);
+}
+.slider.round:hover {
+    background-color: #E20411;
+}
