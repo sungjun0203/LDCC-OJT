@@ -17,5 +17,19 @@ public interface VendingDao {
 	
 	ArrayList<HashMap<String,Object>> problemVending();
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<VendingDto> getVMInfo(Integer vendingId);
 }
 

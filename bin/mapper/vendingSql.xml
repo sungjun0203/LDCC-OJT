@@ -106,6 +106,14 @@
 		
 	]]>
 	</select>
+	
+	<select id="getVMInfo" resultType="com.lotte.vending.VendingDto" parameterType = "Integer">
+		select 	* 
+		from 	vending
+		where   vending_id = #{vendingId}
+	</select>
+	
+	
 
 </mapper>
 

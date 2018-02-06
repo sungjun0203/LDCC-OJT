@@ -13,7 +13,7 @@
 <link href="/resources/assets/css/bootstrap.css" rel="stylesheet" />
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-	
+
 <script>
 	function drinkChange(location) {
 
@@ -43,8 +43,7 @@
 		}
 
 	}
-	
-	</script>
+</script>
 
 </head>
 
@@ -53,14 +52,18 @@
 	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp"></jsp:include>
 	<!-- 헤더 끝 -->
-	
-	<div class="container">
-	
-		<span class="badge badge-primary"
+
+	<form id="photoForm" name="photoForm" method="post"
+		enctype="multipart/form-data" class="form-control2">
+
+		<div class="container">
+
+			<span class="badge badge-primary"
 				style="margin-top: 20px; margin-bottom: 05px">자판기</span>
 
 			<div class="form-group">
-				<select class="form-control" id="location" name="location" onchange="drinkChange(this.value)" style="height:40px">
+				<select class="form-control" id="location" name="location"
+					onchange="drinkChange(this.value)" style="height: 40px">
 
 					<option value="notSelect">지역선택</option>
 
@@ -74,36 +77,40 @@
 			</div>
 
 			<div class="form-group">
-				<select class="form-control" id="vendingNumber" name="vendingNumber" style="height:40px">
+				<select class="form-control" id="vendingNumber" name="vendingNumber"
+					style="height: 40px">
 
 				</select>
 			</div>
-	
-	</div>
+		</div>
 
-	<div class="div_top form-group col-md-5 col-sm-8 col-xs-12 container">
+		<div class="div_top form-group col-md-5 col-sm-8 col-xs-12 container">
 
-		<form id="photoForm" name="photoForm" method="post" enctype="multipart/form-data"
-			class="form-control2">
+
 			<header id="header_guest">
 				<img src="/resources/assets/img/lotte-logo.png" alt="lotte logo"
 					align="middle"
 					style="width: 50px; position: relative; top: 50%; transform: translateY(-50%);">얼굴
 				인식 사진 업로드
 			</header>
-			
+
 			<p class="text-muted">* 얼굴인식은 원본으로 진행됩니다.</p>
 
-			<div class="div_mid" style="width:100%">
+			<div class="div_mid" style="width: 100%">
 				<input type="file" id="btn_file" name="file" align="middle" /> <img
-					id="img_preview" src="#" style="visibility: hidden; text-align:center" />
+					id="img_preview" src="#"
+					style="visibility: hidden; text-align: center" />
 			</div>
-			<div class=" form-group" style="margin-top:30px">
-				<input type="button" id="btn_add" name="add" onclick="photoSubmit()" value="등록">
+			<div class=" form-group" style="margin-top: 30px">
+				<input type="button" id="btn_add" name="add" onclick="photoSubmit()"
+					value="등록">
 			</div>
-		</form>
 
-	</div>
+
+		</div>
+
+	</form>
+
 
 </body>
 </html>
@@ -129,10 +136,10 @@
 		}
 		img_preview.style.visibility = "visible";
 	}
-	
-	function photoSubmit(){
-		
-		$("#photoForm").attr("action","/user/faceVending");	
+
+	function photoSubmit() {
+
+		$("#photoForm").attr("action", "/user/faceVending");
 		$("#photoForm").submit();
 	}
 </script>

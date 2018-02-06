@@ -2,7 +2,6 @@ package com.lotte.vending;
 
 import java.util.ArrayList;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,4 +37,17 @@ public class VendingService {
 		return list;
 	}
 
+	
+	
+	
+	
+	
+	
+	public ArrayList<VendingDto> getVendingMachineInfo(Integer vendingId){
+		
+		return vDao.getVMInfo(vendingId);
+	}
+	
+	
+	
 }
