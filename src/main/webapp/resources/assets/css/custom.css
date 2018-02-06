@@ -28,14 +28,13 @@ table {
 #page-wrapper {
     padding: 15px 15px;
     min-height: 600px;
-    background:#F0F3F8;
-   
+	background:#F0F3F8;
 }
 #page-inner {
     width:100%;
-    margin:10px 20px 10px 0px;
-    background-color:#fff!important;
-    padding:10px;
+    margin:10px 0px 10px 0px;
+    background:#fff!important;
+    padding: 20px 30px 30px 30px;
     min-height:850px;
 }
 
@@ -68,11 +67,13 @@ p {
     =============================================*/
 .panel-back {
     background-color:#F8F8F8;
+    	box-shadow: 5px 5px 5px lightgray;
+    
 
 }
    .noti-box {
 min-height: 100px;
-padding: 20px;
+padding: 10px 20px 10px 20px;
 }
 
     .noti-box .icon-box {
@@ -90,7 +91,7 @@ font-size: 40px;
     margin: 0 0 3px;
 }
 .main-text {
-    font-size: 15px;
+    font-size: 25px;
     font-weight:600;
 }
 .set-icon {
@@ -315,8 +316,6 @@ font-weight: 700;
 	background:#F9F9FC;
 	border-bottom:none;
 	box-shadow: 5px 5px 5px lightgray;
-
-	
 }
 .navbar-cls-top .navbar-brand:hover {
 
@@ -495,3 +494,6 @@ input:checked + .slider:before {
 .slider.round:hover {
     background-color: #E20411;
 }
+
+/* font */
+.ns { font-family: 'Noto Sans KR'; }
