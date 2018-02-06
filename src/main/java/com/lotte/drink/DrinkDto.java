@@ -10,6 +10,13 @@ public class DrinkDto {
 	
 	Integer sellCnt;
 	
+	Integer drinkPicId;
+	
+	Integer picId;
+	String drinkPicName;
+	String drinkPicSrc;
+	
+	
 	public Integer getSales() {
 		return sales;
 	}

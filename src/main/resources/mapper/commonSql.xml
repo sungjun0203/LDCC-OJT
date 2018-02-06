@@ -13,7 +13,11 @@
 		
 		SELECT vending.vending_id
 		FROM VENDING
-		where vending.vending_location=#{vendingLocation};
+		where vending.vending_location=#{vendingLocation}
+        AND vending.vending_id NOT IN
+        (
+			SELECT e.vending_id
+            FROM errorinfo e);
 	
 	</select>
 	

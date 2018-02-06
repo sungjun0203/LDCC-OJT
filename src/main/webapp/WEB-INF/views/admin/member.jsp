@@ -11,7 +11,13 @@
 <!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
 <!-- 템플릿 공통 끝 -->
-
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+		  div { font-family: 'Noto Sans KR'; }
+		  p {font-family: 'Noto Sans KR';}
+		  h2 {font-family: 'Noto Sans KR'; }
+		  h5 {font-family: 'Noto Sans KR'; }
+</style>
 
 
 <script>
@@ -92,14 +98,10 @@ function memberDelete(id){
             <div>
   
  
-  <div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px; position: relative;top: 50%;">
-            <a href ="#">
-          <i class="fa fa-bell fa-2x"style ="position: relative;top: 50%;transform:translateY(25%); color:#424242" ></i><span class="notice-badge badge">3</span></a>
-          <span style="margin:3px;"></span>
-      <img src="/resources/assets/img/profile.jpg" style="width:50px; height:50px; border-radius:50%; "/>
-      </div>
-     
-       </nav>   
+<div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
+            <span style="color:#ED3A2E; font-size:30pt; font-weight:600;">L.SMO</span>
+      </div>     
+        </nav>   
   
   
            <!-- /. NAV TOP  -->
@@ -140,20 +142,24 @@ function memberDelete(id){
 		<div id="page-wrapper">
 			<div id="page-inner">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-12  col-sm-12 col-xs-12">
 						<h2>직원 목록</h2>
 						<h5>직원 리스트입니다.</h5>
+						<hr/>
+					
+						<div class="panel panel-back noti-box" style="min-height:700px;">
+						
 						<!--button row-->
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10">
-								<button type="button" class="btn btn-default"
+															<button type="button" class="btn btn-default"
 									style="margin-bottom: 20px; margin-right: 10px; float: right; background-color: #EDEDED" data-toggle="modal" data-target="#myModal">추가</button>
 									
 									
 							</div>
 							<div class="col-md-1"></div>
-						</div>
+							</div>
 						
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -194,7 +200,7 @@ function memberDelete(id){
 						<div class="row" id="memberTable">
 							<div class="col-md-1"></div>
 							<div class="col-md-10" style="height: 650px; overflow-y: scroll;">
-								<table class="table table-hover">
+								<table class="table table-hover" style="font-size:13pt;">
 									<thead>
 										<tr>
 											<th>사번</th>
@@ -223,6 +229,7 @@ function memberDelete(id){
 							</div>
 						</div>
 					</div>
+					</div>
 				</div>
 				<!-- /. ROW  -->
 				<hr />
@@ -230,10 +237,6 @@ function memberDelete(id){
 			</div>
 			<!-- /. PAGE INNER  -->
 		</div>
-		<!-- /. PAGE WRAPPER  -->
-	</div>
-	<!-- /. WRAPPER  -->
-	<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 
 </body>
 

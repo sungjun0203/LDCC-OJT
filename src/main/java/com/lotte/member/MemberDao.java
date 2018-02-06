@@ -15,5 +15,7 @@ public interface MemberDao {
 	void memberDelete(MemberDto memberDto);
 	
 	
+	ArrayList<MemberDto> getMemberList(Integer vendingId);
+	
 }
 

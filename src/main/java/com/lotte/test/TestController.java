@@ -28,18 +28,18 @@ public class TestController {
 	VendingAnalysisService vendingAnalysisService;
 	
 	@RequestMapping("/")
-	public ModelAndView index(@RequestParam("file") MultipartFile file) throws Exception {
+	public ModelAndView index() throws Exception {
 		
 		
 		ModelAndView mav = new ModelAndView();
 		
-		HashMap<String,Object> faceValue = faceApiService.faceAnalysis(file);
+		//HashMap<String,Object> faceValue = faceApiService.faceAnalysis(file);
 		
-		String age = (String) faceValue.get("age");
-		String gender = (String) faceValue.get("gender");
+//		String age = (String) faceValue.get("age");
+//		String gender = (String) faceValue.get("gender");
 		
 
-		KakaoApiService.sendMesageAPI("01035660203", "당신의 나이는 : " + age + " 당신의 성별은 : " + gender);
+		KakaoApiService.sendMesageAPI("01035660203", "당신의 나이는 : " + "123" + " 당신의 성별은 : " + "123");
 
 				
 		mav.setViewName("test/fileUpload");
