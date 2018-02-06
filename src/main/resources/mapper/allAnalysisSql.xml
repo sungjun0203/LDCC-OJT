@@ -22,7 +22,7 @@
 		and d.drink_id = s.drink_id
 		
 		GROUP BY drink_id
-		order by sell_cnt desc LIMIT 5;
+		order by sell_cnt desc LIMIT 8;
 	</select>
 	
 	<select id="womanSellRank" resultType="com.lotte.drink.DrinkDto">
@@ -32,7 +32,7 @@
 		and d.drink_id = s.drink_id
 		
 		GROUP BY drink_id
-		order by sell_cnt desc LIMIT 5;
+		order by sell_cnt desc LIMIT 8;
 	</select>
 	
 	<select id="locationSellRank" resultType="HashMap">

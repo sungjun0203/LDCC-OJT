@@ -206,7 +206,7 @@ body {
 			</div>
 
 			<span class="badge badge-primary"
-				style="margin-top: 20px; margin-bottom: 05px">자판기</span>
+				style="margin-top: 20px; margin-bottom: 05px">자판기 - 고장난 자판기는 나오지 않습니다.</span>
 
 			<div class="form-group">
 				<select class="form-control" id="location" name="location"

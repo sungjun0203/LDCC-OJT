@@ -124,6 +124,33 @@
 	</select>
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="vendingErrCnt" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(VENDING_ID)
+		FROM ERRORINFO
+		WHERE VENDING_ID = #{vendingId}
+	</select>
+	
+	
+	<insert id="vendingError" parameterType="HashMap">
+		INSERT INTO errorinfo
+		values (0,sysdate(),#{vendingId}, #{asId});
+	</insert>
 
 </mapper>
 

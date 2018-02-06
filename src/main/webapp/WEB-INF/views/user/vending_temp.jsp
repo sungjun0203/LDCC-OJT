@@ -21,16 +21,61 @@
 
 <script>
 
+var troubleCheckValue = false;
+
 function drinkSelect(id){
-	alert(id);
+	troubleCheck();
+	
+	if(troubleCheckValue==false){
+		$("#selectDrinkId").val(id);
+	}
+	
+}
+
+function troubleCheck(){
+	
+	var vendingId = $("#vendingId").val();
+	
+	$.ajax({
+		url : "/user/troubleCheck",
+		dataType : "text",
+		type : "POST",
+		data : {
+			"vendingId" : vendingId
+		},
+		success : function(data) {
+			
+			if(data>0){
+				troubleCheckValue = true;
+				swal("고장 자판기", "죄송합니다 다음에 이용해주세요","error")
+				.then((value) => {
+					location.href="/"
+				});
+			}
+			else{
+				troubleCheckValue=false;
+			}
+
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "error:" + error);
+		}
+	});
+	
+	
+	
+	
 }
 
 
 function vendingTrouble(){
 	
-	swal("고장.. 전원Off", "죄송합니다 다음에 이용해주세요", "error")
-	$("#vendingMachineInfo").attr("action","/user/vendingTrouble");
-	// $("#vendingMachineInfo").submit();
+	swal("고장.. 전원Off", "죄송합니다 다음에 이용해주세요","error")
+	.then((value) => {
+		$("#vendingMachineInfo").attr("action","/user/vendingTrouble");
+		$("#vendingMachineInfo").submit();
+	});
+	
 }
 </script>
 
@@ -39,10 +84,13 @@ function vendingTrouble(){
 
 <body>
 
+
+
 	<form id="vendingMachineInfo">
+		<input type="hidden" id="selectDrinkId" name="selectDrinkId" >
 		<c:forEach var="drinksInfo" items="${drinksInfo}" begin="0" end="0"
 			step="1" varStatus="status">
-			<input type="hidden" id="vendingId" value=${drinksInfo.vending_id}>
+			<input type="hidden" id="vendingId" name="vendingId" value=${drinksInfo.vending_id}>
 		</c:forEach>
 		<div class="row" id="vmbgimg"
 			style="overflow-x: hidden; background-color: #018226;">
@@ -130,14 +178,14 @@ function vendingTrouble(){
 						<c:choose>
 
 							<c:when test="${status.index eq 0}">
-								<button class="vm_button" style="margin-left: 9%;"
+								<button type="button" class="vm_button" style="margin-left: 9%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
 							</c:when>
 
 							<c:otherwise>
-								<button class="vm_button" style="margin-left: 6%;"
+								<button type="button" class="vm_button" style="margin-left: 6%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
@@ -222,14 +270,14 @@ function vendingTrouble(){
 						<c:choose>
 
 							<c:when test="${status.index eq 4}">
-								<button class="vm_button" style="margin-left: 9%;"
+								<button type="button" class="vm_button" style="margin-left: 9%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
 							</c:when>
 
 							<c:otherwise>
-								<button class="vm_button" style="margin-left: 6%;"
+								<button type="button" class="vm_button" style="margin-left: 6%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
@@ -314,14 +362,14 @@ function vendingTrouble(){
 						<c:choose>
 
 							<c:when test="${status.index eq 8}">
-								<button class="vm_button" style="margin-left: 9%;"
+								<button type="button" class="vm_button" style="margin-left: 9%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
 							</c:when>
 
 							<c:otherwise>
-								<button class="vm_button" style="margin-left: 6%;"
+								<button  type="button"class="vm_button" style="margin-left: 6%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>

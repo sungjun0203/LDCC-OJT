@@ -27,8 +27,9 @@ public interface VendingDao {
 	
 	
 	
-	
-	
+	//에러발생
+	public void vendingError(Integer vendingId);
+	public Integer vendingErrCnt(Integer vendingId);
 	
 	
 	public ArrayList<HashMap<String,Object>> getVmDrinksInfo(Integer vendingId);
