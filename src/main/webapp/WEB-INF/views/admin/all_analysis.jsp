@@ -323,12 +323,10 @@ function drawMaterial() {
 						<!--                <span class="icon-box bg-color-blue">
                     <i class="fa fa-warning"></i>
                 </span>-->
-						<div class="text-box">
-							<p class="main-text">
-								시간대별 판매 랭킹
-							</p>
-							<hr/>
-							<div id="timeSellChart">
+							<div class="text-box">
+								<p class="main-text">시간대별 판매 랭킹</p>
+								<hr />
+								 <div id="timeSellChart"></div>
 							</div>
 						</div>
 					</div>

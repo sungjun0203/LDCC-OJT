@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lotte.util.CommonService;
 import com.lotte.util.FaceApiService;
 import com.lotte.util.FaceDto;
+import com.lotte.util.KakaoApiService;
 import com.lotte.vending.VendingService;
 
 @Controller
@@ -34,6 +35,8 @@ public class UserController {
 	
 	@Autowired
 	VendingService vendingService;
+	
+	
 	
 	@RequestMapping("/")
 	public ModelAndView index() {
@@ -108,14 +111,35 @@ public class UserController {
 		Integer vendingId =  Integer.parseInt(request.getParameter("vendingNumber"));
 		
 		model.addAttribute("vendingInfo", vendingService.getVendingMachineInfo(vendingId));
-		model.addAttribute("stocksInfo", vendingService.getStocks(vendingId));
-		model.addAttribute("drinkInfo", vendingService.getDrinkSales(vendingId));
+		model.addAttribute("drinksInfo", vendingService.getVmDrinksInfo(vendingId));
 		
 		
 		model.addAttribute("faceResult", faceResult);
 		
-		return new ModelAndView("user/vending");
+		return new ModelAndView("user/vending_temp");
 	}
+	
+	@RequestMapping("/vendingTrouble")
+	public ModelAndView vendingTrouble(HttpServletRequest request) throws Exception {
+		
+		Integer vendingId = Integer.parseInt(request.getParameter("vendingId"));
+		
+		userService.vendingTrouble(vendingId);
+		
+		
+		return new ModelAndView("/user/main");
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/troubleCheck")
+	public Integer troubleCheck(HttpServletRequest request) {
+		
+		Integer vendingId = Integer.parseInt(request.getParameter("vendingId"));
+		
+		return userService.vendingErrCnt(vendingId);
+	}
+	
 	
 	
 	

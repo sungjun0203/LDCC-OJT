@@ -22,6 +22,16 @@
 	
 	
 	
+	<select id="getMemberList" parameterType="Integer" resultType="com.lotte.member.MemberDto">
+		SELECT AI.*
+		FROM VENDING V, ASINFO AI
+		WHERE V.VENDING_ID = #{vendingId};
+	
+	
+	</select>
+	
+	
+	
 
 </mapper>
 

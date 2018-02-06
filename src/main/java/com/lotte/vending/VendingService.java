@@ -1,6 +1,7 @@
 package com.lotte.vending;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,9 +44,14 @@ public class VendingService {
 	
 	
 	
-	public ArrayList<VendingDto> getVendingMachineInfo(Integer vendingId){
+	public VendingDto getVendingMachineInfo(Integer vendingId){
 		
 		return vDao.getVMInfo(vendingId);
+	}
+	
+	public ArrayList<HashMap<String,Object>> getVmDrinksInfo(Integer vendingId){
+		
+		return vDao.getVmDrinksInfo(vendingId);
 	}
 	
 	

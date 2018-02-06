@@ -22,6 +22,7 @@ public class AllAnalysisController {
 		model.addAttribute("womanSellRank",allAnalysisService.womanSellRank());
 		model.addAttribute("locationSellRank", allAnalysisService.locationSellRank());
 		model.addAttribute("fieldSellRank", allAnalysisService.fieldSellRank());
+		model.addAttribute("timeSellRank", allAnalysisService.timeSellRank());
 		
 		return new ModelAndView("/admin/all_analysis");
 	}
