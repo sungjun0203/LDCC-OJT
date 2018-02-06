@@ -55,7 +55,14 @@ function troubleCheck(){
 				});
 			}
 			else{
+				
+				
 				troubleCheckValue=false;
+				
+				$("#vendingMachineInfo").attr("action","/user/vendingSubmit");
+				$("#vendingMachineInfo").submit();
+				
+				
 			}
 
 		},
@@ -73,7 +80,7 @@ function troubleCheck(){
 function vendingTrouble(){
 	
 	
-var vendingId = $("#vendingId").val();
+	var vendingId = $("#vendingId").val();
 	
 	$.ajax({
 		url : "/user/troubleCheck",
@@ -85,7 +92,7 @@ var vendingId = $("#vendingId").val();
 		success : function(data) {
 			
 			if(data>0){
-				swal("고장.. 전원Off", "죄송합니다 다음에 이용해주세요","error")
+				swal("이미 고장난 자판기입니다.", "죄송합니다 다음에 이용해주세요","error")
 				.then((value) => {
 					location.href="/"
 				});
@@ -113,12 +120,15 @@ var vendingId = $("#vendingId").val();
 <body>
 
 
-
 	<form id="vendingMachineInfo">
-		<input type="hidden" id="selectDrinkId" name="selectDrinkId" >
+	
+		<input type="hidden" id="faceGender" name="faceGender" value="${faceResult.age}">
+		<input type="hidden" id="faceAge" name="faceAge" value="${faceResult.gender}">
+		<input type="hidden" id="selectDrinkId" name="selectDrinkId">
 		<c:forEach var="drinksInfo" items="${drinksInfo}" begin="0" end="0"
 			step="1" varStatus="status">
-			<input type="hidden" id="vendingId" name="vendingId" value=${drinksInfo.vending_id}>
+			<input type="hidden" id="vendingId" name="vendingId"
+				value=${drinksInfo.vending_id}>
 		</c:forEach>
 		<div class="row" id="vmbgimg"
 			style="overflow-x: hidden; background-color: #018226;">
@@ -397,7 +407,7 @@ var vendingId = $("#vendingId").val();
 							</c:when>
 
 							<c:otherwise>
-								<button  type="button"class="vm_button" style="margin-left: 6%;"
+								<button type="button" class="vm_button" style="margin-left: 6%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>

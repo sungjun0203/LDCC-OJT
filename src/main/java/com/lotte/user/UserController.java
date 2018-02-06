@@ -140,6 +140,17 @@ public class UserController {
 		return userService.vendingErrCnt(vendingId);
 	}
 	
+	@RequestMapping("/vendingSubmit")
+	public ModelAndView vendingSubmit(HttpServletRequest request) {
+		
+		
+		System.out.println(request.getParameter("selectDrinkId"));
+		System.out.println(request.getParameter("vendingId"));
+		
+		return new ModelAndView("/user/main");
+		
+	}
+	
 	
 	
 	
