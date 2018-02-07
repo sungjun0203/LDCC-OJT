@@ -96,7 +96,7 @@
 	
 	<insert id="vendingError" parameterType="HashMap">
 		INSERT INTO errorinfo
-		values (0,sysdate(),#{vendingId}, #{asId});
+		values (0,sysdate(),#{vendingId}, #{asId},"미전송");
 	</insert>
 	
 	

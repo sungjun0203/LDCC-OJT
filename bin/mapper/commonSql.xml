@@ -21,6 +21,16 @@
 	
 	</select>
 	
+	<select id="getDrinkAnalysis" resultType="com.lotte.drink.DrinkDto" parameterType="HashMap">
+		select sellinfo.drink_id,drink_name
+		from sellinfo inner join drinks on sellinfo.drink_id=drinks.drink_id
+		where sellinfo.customer_gender=#{gender} and sellinfo.customer_age=#{age}  and sellinfo.drink_id in(select drink_id from stocks where vending_id=#{vendingId} )
+		group by drink_id
+		order by count(sellinfo.drink_id) desc
+		limit 3;
+	
+	</select>
+	
 
 </mapper>
 

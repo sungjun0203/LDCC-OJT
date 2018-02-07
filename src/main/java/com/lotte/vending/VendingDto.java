@@ -28,6 +28,9 @@ public class VendingDto {
 	private int countForThrity;
 	private int countForForthy;
 	
+	
+	public String sended;
+	
 	int	saleNum;
 	
 	public DrinkDto getDrinkDto() {
@@ -219,6 +222,14 @@ public class VendingDto {
 	public void setAsName(String asName) {
 		this.asName = asName;
 	}
+	public String getSended() {
+		return sended;
+	}
+	public void setSended(String sended) {
+		this.sended = sended;
+	}
+	
+	
 
 	
 	

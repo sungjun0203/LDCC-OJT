@@ -72,13 +72,31 @@ public class UserController {
 	// 작성자 : 박성준
 	// 일반 자판기
 	@RequestMapping("/vending")
-	public ModelAndView vending(FaceDto faceDto) {
+	public ModelAndView vending(FaceDto faceDto, Model model,HttpServletRequest request) {
 		
 		
-		System.out.println(faceDto.getGender());
-		System.out.println(faceDto.getAge());
+		HashMap<String,Object> faceResult = new HashMap<String,Object>();
+		Integer vendingId =  Integer.parseInt(request.getParameter("vendingNumber"));
 		
-		return new ModelAndView("user/vending");
+		model.addAttribute("vendingInfo", vendingService.getVendingMachineInfo(vendingId));
+		model.addAttribute("drinksInfo", vendingService.getVmDrinksInfo(vendingId));
+		
+
+		faceResult.put("gender", request.getParameter("faceGender"));
+		faceResult.put("age", request.getParameter("faceAge"));
+		
+		String checkHuman = "true";
+		
+		if(faceResult.get("gender")==null) {
+			
+			checkHuman = "false";
+		}
+		
+		
+		model.addAttribute("checkHuman", checkHuman);
+		model.addAttribute("faceResult", faceResult);
+		
+		return new ModelAndView("user/vending_temp");
 	}
 	
 	@ResponseBody
@@ -107,13 +125,48 @@ public class UserController {
 	@RequestMapping("/faceVending")
 	public ModelAndView vending(@RequestParam("file") MultipartFile file, Model model,HttpServletRequest request) {
 		
+		
+		String checkHuman = "true";
+		
 		HashMap<String,Object> faceResult = faceApiService.faceAnalysis(file);
 		Integer vendingId =  Integer.parseInt(request.getParameter("vendingNumber"));
 		
 		model.addAttribute("vendingInfo", vendingService.getVendingMachineInfo(vendingId));
 		model.addAttribute("drinksInfo", vendingService.getVmDrinksInfo(vendingId));
 		
+		if(faceResult.get("gender")==null) {
+			
+			checkHuman = "false";
+		}
+		else {
+			
+			
+			
+			HashMap<String,Object> info = new HashMap<String,Object>();
+			
+			if(faceResult.get("gender").equals("male")) {
+				info.put("gender","남" );
+			}
+			else {
+				info.put("gender","여" );
+			}
+			
+			Integer age = 0;
+			Double tempAge = Double.parseDouble((String) faceResult.get("age"));
+			int intAge = Integer.parseInt(String.valueOf(Math.round(tempAge)));
+					
+			age =  ( (intAge / 10) * 10);
+			
+			info.put("age", age);
+			info.put("vendingId", vendingId);
+			
+			System.out.println(info);
+			
+			model.addAttribute("drinkAnalysis", userService.getDrinkAnalysis(info));
+		}
 		
+		
+		model.addAttribute("checkHuman", checkHuman);
 		model.addAttribute("faceResult", faceResult);
 		
 		return new ModelAndView("user/vending_temp");
