@@ -1,3 +1,4 @@
+
 package com.lotte.vending;
 
 import java.util.ArrayList;
@@ -15,17 +16,17 @@ public class VendingService {
 	
 	public ArrayList<VendingDto> getVendingMachineInfo(){
 		ArrayList<VendingDto> list = vDao.getVendingMachineInfo();
-		/*for(VendingDto vd : list) 
+		for(VendingDto vd : list) 
 			System.out.println(vd.getVendingId() + ", "+vd.getVendingLocation());
-		*/
+		
 		return list;
 	}
 	
 	public ArrayList<VendingDto> getStocks(int vendingId){
 		ArrayList<VendingDto> list = vDao.getStocks(vendingId);
-/*		for(VendingDto vd : list) 
+		for(VendingDto vd : list) 
 			System.out.println(vd.getVendingId() + ", "+vd.getDrinkId()+", "+vd.getDrinkName()+", "+vd.getStockQuantity());
-		*/
+		
 		return list;
 	}
 	
@@ -38,6 +39,7 @@ public class VendingService {
 		return list;
 	}
 
+	
 	public HashMap<String,Object> getVendingState(int vendingId){
 		HashMap<String,Object> list = vDao.getVendingState(vendingId);
 		return list;
@@ -46,4 +48,19 @@ public class VendingService {
 		ArrayList<VendingDto> list = vDao.getLocation(vendingLocation);
 		return list;
 	}
+	
+	
+	
+	public VendingDto getVendingMachineInfo(Integer vendingId){
+		
+		return vDao.getVMInfo(vendingId);
+	}
+	
+	public ArrayList<HashMap<String,Object>> getVmDrinksInfo(Integer vendingId){
+		
+		return vDao.getVmDrinksInfo(vendingId);
+	}
+	
+	
+	
 }

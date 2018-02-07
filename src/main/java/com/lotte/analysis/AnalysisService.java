@@ -1,6 +1,7 @@
 package com.lotte.analysis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lotte.drink.DrinkDto;
 import com.lotte.sell.CustomerService;
 import com.lotte.sell.CustomerVO;
+import com.lotte.sell.SellDto;
 import com.lotte.vending.VendingDto;
 
 @Service
@@ -18,14 +20,7 @@ public class AnalysisService {
 	@Autowired
 	CustomerService customerService;
 	
-	public ArrayList<VendingDto> getVendingMachineRanking(){
-		ArrayList<VendingDto> vmRankingList = analysisDao.getVendingMachineRanking();
-		return vmRankingList;
-	}
 
-	public ArrayList<DrinkDto> getDrinkRankingById(VendingDto vendingDto) {
-		return analysisDao.getDrinkRankingById(vendingDto);
-	}
 	
 	public ArrayList<CustomerVO> getAgeAndGenderAnalysis(VendingDto vendingDto){
 		ArrayList<CustomerVO> ageAndGenderList= analysisDao.getAgeAndGenderInfo(vendingDto);
@@ -57,4 +52,93 @@ public class AnalysisService {
 		return analysisDao.getField(vendingLocation);
 	}
 
+	//추가
+	
+	public ArrayList<VendingDto> getVendingMachineRanking(){
+		
+		ArrayList<Integer> vendingIdList = analysisDao.getTotalVendingId();
+		ArrayList<VendingDto> vendingList = analysisDao.getVendingMachineRanking();
+		boolean flag=false;
+		for(int k=0; k<vendingIdList.size();k++){
+			for(int i=0; i<vendingList.size();i++){
+				if(vendingList.get(i).getVendingId() == vendingIdList.get(k) ){
+					flag=true;
+					break;
+				}
+			}
+			if(flag==false){
+				VendingDto vendingDto = new VendingDto();
+				vendingDto.setVendingId(vendingIdList.get(k));
+				vendingDto.setSales(0);
+				vendingList.add(vendingDto);
+			}
+			flag=false;
+		}
+		
+		return vendingList;
+	}
+	
+	public ArrayList<DrinkDto> getDrinkRankingById(VendingDto vendingDto) {
+		ArrayList<DrinkDto> drinkInfoList = analysisDao.getAllDrinkInfoById(vendingDto);
+		ArrayList<DrinkDto> drinkList = analysisDao.getDrinkRankingById(vendingDto);
+		boolean flag=false;
+		for(int k=0; k<drinkInfoList.size();k++){
+			for(int i=0; i<drinkList.size();i++){
+				if(drinkList.get(i).getDrinkId() == drinkInfoList.get(k).getDrinkId()){
+					flag=true;
+					break;
+				}
+			}
+			if(flag==false){
+				DrinkDto drinkDto = new DrinkDto();
+				drinkDto.setDrinkId(drinkInfoList.get(k).getDrinkId());
+				drinkDto.setDrinkName(drinkInfoList.get(k).getDrinkName());
+				drinkDto.setDrinkCategory(drinkInfoList.get(k).getDrinkCategory());
+				drinkDto.setDrinkPrice(drinkInfoList.get(k).getDrinkPrice());
+				drinkDto.setSales(0);
+				drinkList.add(drinkDto);
+			}
+			flag=false;
+		}
+		
+		return drinkList;
+	}
+	
+	public DrinkDto getDrinkInfoByDrinkId(VendingDto vendingDto){
+		return analysisDao.getDrinkInfoByDrinkId(vendingDto);
+	}
+	
+	
+/*	public ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraph(VendingDto vendingDto){
+		Integer vendingId=vendingDto.getVendingId();
+		ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId);
+		ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraphInfo = new ArrayList<ArrayList<HashMap<String,Object>>>();
+		for (int i=0; i<TopThreeDrinkId.size();i++){ 
+			VendingDto newVending=new VendingDto();
+			newVending.setVendingId(vendingId);
+			newVending.setDrinkId(TopThreeDrinkId.get(i));
+			getDrinkSalesGraphInfo.add(analysisDao.getTopDrinkInfo(newVending));
+			System.out.println("TOP3: "+TopThreeDrinkId.get(i));
+		}
+		return getDrinkSalesGraphInfo; 
+	}*/
+	
+	//
+	// 시간, 음료1, 음료2, 음료
+	public ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraph(VendingDto vendingDto){
+		Integer vendingId=vendingDto.getVendingId();
+		ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId);
+		ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraphInfo = new ArrayList<ArrayList<HashMap<String,Object>>>();
+		for (int i=0; i<TopThreeDrinkId.size();i++){ 
+			VendingDto newVending=new VendingDto();
+			newVending.setVendingId(vendingId);
+			newVending.setDrinkId(TopThreeDrinkId.get(i));
+			getDrinkSalesGraphInfo.add(analysisDao.getTopDrinkInfo(newVending));
+		}
+		ArrayList<SellDto> oneDrink = new ArrayList<SellDto>();
+		ArrayList<SellDto> twoDrink = new ArrayList<SellDto>();
+		ArrayList<SellDto> threeDrink = new ArrayList<SellDto>();
+		return getDrinkSalesGraphInfo; 
+	}
+	
 }

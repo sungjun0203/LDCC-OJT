@@ -1,3 +1,4 @@
+
 package com.lotte.member;
 
 
@@ -10,12 +11,12 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberDao {
 	
 	ArrayList<MemberDto> memberList();
-	ArrayList<MemberDto> detailed(int asId);
 	
 	void memberAdd(MemberDto memberDto);
 	void memberDelete(MemberDto memberDto);
-	
-	
+	public ArrayList<MemberDto> detailed(int asId);
+	ArrayList<MemberDto> getMemberList(Integer vendingId);
 	
 }
+
 

@@ -25,6 +25,9 @@ th {
 
 </style>
 <script>
+/*
+ * 함수 작성자 : 백상우
+ */
 	var machineNum = parseInt("${machineNum}");
 	if(machineNum == 0) {
 		callDrinks(1);
@@ -32,7 +35,9 @@ th {
 	if(machineNum != 0){
 		callDrinks(machineNum);
 	}
-	
+/*
+ * 함수 작성자 : 백상우
+ */	
 function callState(no){
 	$.ajax({
 		type : 'GET',
@@ -62,7 +67,9 @@ function callState(no){
 		}
 	});
 }	
-		
+/*
+ * 함수 작성자 : 백상우
+ */			
 function callDrinks(no){
 	$.ajax({
 		type : 'GET',
@@ -73,9 +80,9 @@ function callDrinks(no){
 			$(".empty > h2").remove();
 			var show_ul = "";
 			for (var i = 0; i < data.length; i++) {
-				var img = data[i].drinkName + '.jpg';
-				show_ul += "<td class='drinkImg' id='"+data[i].drinkId+"' style='text-align:center'><img class='cImg' src='./././"+data[i].drinkPic+"'/><br/>"
-						+ data[i].drinkName
+				var img = data[i].drinkName + '.png';
+				show_ul += "<td class='drinkImg' id='"+data[i].picId+"' style='text-align:center'><img class='cImg' src='./././"+data[i].drinkPicSrc+"'/><br/>"
+						+ data[i].drinkPicName
 						+ "<br/>재고 수 : "
 						+ data[i].stockQuantity + "</td>"
 			}
@@ -86,9 +93,10 @@ function callDrinks(no){
 			callState(no);
 		}
 	});
-
 }
-	
+/*
+ * 함수 작성자 : 백상우
+ */		
 function callGraphGender(no){
 	//alert("Gender and no : "+no);
 	$("#chart_div").html("");
@@ -127,7 +135,9 @@ function callGraphGender(no){
 		}
 	});
 }
-
+/*
+ * 함수 작성자 : 백상우
+ */	
 function callGraphAge(no){
 	//alert("Age and no : "+no);
 	$("#chart_div").html("");

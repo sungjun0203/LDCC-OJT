@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lotte.allAnalysis.AllAnalysisDao;
 import com.lotte.vending.VendingDao;
 
 @Service
@@ -13,6 +14,9 @@ public class VendingAnalysisService {
 	
 	@Autowired
 	VendingDao vendingDao;
+	
+	@Autowired
+	AllAnalysisDao allAnalysisDao;
 	
 	public HashMap<String,Object> vendingCount() {
 		
@@ -36,6 +40,22 @@ public class VendingAnalysisService {
 		
 		return problemVendingInfo;
 		
+	}
+	
+	public ArrayList<HashMap<String,Object>> allSalesInfo(){
+		
+		long time = System.currentTimeMillis();
+		String timeConvert = "t" + Long.toString(time);
+		
+		HashMap<String,Object> viewInfo = new HashMap<String,Object>();
+		viewInfo.put("viewNm", timeConvert);
+		
+		allAnalysisDao.viewCreate(viewInfo);
+		ArrayList<HashMap<String,Object>> allSalesInfo = allAnalysisDao.allSalesInfo(viewInfo);
+		allAnalysisDao.viewDelete(viewInfo);
+		
+		
+		return allSalesInfo;
 	}
 	
 

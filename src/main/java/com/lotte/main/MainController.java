@@ -26,6 +26,8 @@ public class MainController {
 		
 		model.addAttribute("vendingCount", vendingAnalysisService.vendingCount());
 		model.addAttribute("problemVending", vendingAnalysisService.problemVending());
+		model.addAttribute("allSalesInfo", vendingAnalysisService.allSalesInfo());
+		
 		
 		return new ModelAndView("admin/main");
 	}

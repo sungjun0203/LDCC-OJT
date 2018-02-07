@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,13 +8,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <title>Insert title here</title>
-
-<!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
-<!-- 템플릿 공통 끝 -->
-
-
-
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+		  div { font-family: 'Noto Sans KR'; }
+		  p {font-family: 'Noto Sans KR';}
+		  h2 {font-family: 'Noto Sans KR'; }
+		  h5 {font-family: 'Noto Sans KR'; }
+</style>
 <script>
 function detailed(no){
 	$.ajax({
@@ -28,6 +30,7 @@ function detailed(no){
 				show_ul += "<tr><td>"+data[i].vendingId+"</td><td>"+data[i].asLocation+"</td><td>"+data[i].vendingLocation+", "+data[i].vendingField+"</td></tr>";
 				
 			}
+			$('#default-text').remove();
 			$("#memberTable > ").find("tbody").eq(1).html(show_ul);		
 			
 			
@@ -39,6 +42,7 @@ function detailed(no){
 	});
 	
 }
+
 function memberSubmit(){
 	
 	var asName = $("#asName").val();
@@ -92,14 +96,10 @@ function memberDelete(id){
 	
 	
 }
-
-
 </script>
 </head>
-
 <body>
-
-		<div id="wrapper">
+	<div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -110,17 +110,12 @@ function memberDelete(id){
                 </button>
                 <a class="navbar-brand" href="index.html"><img src="/resources/assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a> 
             </div>
-            <div>
+     <div>
   
- 
-  <div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px; position: relative;top: 50%;">
-            <a href ="#">
-          <i class="fa fa-bell fa-2x"style ="position: relative;top: 50%;transform:translateY(25%); color:#424242" ></i><span class="notice-badge badge">3</span></a>
-          <span style="margin:3px;"></span>
-      <img src="/resources/assets/img/profile.jpg" style="width:50px; height:50px; border-radius:50%; "/>
-      </div>
-     
-       </nav>   
+<div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
+            <span style="color:#ED3A2E; font-size:30pt; font-weight:600;">L.SMO</span>
+      </div>     
+        </nav>   
   
   
            <!-- /. NAV TOP  -->
@@ -161,21 +156,21 @@ function memberDelete(id){
 		<div id="page-wrapper">
 			<div id="page-inner">
 				<div class="row">
-				
-					<div class="col-md-12">
+					<div class="col-md-12  col-sm-12 col-xs-12">
 						<h2>직원 목록</h2>
-						<h4>직원 리스트입니다.</h4>
+						<h5>직원 리스트입니다.</h5>
+						<hr/>
+					
+						<div class="panel panel-back noti-box" style="min-height:700px;">
+						
 						<!--button row-->
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10">
-								<button type="button" class="btn btn-default"
-									style="margin-bottom: 10px; margin-left: 60%; float: left; background-color: #EDEDED" data-toggle="modal" data-target="#myModal">추가</button>
-									
-									
+									<button type="button" class="btn btn-default" style="margin-left: 59%; float: left; background-color: #EDEDED" data-toggle="modal" data-target="#myModal">추가</button>
 							</div>
 							<div class="col-md-1"></div>
-						</div>
+							</div>
 						
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -213,11 +208,11 @@ function memberDelete(id){
 						</div>
 						
 						
-						<div class="row" id="memberTable">	
-	
+						
+						<div class="row" id="memberTable">
 							<div class="col-md-1"></div>
-							<div class="col-md-10" style="height: 650px; width:57%; overflow-y: scroll;">
-								<table class="table table-hover">
+							<div class="col-md-10" style="width: 56.333333%; height: 650px; overflow-y: scroll;">
+								<table class="table table-hover" style="font-size:13pt;">
 									<thead>
 										<tr>
 											<th>사번</th>
@@ -229,6 +224,7 @@ function memberDelete(id){
 									</thead>
 									<tbody>
 										<c:forEach var="member" items="${memberList}">
+
 											<tr onclick="detailed(${member.asId})">
 												<td>${member.asId}</td>
 												<td>${member.asName}</td>
@@ -236,45 +232,38 @@ function memberDelete(id){
 												<td>${member.asLocation}</td>
 												<td><a onclick="memberDelete(${member.asId})"><i class="fa fa-trash-alt fa-2x" style="width:15px; height:15px; position:relative;transform:translateY(-25%);"></i></a></td>
 											</tr>
+
 										</c:forEach>
+
 									</tbody>
 								</table>
 								<div class="col-md-1"></div>
 							</div>
-							
-							<div class="col-md-10" style="height: 650px; width: 39.333333%; overflow-y: scroll;">
-								<table class="table table-hover">
+							<div class="col-md-10" style="width:40.333333%;height: 650px; overflow-y: scroll;">
+								<table class="table table-hover" style="font-size:13pt;">
 									<thead>
 										<tr>
 											<th>자판기 번호</th>
 											<th>관리 구역</th>
-											<th>세부 위치</th>
+											<th>자판기 위치</th>
 										</tr>
 									</thead>
 									<tbody>
-										
 									</tbody>
 								</table>
+								<div class="col-md-1"><p><h2 id="default-text" style="color:black;text-align:center;">직원 목록에서 직원을 선택해주세요.</h2>
+								</div>
 							</div>
-							
-							
-							
-							
-							
+							</div>
 						</div>
 					</div>
-			
+					</div>
+				</div>
 				<!-- /. ROW  -->
 				<hr />
-
 			</div>
 			<!-- /. PAGE INNER  -->
 		</div>
-		<!-- /. PAGE WRAPPER  -->
-	</div>
-	<!-- /. WRAPPER  -->
-	<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-
 </body>
 
 </html>

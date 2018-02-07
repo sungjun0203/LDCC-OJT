@@ -4,39 +4,95 @@
 
 <mapper namespace="com.lotte.analysis.AnalysisDao">
 
-<select id="getVendingMachineRanking" resultType="com.lotte.vending.VendingDto">
-	select sellinfo.vending_id, sum(drinks.drink_price) as 'sales'
-	from sellinfo inner join drinks on sellinfo.drink_id = drinks.drink_id
-	group by sellinfo.vending_id order by sales desc
-</select>
 
-<select id="getDrinkRankingById"  parameterType="com.lotte.vending.VendingDto" resultType="com.lotte.drink.DrinkDto">
-select   drinks.drink_id, drink_name, drink_category, sum(drinks.drink_price) as 'sales' 
-from drinks left join sellinfo on drinks.drink_id=sellinfo.drink_id 
-where vending_id = #{vendingId}
-group by drink_id
-order by sales desc
-</select>
+	<select id="getVendingMachineRanking" resultType="com.lotte.vending.VendingDto">
+		select sellinfo.vending_id, count(sellinfo.drink_id) as 'sales'
+		from sellinfo inner join drinks on sellinfo.drink_id = drinks.drink_id
+		group by sellinfo.vending_id order by sales desc
 
-<select id="getAgeAndGenderInfo" parameterType="com.lotte.vending.VendingDto" resultType="com.lotte.sell.CustomerVO">
-	select customer_age, customer_gender, count(*) as 'customer_count'
-	from sellinfo 
-	where vending_id=#{vendingId} and drink_id=#{drinkId}
-	group by customer_age,customer_gender
-</select>
-	
+	</select>
+
+	<select id="getDrinkRankingById" parameterType="com.lotte.vending.VendingDto"
+		resultType="com.lotte.drink.DrinkDto">
+		select drinks.drink_id, drink_name, drink_category, count(sellinfo.drink_id)
+		as 'sales'
+		from drinks left join sellinfo on drinks.drink_id=sellinfo.drink_id
+		where vending_id = #{vendingId}
+		group by drink_id
+		order by sales desc
+	</select>
+
+	<select id="getAgeAndGenderInfo" parameterType="com.lotte.vending.VendingDto"
+		resultType="com.lotte.sell.CustomerVO">
+		select customer_age, customer_gender, count(*) as 'customer_count'
+		from sellinfo
+		where vending_id=#{vendingId} and drink_id=#{drinkId}
+		group by customer_age,customer_gender
+	</select>
+
+
+	<select id="getTotalVendingId" resultType="Integer">
+		select vending_id from vending
+	</select>
+
+
+	<select id="getAllDrinkInfoById" parameterType="com.lotte.vending.VendingDto"
+		resultType="com.lotte.drink.DrinkDto">
+		select stocks.drink_id,drinks.drink_name,drinks.drink_category,
+		drinks.drink_price
+		from stocks left join drinks on stocks.drink_id=drinks.drink_id
+		where vending_id=#{vendingId};
+	</select>
+
+	<select id="getDrinkInfoByDrinkId" parameterType="com.lotte.vending.VendingDto"
+		resultType="com.lotte.drink.DrinkDto">
+		select * from drinks where drink_id=#{drinkId};
+	</select>
+
+	<select id="getTopDrinkInfo" parameterType="com.lotte.vending.VendingDto"
+		resultType="HashMap">
+		select date_format(timetable.timefield,"%H:00:00") as
+		'sell_date',ifnull(sellinfo.drink_id,#{drinkId}) as 'drink_id'
+		,(select drinks.drink_name
+		from drinks where drink_id=#{drinkId}
+		) as 'drink_name' ,count(sellinfo.drink_id) as 'sales'
+		from timetable left join sellinfo on
+		date_format(timetable.timefield,"%H:00:00")=date_format(sellinfo.sell_date,"%H:00:00")
+		and sellinfo.drink_id=#{drinkId} and sellinfo.vending_id=#{vendingId}
+		group by sell_date;
+	</select>
+
+	<!-- <select id="getTopDrinkInfo" parameterType="com.lotte.vending.VendingDto" 
+		resultType="HashMap"> select date_format(timetable.timefield,"%H:00:00") 
+		as 'sell_date',count(sellinfo.drink_id) as 'sales' from timetable left join 
+		sellinfo on date_format(timetable.timefield,"%H:00:00")=date_format(sellinfo.sell_date,"%H:00:00") 
+		and sellinfo.drink_id=#{drinkId} and sellinfo.vending_id=#{vendingId} group 
+		by sell_date; </select> -->
+		
+	<select id="getTopThreeDrinkId" parameterType="Integer"
+		resultType="Integer">
+		select drink_id
+		from sellinfo
+		where vending_id = #{vendingId}
+		group by drink_id
+		limit 3
+	</select>
+
+
 	<select id="getLocation" resultType="com.lotte.vending.VendingDto">
-		select vending_location 
+		select vending_location
 		from vending
 		group by vending_location
-	</select> 
-	
-	<select id="getField" parameterType="String" resultType="com.lotte.vending.VendingDto">
+	</select>
+
+	<select id="getField" parameterType="String"
+		resultType="com.lotte.vending.VendingDto">
 		select vending_field
 		from vending
-		where vending_location=#{vendingLocation}
+		where
+		vending_location=#{vendingLocation}
 		group by vending_field
-	</select> 
+	</select>
 
 </mapper>
 

@@ -1,6 +1,7 @@
 package com.lotte.analysis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -56,6 +57,8 @@ public class AnalysisController {
 		ArrayList<CustomerVO> sellInfoList=analysisService.getAgeAndGenderAnalysis(vendingDto);
 		mv.addObject("sellInfoList",sellInfoList);
 		d.addAttribute("location",analysisService.getLocation());
+		ArrayList<CustomerVO> ageAndGenderList=analysisService.getAgeAndGenderAnalysis(vendingDto);
+		mv.addObject("ageAndGenderList",ageAndGenderList);
 
 		return mv;
 	}
@@ -67,4 +70,21 @@ public class AnalysisController {
 		return analysisService.getField(vendingLocation);
 	}
 	
+	@RequestMapping("analysis/getIndividualAnalysisData_test.do")
+	public ModelAndView getIndividualAnalysisDataTest(VendingDto vendingDto){
+		ModelAndView mv = new ModelAndView("analysis/individual_analysis_data2");
+		ArrayList<VendingDto> vmRankingList = analysisService.getVendingMachineRanking();
+		mv.addObject("vmRankingList", vmRankingList);
+		mv.addObject("vendingId", vendingDto.getVendingId());
+		ArrayList<DrinkDto> drinkRankingList = analysisService.getDrinkRankingById(vendingDto);
+		mv.addObject("drinkRankingList", drinkRankingList);
+		ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraphInfo=analysisService.getDrinkSalesGraph(vendingDto);
+		mv.addObject("getDrinkSalesGraphInfo",getDrinkSalesGraphInfo);
+		if(vendingDto.getDrinkId()!=0){
+			ArrayList<CustomerVO> ageAndGenderList=analysisService.getAgeAndGenderAnalysis(vendingDto);
+			mv.addObject("ageAndGenderList",ageAndGenderList);
+			mv.addObject("drinkName",analysisService.getDrinkInfoByDrinkId(vendingDto).getDrinkName() );
+		}
+		return mv;
+	}
 }

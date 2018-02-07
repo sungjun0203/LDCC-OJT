@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lotte.util.CommonService;
 import com.lotte.util.FaceApiService;
 import com.lotte.util.FaceDto;
+import com.lotte.util.KakaoApiService;
+import com.lotte.vending.VendingService;
 
 @Controller
 @RequestMapping("/user")
@@ -30,6 +32,11 @@ public class UserController {
 	
 	@Autowired
 	FaceApiService faceApiService;
+	
+	@Autowired
+	VendingService vendingService;
+	
+	
 	
 	@RequestMapping("/")
 	public ModelAndView index() {
@@ -61,15 +68,18 @@ public class UserController {
 		return new ModelAndView("user/input");
 	}
 	
-//	@RequestMapping("/vending")
-//	public ModelAndView vending(FaceDto faceDto) {
-//		
-//		
-//		System.out.println(faceDto.getGender());
-//		System.out.println(faceDto.getAge());
-//		
-//		return new ModelAndView("user/vending");
-//	}
+	
+	// 작성자 : 박성준
+	// 일반 자판기
+	@RequestMapping("/vending")
+	public ModelAndView vending(FaceDto faceDto) {
+		
+		
+		System.out.println(faceDto.getGender());
+		System.out.println(faceDto.getAge());
+		
+		return new ModelAndView("user/vending");
+	}
 	
 	@ResponseBody
 	@RequestMapping("/vendingId")
@@ -91,17 +101,56 @@ public class UserController {
 		return new ModelAndView("/user/input_photo");
 	}
 	
-	
+	// 작성자 : 박성준
+	// 얼굴 인식 자판기
 	
 	@RequestMapping("/faceVending")
-	public ModelAndView vending(@RequestParam("file") MultipartFile file, Model model) {
+	public ModelAndView vending(@RequestParam("file") MultipartFile file, Model model,HttpServletRequest request) {
 		
 		HashMap<String,Object> faceResult = faceApiService.faceAnalysis(file);
+		Integer vendingId =  Integer.parseInt(request.getParameter("vendingNumber"));
+		
+		model.addAttribute("vendingInfo", vendingService.getVendingMachineInfo(vendingId));
+		model.addAttribute("drinksInfo", vendingService.getVmDrinksInfo(vendingId));
+		
 		
 		model.addAttribute("faceResult", faceResult);
 		
-		return new ModelAndView("user/vending");
+		return new ModelAndView("user/vending_temp");
 	}
+	
+	@RequestMapping("/vendingTrouble")
+	public ModelAndView vendingTrouble(HttpServletRequest request) throws Exception {
+		
+		Integer vendingId = Integer.parseInt(request.getParameter("vendingId"));
+		
+		userService.vendingTrouble(vendingId);
+		
+		
+		return new ModelAndView("/user/main");
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/troubleCheck")
+	public Integer troubleCheck(HttpServletRequest request) {
+		
+		Integer vendingId = Integer.parseInt(request.getParameter("vendingId"));
+		
+		return userService.vendingErrCnt(vendingId);
+	}
+	
+	@RequestMapping("/vendingSubmit")
+	public ModelAndView vendingSubmit(HttpServletRequest request) {
+		
+		
+		System.out.println(request.getParameter("selectDrinkId"));
+		System.out.println(request.getParameter("vendingId"));
+		
+		return new ModelAndView("/user/main");
+		
+	}
+	
 	
 	
 	

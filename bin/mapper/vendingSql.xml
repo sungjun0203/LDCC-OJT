@@ -5,16 +5,14 @@
 	<select id="getVendingMachineInfo" resultType="com.lotte.vending.VendingDto">
 		select * from
 		vending
-
 	</select>
-
 
 	<select id="getStocks" parameterType="int"
 		resultType="com.lotte.vending.VendingDto">
-		select s.vending_id, d.drink_id, d.drink_name,s.stock_quantity,d.drink_pic
-		from drinks d inner join stocks s
-		on d.drink_id=s.drink_id
-		where s.vending_id = #{vendingId}
+		select s.vending_id, d.pic_id, d.drink_pic_name,s.stock_quantity,d.drink_pic_src
+		from drinks_pic d inner join stocks s
+		on d.pic_id=s.drink_id
+		where s.vending_id = #{vendingId};
 	</select>
 
 	<select id="getDrinkSales" parameterType="int"
@@ -33,51 +31,6 @@
 		group by 1,2 order by vending_id;
 	</select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<select id="allVendingCount" resultType="Integer">
 		select count(*)
 		from vending
@@ -88,9 +41,7 @@
 		from errorInfo
 	</select>
 	
-	
 	<select id="problemVending" resultType="HashMap">
-	
 	<![CDATA[
 		SELECT 		errorinfo.vending_id, asinfo.as_name,asinfo.as_id, asinfo.as_phone,'고장' as 'state'
 		FROM 		asinfo,errorinfo
@@ -101,9 +52,29 @@
 		SELECT 		stocks.vending_id, asinfo.as_name,asinfo.as_id, asinfo.as_phone, '재고 부족	' as 'state'
 		FROM 		ojt.stocks, asinfo
 		WHERE 		stocks.stock_quantity<5
-		GROUP BY 	stocks.vending_id;
-		
+		GROUP BY 	stocks.vending_id
 	]]>
+	</select>
+	
+	<select id="getVMInfo" resultType="com.lotte.vending.VendingDto" parameterType = "Integer">
+		select 	* 
+		from 	vending
+		where   vending_id = #{vendingId}
+	</select>
+	
+	<select id="getVmDrinksInfo" resultType="HashMap" parameterType="Integer">
+		SELECT *
+		FROM VENDING V, STOCKS S, DRINKS D, drinks_pic DP
+		WHERE V.VENDING_ID = S.VENDING_ID
+		AND S.DRINK_ID = D.DRINK_ID
+		AND D.DRINK_PIC_ID = DP.pic_id
+		AND V.VENDING_ID = #{vendingId}
+	</select>
+	
+	<select id="vendingErrCnt" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(VENDING_ID)
+		FROM ERRORINFO
+		WHERE VENDING_ID = #{vendingId}
 	</select>
 	
 	<select id="getVendingState" parameterType="int" resultType="HashMap">
@@ -123,10 +94,10 @@
 	]]>
 	</select>
 	
-	
-	
-	
-
+	<insert id="vendingError" parameterType="HashMap">
+		INSERT INTO errorinfo
+		values (0,sysdate(),#{vendingId}, #{asId});
+	</insert>
 </mapper>
 
 

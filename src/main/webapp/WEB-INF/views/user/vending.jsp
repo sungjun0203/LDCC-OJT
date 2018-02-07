@@ -155,6 +155,8 @@
 $( document ).ready(function() {
 	
 	swal("얼굴 분석 완료", "<strong> 당신의 성별은 :  ${faceResult.gender} <br> 당신의 나이는 : ${faceResult.age}<strong>", "success");
+	
+	
 });
 
 </script>
