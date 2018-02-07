@@ -1,7 +1,6 @@
 package com.lotte.analysis;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lotte.drink.DrinkDto;
 import com.lotte.sell.CustomerVO;
+import com.lotte.sell.TopSellVO;
 import com.lotte.vending.VendingDto;
 
 @Controller
@@ -48,8 +48,10 @@ public class AnalysisController {
 		mv.addObject("vendingId", vendingDto.getVendingId());
 		ArrayList<DrinkDto> drinkRankingList = analysisService.getDrinkRankingById(vendingDto);
 		mv.addObject("drinkRankingList", drinkRankingList);
-		ArrayList<CustomerVO> ageAndGenderList=analysisService.getAgeAndGenderAnalysis(vendingDto);
-		mv.addObject("ageAndGenderList",ageAndGenderList);
+		ArrayList<TopSellVO> drinkSalesGraphInfoByTimeList=analysisService.getDrinkSalesGraphByTime(vendingDto);
+		mv.addObject("drinkSalesGraphInfoByTimeList",drinkSalesGraphInfoByTimeList);
+		ArrayList<TopSellVO> drinkSalesGraphInfoByMonthList=analysisService.getDrinkSalesGraphByMonth(vendingDto);
+		mv.addObject("drinkSalesGraphInfoByMonthList",drinkSalesGraphInfoByMonthList);
 
 		return mv;
 	}
@@ -62,13 +64,11 @@ public class AnalysisController {
 		mv.addObject("vendingId", vendingDto.getVendingId());
 		ArrayList<DrinkDto> drinkRankingList = analysisService.getDrinkRankingById(vendingDto);
 		mv.addObject("drinkRankingList", drinkRankingList);
-		ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraphInfo=analysisService.getDrinkSalesGraph(vendingDto);
-		mv.addObject("getDrinkSalesGraphInfo",getDrinkSalesGraphInfo);
-		if(vendingDto.getDrinkId()!=0){
 			ArrayList<CustomerVO> ageAndGenderList=analysisService.getAgeAndGenderAnalysis(vendingDto);
 			mv.addObject("ageAndGenderList",ageAndGenderList);
 			mv.addObject("drinkName",analysisService.getDrinkInfoByDrinkId(vendingDto).getDrinkName() );
-		}
+			ArrayList<TopSellVO> drinkSalesGraphInfoByTimeList=analysisService.getDrinkSalesGraphByTimeByDrinkId(vendingDto);
+			mv.addObject("drinkSalesGraphInfoByTimeList",drinkSalesGraphInfoByTimeList);
 		return mv;
 	}
 }

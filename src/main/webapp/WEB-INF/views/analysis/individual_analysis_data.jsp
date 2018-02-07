@@ -20,24 +20,24 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	function getDrinkRanking(id){
-		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+id;
+		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
 	}
 	function getAgeAndGender(drinkId, vendingId){
-		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+vendingId+"&drinkId="+drinkId;
+		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+vendingId+"&drinkId="+drinkId;
 	}
 
     
 </script>
 
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
   google.charts.load('current', {'packages':['bar']});
   google.charts.setOnLoadCallback(drawStuff);
   
   
 
   function drawStuff() {
- 
-	  var age="";
+
+	  var drinkName='${drinkName}';
     var data = new google.visualization.arrayToDataTable([
     	 ['', 'Male', 'Female'],
     	
@@ -48,9 +48,9 @@
 
     ]);
     var options = {
-      width: 800,
+    		width: 800,
       chart: {
-        title: 'Nearby galaxies',
+        title: drinkName,
       },
       bars: 'horizontal', // Required for Material Bar Charts.
 
@@ -59,8 +59,49 @@
   var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
   chart.draw(data, options);
 };
-  </script>
+  </script> -->
+ <script type="text/javascript">
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
 
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+
+      data.addColumn('number', '시간');
+      data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink1Name}');
+	      	data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink2Name}');
+		    	 data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink3Name}');
+      
+      data.addRows([
+    	  
+		/* <c:forEach var="drinkSalesGraphInfoByTime" items="${drinkSalesGraphInfoByTimeList}">
+		  	 	 	[${drinkSalesGraphInfoByTime.sellDate}, ${drinkSalesGraphInfoByTime.drink1}, ${drinkSalesGraphInfoByTime.drink2}, ${drinkSalesGraphInfoByTime.drink3}],
+		</c:forEach>  */
+		<c:forEach var="drinkSalesGraphInfoByMonth" items="${drinkSalesGraphInfoByMonthList}">
+				[${drinkSalesGraphInfoByMonth.sellDate}, ${drinkSalesGraphInfoByMonth.drink1}, ${drinkSalesGraphInfoByMonth.drink2}, ${drinkSalesGraphInfoByMonth.drink3}],
+		</c:forEach>
+
+      ]);
+
+      var options = {
+        chart: {
+          title: '시간대 별 음료 판매 TOP3 그래프',
+        },
+        width: 900,
+        height: 500,
+        axes: {
+          x: {
+            0: {side: 'bottom'}
+          }
+        }
+      };
+
+      var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+  </script>
       
 <body>
     <div id="wrapper">
@@ -98,7 +139,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     </li>	
                     
                     <li><a class="text-center" onclick="moveRank()"><i
-						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
+						class="fa fa-chart-bar fa-3x" ></i> <br>분석</a></li>
                       <li  >
                         <a  class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
                     </li>
@@ -113,7 +154,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
             <div id="page-inner">
                 <div class="row">
                 	<div class="col-md-12">
-						<h2>분석</h2>
+						<h2>분석1</h2>
 						<h5>칠성에서 음료 개발 및 마케팅 정보로 활용할 수 있는 자판기 판매 분석 랭킹 보는곳이라는 말을 예쁘게
 							고쳐주세요.</h5>
 					</div>
@@ -125,7 +166,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <i class="fa fa-envelope-o"></i>
                 </span>-->
 							<div class="text-box">
-								<p class="main-text">자판기 매출 순위</p>
+								<p class="main-text">자판기 판매 순위</p>
 								<hr />
 								<div class="row">
 								<div style="height: 500px; overflow-y: scroll;">
@@ -133,7 +174,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 												<thead>
 													<tr>
 														<th>자판기ID</th>
-														<th>매출액</th>
+														<th>판매량</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -163,7 +204,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     <i class="fa fa-envelope-o"></i>
                 </span>-->
 							<div class="text-box">
-								<p class="main-text">자판기 번호 :  ${vendingId} / 음료 매출 순위</p>
+								<p class="main-text">자판기 번호 :  ${vendingId} / 음료 판매 순위</p>
 								<hr />
 								<div class="row">
 								<div style="height: 500px; overflow-y: scroll;">
@@ -171,7 +212,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 												<thead>
 													<tr>
 														<th>음료</th>
-														<th>매출액</th>
+														<th>판매량</th>
 													</tr>
 												</thead>
 												<tbody id="drinksRanking">
@@ -191,11 +232,13 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 								</div>
 								<!-- <p class="text-muted">Messages</p>-->
 							</div>
+					
 					<div class="col-md-6 col-sm-6 col-xs-6">
 						<div id="dual_x_div" style="width: 300px; height: 500px;"></div>
 					</div>
-
-
+					<div class="col-md-6 col-sm-6 col-xs-6">
+					<div id="line_top_x"style="width: 300px; height: 500px;"></div>
+					</div>
 						</div>
 					</div>
 					

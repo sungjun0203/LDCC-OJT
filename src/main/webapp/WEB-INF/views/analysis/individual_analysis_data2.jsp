@@ -20,7 +20,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	function getDrinkRanking(id){
-		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+id;
+		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
 	}
 	function getAgeAndGender(drinkId, vendingId){
 		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+vendingId+"&drinkId="+drinkId;
@@ -29,7 +29,7 @@
     
 </script>
 
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
   google.charts.load('current', {'packages':['bar']});
   google.charts.setOnLoadCallback(drawStuff);
   
@@ -59,7 +59,7 @@
   var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
   chart.draw(data, options);
 };
-  </script>
+  </script> -->
  <script type="text/javascript">
       google.charts.load('current', {'packages':['line']});
       google.charts.setOnLoadCallback(drawChart);
@@ -68,20 +68,20 @@
 
       var data = new google.visualization.DataTable();
       data.addColumn('number', '시간');
-      data.addColumn('number', '음료1');
-      data.addColumn('number', '음료2');
-      data.addColumn('number', '음료3');
-
+      data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink1Name}');
+      <c:if test="${drinkSalesGraphInfoByTimeList[0].drink2Name!=null}">
+      	data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink2Name}');
+     	 data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink3Name}');
+      </c:if>
       data.addRows([
     	  
-		<c:forEach items="${getDrinkSalesGraphInfo}" var="getDrinkSalesGraphInfoList">
-			<c:forEach items="${getDrinkSalesGraphInfoList}" var="getDrinkSalesGraphInfo">
-				<c:forEach items="${getDrinkSalesGraphInfo}" var="drinkInfo">
-				  [${drinkInfo.key} , ${drinkInfo.value}]
-				</c:forEach>
-			</c:forEach>
+		/* <c:forEach var="drinkSalesGraphInfoByTime" items="${drinkSalesGraphInfoByTimeList}">
+		  	 	 	[${drinkSalesGraphInfoByTime.sellDate}, ${drinkSalesGraphInfoByTime.drink1}, ${drinkSalesGraphInfoByTime.drink2}, ${drinkSalesGraphInfoByTime.drink3}],
+		</c:forEach>  */
+		<c:forEach var="drinkSalesGraphInfoByMonth" items="${drinkSalesGraphInfoByMonthList}">
+	 	 	[${drinkSalesGraphInfoByMonth.sellDate}, ${drinkSalesGraphInfoByMonth.drink1}, ${drinkSalesGraphInfoByMonth.drink2}, ${drinkSalesGraphInfoByMonth.drink3}],
 		</c:forEach>
-/*         [1,  37.8, 80.8, 41.8],
+/*        [1,  37.8, 80.8, 41.8],
         [2,  30.9, 69.5, 32.4],
         [3,  25.4,   57, 25.7],
         [4,  11.7, 18.8, 10.5],
@@ -94,7 +94,7 @@
         [11,  5.3,  7.9,  4.7],
         [12,  6.6,  8.4,  5.2],
         [13,  4.8,  6.3,  3.6],
-        [14,  4.2,  6.2,  3.4] */
+        [14,  4.2,  6.2,  3.4]  */
       ]);
 
       var options = {
@@ -167,7 +167,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
             <div id="page-inner">
                 <div class="row">
                 	<div class="col-md-12">
-						<h2>asdfasfafs</h2>
+						<h2>분석2</h2>
 						<h5>칠성에서 음료 개발 및 마케팅 정보로 활용할 수 있는 자판기 판매 분석 랭킹 보는곳이라는 말을 예쁘게
 							고쳐주세요.</h5>
 					</div>
@@ -245,21 +245,13 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 								</div>
 								<!-- <p class="text-muted">Messages</p>-->
 							</div>
+					
 					<div class="col-md-6 col-sm-6 col-xs-6">
 						<div id="dual_x_div" style="width: 300px; height: 500px;"></div>
-					<div id="line_top_x"></div>
 					</div>
-						<div>
-						${getDrinkSalesGraphInfo}
-						<br>시간대 , 음료1, 음료2, 음료3<br>
-								<c:forEach items="${getDrinkSalesGraphInfo}" var="getDrinkSalesGraphInfoList">
-									<c:forEach items="${getDrinkSalesGraphInfoList}" var="getDrinkSalesGraphInfo">
-										<c:forEach items="${getDrinkSalesGraphInfo}" var="drinkInfo">
-										 ${drinkInfo.key} / ${drinkInfo.value},,
-										</c:forEach>
-									</c:forEach>
-								</c:forEach>
-						</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+					<div id="line_top_x"style="width: 300px; height: 500px;"></div>
+					</div>
 						</div>
 					</div>
 					

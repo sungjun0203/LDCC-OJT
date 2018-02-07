@@ -1,12 +1,12 @@
 package com.lotte.analysis;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.lotte.drink.DrinkDto;
 import com.lotte.sell.CustomerVO;
+import com.lotte.sell.SellDto;
 import com.lotte.vending.VendingDto;
 
 @Mapper
@@ -23,7 +23,8 @@ public interface AnalysisDao {
 	ArrayList<DrinkDto> getAllDrinkInfoById(VendingDto vendingDto);
 	DrinkDto getDrinkInfoByDrinkId(VendingDto vendingDto);
 
-	ArrayList<HashMap<String, Object>> getTopDrinkInfo(VendingDto vendingDto);
-
+	//ArrayList<HashMap<String, Object>> getTopDrinkInfo(VendingDto vendingDto);
+	ArrayList<SellDto> getTopDrinkInfoByTime(VendingDto vendingDto);
+	ArrayList<SellDto> getTopDrinkInfoByMonth(VendingDto vendingDto);
 	ArrayList<Integer> getTopThreeDrinkId(Integer vendingId);
 }
