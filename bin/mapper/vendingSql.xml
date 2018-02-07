@@ -98,6 +98,14 @@
 		INSERT INTO errorinfo
 		values (0,sysdate(),#{vendingId}, #{asId});
 	</insert>
+	
+	
+	<select id="vendingStockCheck" parameterType="HashMap" resultType="HashMap">
+		select *
+		from stocks
+		where stocks.vending_id = #{vendingId} and stocks.drink_id=#{selectDrinkId};
+	</select>
+
 </mapper>
 
 

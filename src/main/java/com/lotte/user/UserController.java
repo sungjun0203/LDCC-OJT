@@ -140,19 +140,40 @@ public class UserController {
 		return userService.vendingErrCnt(vendingId);
 	}
 	
+	@ResponseBody
 	@RequestMapping("/vendingSubmit")
-	public ModelAndView vendingSubmit(HttpServletRequest request) {
+	public String vendingSubmit(HttpServletRequest request) throws Exception {
+		
+		HashMap<String,Object> vendingSubmitInfo = new HashMap<String,Object>();
+		
+		vendingSubmitInfo.put("faceAge",  request.getParameter("faceAge"));
+		vendingSubmitInfo.put("faceGender",  request.getParameter("faceGender"));
+		vendingSubmitInfo.put("selectDrinkId",  request.getParameter("selectDrinkId"));
+		vendingSubmitInfo.put("vendingId",  request.getParameter("vendingId"));
+		vendingSubmitInfo.put("stock",  request.getParameter("stock"));
+		vendingSubmitInfo.put("sendCheck",  request.getParameter("sendCheck"));
+		
+		System.out.println(request.getParameter("sendCheck"));
 		
 		
-		System.out.println(request.getParameter("selectDrinkId"));
-		System.out.println(request.getParameter("vendingId"));
+		userService.vendingSubmit(vendingSubmitInfo);
 		
-		return new ModelAndView("/user/main");
+		return "success";
 		
 	}
 	
-	
-	
+	@ResponseBody
+	@RequestMapping("/vendingStockCheck")
+	public HashMap<String,Object> vendingStockCheck(HttpServletRequest request)	{
+		
+		HashMap<String,Object> vendingSubmitInfo = new HashMap<String,Object>();
+		vendingSubmitInfo.put("selectDrinkId",  request.getParameter("selectDrinkId"));
+		vendingSubmitInfo.put("vendingId",  request.getParameter("vendingId"));
+		
+		
+		return userService.vendingStockCheck(vendingSubmitInfo);
+		
+	}
 	
 	
 	
