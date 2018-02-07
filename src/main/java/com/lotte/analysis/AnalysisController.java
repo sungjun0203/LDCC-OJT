@@ -1,7 +1,6 @@
 package com.lotte.analysis;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lotte.drink.DrinkDto;
 import com.lotte.sell.CustomerVO;
+import com.lotte.sell.TopSellVO;
 import com.lotte.vending.VendingDto;
 
 @Controller
@@ -54,11 +54,11 @@ public class AnalysisController {
 		mv.addObject("vendingId", vendingDto.getVendingId());
 		ArrayList<DrinkDto> drinkRankingList = analysisService.getDrinkRankingById(vendingDto);
 		mv.addObject("drinkRankingList", drinkRankingList);
-		ArrayList<CustomerVO> sellInfoList=analysisService.getAgeAndGenderAnalysis(vendingDto);
-		mv.addObject("sellInfoList",sellInfoList);
+		ArrayList<TopSellVO> drinkSalesGraphInfoByTimeList=analysisService.getDrinkSalesGraphByTimeByDrinkId(vendingDto);
+		mv.addObject("drinkSalesGraphInfoByTimeList",drinkSalesGraphInfoByTimeList);
+		ArrayList<TopSellVO> drinkSalesGraphInfoByMonthList=analysisService.getDrinkSalesGraphByMonthByDrinkId(vendingDto);
+		mv.addObject("drinkSalesGraphInfoByMonthList",drinkSalesGraphInfoByMonthList);
 		d.addAttribute("location",analysisService.getLocation());
-		ArrayList<CustomerVO> ageAndGenderList=analysisService.getAgeAndGenderAnalysis(vendingDto);
-		mv.addObject("ageAndGenderList",ageAndGenderList);
 
 		return mv;
 	}
@@ -78,13 +78,13 @@ public class AnalysisController {
 		mv.addObject("vendingId", vendingDto.getVendingId());
 		ArrayList<DrinkDto> drinkRankingList = analysisService.getDrinkRankingById(vendingDto);
 		mv.addObject("drinkRankingList", drinkRankingList);
-		ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraphInfo=analysisService.getDrinkSalesGraph(vendingDto);
-		mv.addObject("getDrinkSalesGraphInfo",getDrinkSalesGraphInfo);
-		if(vendingDto.getDrinkId()!=0){
 			ArrayList<CustomerVO> ageAndGenderList=analysisService.getAgeAndGenderAnalysis(vendingDto);
 			mv.addObject("ageAndGenderList",ageAndGenderList);
 			mv.addObject("drinkName",analysisService.getDrinkInfoByDrinkId(vendingDto).getDrinkName() );
-		}
+			ArrayList<TopSellVO> drinkSalesGraphInfoByTimeList=analysisService.getDrinkSalesGraphByTimeByDrinkId(vendingDto);
+			mv.addObject("drinkSalesGraphInfoByTimeList",drinkSalesGraphInfoByTimeList);
+			ArrayList<TopSellVO> drinkSalesGraphInfoByMonthList=analysisService.getDrinkSalesGraphByMonthByDrinkId(vendingDto);
+			mv.addObject("drinkSalesGraphInfoByMonthList",drinkSalesGraphInfoByMonthList);
 		return mv;
 	}
 }

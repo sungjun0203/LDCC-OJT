@@ -230,7 +230,7 @@ function memberDelete(id){
 												<td>${member.asName}</td>
 												<td>${member.asPhone}</td>
 												<td>${member.asLocation}</td>
-												<td><a onclick="memberDelete(${member.asId})"><i class="fa fa-trash-alt fa-2x" style="width:15px; height:15px; position:relative;transform:translateY(-25%);"></i></a></td>
+												<td><a onclick="memberDelete(${member.asId})"><i class="fa fa-trash-alt fa-2x" style="width:15px; height:15px;"></i></a></td>
 											</tr>
 
 										</c:forEach>

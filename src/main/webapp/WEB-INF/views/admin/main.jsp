@@ -171,7 +171,7 @@ function getTodayLabel() {
                 <div>
                     <div class="col-md-5 col-sm-12 col-xs-12" style="padding:10px 10px 0px 10px;">
                     	<div id="nowVendingStatus" style="height:200px;" ></div>
-   	  	                    <div style="text-align: center; z-index:10; height:200px; transform:translateY(-65%); font-size:30pt; font-weight:600;color:#292c44;">${vendingCount.normalVendingCount/vendingCount.allVendingCount*100}%       	</div>
+   	  	                    <div style="text-align: center; z-index:10; position:relative;transform:translateY(-220%); font-size:30pt; font-weight:600;color:#292c44;">${vendingCount.normalVendingCount/vendingCount.allVendingCount*100}%       	</div>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-6" style="transform:translateY(100%);">
                     	<p><text style="font-size:15pt; font-weight:500;">정상 작동</text></p>
