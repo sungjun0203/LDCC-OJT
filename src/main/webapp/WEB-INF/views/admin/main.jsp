@@ -83,9 +83,49 @@ function getTodayLabel() {
 
         var options = {
         backgroundColor: 'transparent',
-        colors: ['#292c44']
+        colors: ['#292c44'],
+        animation: { startup: true, duration: 2500, easing: 'out' },
+        crosshair:{
+				orientation:'both',
+				trigger:'both'
+		},
+		lineWidth: 5,
+	    pointSize: 20,
+	    dataOpacity: 0.01,
+        chartArea:{
+				width: '78%'
+				},
+		hAxis : {
+				title : '매출 발생 날짜',
+				textStyle : {
+	    		    fontSize: 15
+				},
+				gridlines : {
+					color : 'black',
+					count : 6
+				},
+				titleTextStyle: {
+	    		    fontSize: 18
+	    		  },
+				gridlines : {
+					color : 'black',
+					count : 9
+				}
+			},
+			vAxis : {
+					title : "판매 금액(원)",
+					textStyle : {
+		    		    fontSize: 14,
+					},
+					gridlines : {
+						color : 'black',
+						count : 7
+					},
+					titleTextStyle: {
+		    		    fontSize: 16,
+		    		  }
+				}
         };
-
         var chart = new google.visualization.AreaChart(document.getElementById('allSalesStatus'));
         chart.draw(data, options);
       }
@@ -138,12 +178,6 @@ function getTodayLabel() {
                     
                     <li><a class="text-center" onclick="moveRank()"><i
 						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
-                      <li  >
-                        <a  class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
-                    </li>
-                    <li  >
-                        <a  class="text-center" onclick="moveHome()" id="navi6"><i class="fa fa-bullhorn fa-3x"></i> <br>Notice </a>
-                    </li>				
                 </ul>
             </div>
         </nav>  

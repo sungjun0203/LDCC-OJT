@@ -15,8 +15,7 @@
 		where s.vending_id = #{vendingId};
 	</select>
 
-	<select id="getDrinkSales" parameterType="int"
-		resultType="com.lotte.vending.VendingDto">
+	<select id="getDrinkSales" parameterType="int" resultType="com.lotte.vending.VendingDto">
 		select vending_id, s.drink_id, d.drink_name, count(s.drink_id),
 		count(case when s.customer_gender = '남' then 1 end) as countForMale,
 		count(case when s.customer_gender = '여' then 1 end) as countForFemale,
@@ -28,7 +27,7 @@
 		from sellinfo s inner join drinks d
 		on s.drink_id = d.drink_id
 		where vending_id = #{vendingId}
-		group by 1,2 order by vending_id;
+		group by 1,2 order by vending_id
 	</select>
 
 	<select id="allVendingCount" resultType="Integer">
@@ -78,7 +77,6 @@
 	</select>
 	
 	<select id="getVendingState" parameterType="int" resultType="HashMap">
-	
 	<![CDATA[
 		SELECT 		errorinfo.vending_id, '고장' as 'state'
 		FROM 		asinfo,errorinfo
@@ -88,9 +86,8 @@
 		
 		SELECT 		stocks.vending_id, '재고' as 'state'
 		FROM 		ojt.stocks, asinfo
-		WHERE 		stocks.stock_quantity<5
-		GROUP BY 	stocks.vending_id;
-		
+		WHERE 		stocks.stock_quantity<5 and vending_id = #{vendingId}
+		GROUP BY 	stocks.vending_id
 	]]>
 	</select>
 	

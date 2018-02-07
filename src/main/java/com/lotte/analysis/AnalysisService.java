@@ -108,9 +108,9 @@ public class AnalysisService {
 		return analysisDao.getDrinkInfoByDrinkId(vendingDto);
 	}
 	
-	
+	/*
 	public ArrayList<TopSellVO> getDrinkSalesGraphByMonth(VendingDto vendingDto){
-		System.out.println("month시작----------------------------");
+		//System.out.println("month시작----------------------------");
 		Integer vendingId=vendingDto.getVendingId();
 		ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId); //TOP3음료 아이디 뽑아오기
 		ArrayList<ArrayList<SellDto>> drinkSalesGraphInfo = new ArrayList<ArrayList<SellDto>>(); //top3 db에서 뽑은 값
@@ -162,7 +162,7 @@ public class AnalysisService {
 	}
 	
 	public ArrayList<TopSellVO> getDrinkSalesGraphByTime(VendingDto vendingDto){
-		System.out.println("time시작----------------------------");
+		//System.out.println("time시작----------------------------");
 		Integer vendingId=vendingDto.getVendingId();
 		ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId); //TOP3음료 아이디 뽑아오기
 		ArrayList<ArrayList<SellDto>> drinkSalesGraphInfo = new ArrayList<ArrayList<SellDto>>(); //top3 db에서 뽑은 값
@@ -212,7 +212,7 @@ public class AnalysisService {
 	}
 		return reDrinkSalesGraphInfo; 
 	}
-	
+	*/
 	public ArrayList<TopSellVO> getDrinkSalesGraphByTimeByDrinkId(VendingDto vendingDto){
 		
 		Integer vendingId=vendingDto.getVendingId();
@@ -234,13 +234,13 @@ public class AnalysisService {
 			}
 		}
 		
-				for(int k=0; k<drinkSalesGraphInfo.size(); k++){
+/*				for(int k=0; k<drinkSalesGraphInfo.size(); k++){
 		for(int i=0; i<drinkSalesGraphInfo.get(k).size(); i++){
 			System.out.println("데이터 : " + drinkSalesGraphInfo.get(k).get(i).getSellDate1()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getCustomerCount()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getDrinkName());
 		}
 		System.out.println("----------------------------");
 	}
-		
+		*/
 		
 		
 		for(int i=0; i<24;i++){
@@ -291,13 +291,13 @@ public class AnalysisService {
 			}
 		}
 		
-				for(int k=0; k<drinkSalesGraphInfo.size(); k++){
+/*				for(int k=0; k<drinkSalesGraphInfo.size(); k++){
 		for(int i=0; i<drinkSalesGraphInfo.get(k).size(); i++){
 			System.out.println("데이터 : " + drinkSalesGraphInfo.get(k).get(i).getSellDate1()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getCustomerCount()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getDrinkName());
 		}
 		System.out.println("----------------------------");
 	}
-		
+		*/
 		
 		
 		for(int i=0; i<12;i++){

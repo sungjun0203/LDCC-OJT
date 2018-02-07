@@ -17,10 +17,22 @@
 
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-		  div { font-family: 'Noto Sans KR'; }
-		  p {font-family: 'Noto Sans KR';}
-		  h2 {font-family: 'Noto Sans KR'; }
-		  h5 {font-family: 'Noto Sans KR'; }
+
+div {
+	font-family: 'Noto Sans KR';
+}
+
+p {
+	font-family: 'Noto Sans KR';
+}
+
+h2 {
+	font-family: 'Noto Sans KR';
+}
+
+h5 {
+	font-family: 'Noto Sans KR';
+}
 </style>
 
 <style>
@@ -30,8 +42,7 @@ th {
 
 .cImg {
 	width: 60px;
-}
-
+}`
 </style>
 <script>
 /*
@@ -54,25 +65,28 @@ function callState(no){
 		data : 'vendingId=' + no,
 		dataType : 'json',
 		success : function(data) {
-			//alert("callState("+no+")"+" call");
-			console.log(data);
-			if(data.state == "고장"){
-				//alert("고장");
-				$(".notice-red > ").html(data.vending_id+"번 자판기 작동 상태 : 고장");
-				$(".notice-blue > ").html(data.vending_id+"번 자판기 재고 상태 : 양호");
+			if(data.length == 1){
+				if(data[0].state == "고장"){
+					$(".notice-blue > ").html(no+"번 자판기 작동 상태 : 고장");
+					$(".notice-red > ").html(no+"번 자판기 재고 상태 : 양호");
 
+				}
+				if(data[0].state == "재고"){
+					$(".notice-red > ").html(no+"번 자판기 재고 상태 : 재고 부족");
+					$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 양호");
+				}	
 			}
-			if(data.state == "재고"){
-				//alert("재고");
-				$(".notice-red > ").html(data.vending_id+"번 자판기 재고 상태 : 재고 부족");
-				$(".notice-blue > ").html(data.vending_id+"번 자판기 자판기 작동 상태 : 양호");
+			if(data.length == 2){
+				$(".notice-red > ").html(no+"번 자판기 재고 상태 : 고장");
+				$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 재고 부족");
 			}
-			
+			if(data.length == 0){
+				$(".notice-red > ").html(no+"번 자판기 재고 상태 : 양호");
+				$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 양호");
+			}
 			
 		},
 		error : function(err){
-			$(".notice-blue > ").html(no+"번 자판기 재고 상태 : 양호");
-			$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 양호");
 		}
 	});
 }	
@@ -86,7 +100,7 @@ function callDrinks(no){
 		data : 'vendingId=' + no,
 		dataType : 'json',
 		success : function(data) {
-			$(".empty > h2").remove();
+			//$(".empty > h2").remove();
 			var show_ul = "";
 			for (var i = 0; i < data.length; i++) {
 				var img = data[i].drinkName + '.png';
@@ -100,57 +114,112 @@ function callDrinks(no){
 			$("#btn-gender").attr("onclick","callGraphGender("+no+")");
 			$("#btn-age").attr("onclick","callGraphAge("+no+")");
 			callState(no);
+		},
+		error:function(error){
+			console.log("정상 에러 : " + error);
 		}
 	});
 }
 /*
  * 함수 작성자 : 백상우
  */		
-function callGraphGender(no){
-	//alert("Gender and no : "+no);
-	$("#chart_div").html("");
-	//alert("gender");
-	$.ajax({
-		type : 'GET',
-		url : 'getDrinkSales',
-		data : 'vendingId=' + no,
-		dataType : 'json',
-		success : function(jdata) {
-			google.charts.load('current', {
-				packages : [ 'corechart', 'bar' ]
-			});
-			google.charts.setOnLoadCallback(drawMultSeries);
-			function drawMultSeries() {
-				var data = new google.visualization.DataTable();
-				data.addColumn('string', '음료수 종류');
-				data.addColumn('number', '남');
-				data.addColumn('number', '여');
-				data.addRows(jdata.length);
-				for (i = 0; i < jdata.length; i++) {
-					data.setCell(i, 0, jdata[i].drinkName);
-					data.setCell(i, 1, jdata[i].countForMale);
-					data.setCell(i, 2, jdata[i].countForFemale);
+ 
+ function callGraphGender(no){
+		$("#chart_div").html("");
+		$.ajax({
+			type : 'GET',
+			url : 'getDrinkSales',
+			data : 'vendingId=' + no,
+			dataType : 'json',
+			success : function(jdata) {
+				console.log(jdata);
+				google.charts.load('current', {'packages':['line', 'corechart']});
+				google.charts.setOnLoadCallback(drawMultSeries);
+				function drawMultSeries() {
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', '음료수 종류');
+					data.addColumn('number', '남');
+					data.addColumn('number', '여');
+					data.addRows(jdata.length);
+					for (i = 0; i < jdata.length; i++) {
+						data.setCell(i, 0, jdata[i].drinkName);
+						data.setCell(i, 1, jdata[i].countForMale);
+						data.setCell(i, 2, jdata[i].countForFemale);
+					}
+
+					var options = {
+	 						height : 350,
+	 						color : 'black',
+	 						animation: { startup: true, duration: 2500, easing: 'out' },
+	 						crosshair:{
+	 							orientation:'both',
+	 							trigger:'both'
+	 						  },
+	 						legend:{
+	 							position: 'top',
+								  textStyle:{
+	 				    		    color: 'black',
+	 				    		    fontSize: 12,
+	 				    		    bold: false,
+	 				    		    italic: false
+	 							  }
+	 						  },
+	 						 lineWidth: 5,
+	 						  pointSize: 20,
+	 						  dataOpacity: 0.01,
+	 						backgroundColor: { fill:'transparent' },
+	 						chartArea:{
+	 							width: '85%',
+	 							height: '70%'
+	 						},
+	 						hAxis : {
+	 							title : '음료수 종류',
+	 							textStyle : {
+	 				    		    color: 'black',
+	 				    		    fontSize: 14,
+	 				    		    bold: false,
+	 				    		    italic: false
+	 							},
+	 							titleTextStyle: {
+	 				    		    color: 'black',
+	 				    		    fontSize: 18,
+	 				    		    bold: false,
+	 				    		    italic: true
+	 				    		  },
+	 							gridlines : {
+	 								color : 'black'
+	 							},
+
+	 						},
+	 						vAxis : {
+	 							title : "판매수",
+	 							textStyle : {
+	 				    		    color: 'black',
+	 				    		    fontSize: 14,
+	 				    		    bold: false,
+	 				    		    italic: false
+	 							},
+	 							gridlines : {
+	 								color : 'black',
+	 								count : 6
+	 							},
+	 							titleTextStyle: {
+	 				    		    color: 'black',
+	 				    		    fontSize: 16,
+	 				    		    bold: false,
+	 				    		    italic: true
+	 				    		  }
+	 						}
+	 					};
+					var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+					chart.draw(data, options);
 				}
 
-				var options = {
-					chart : {
-						title : '남녀별 음료 매출'
-					},
-					colors:[ '#1a2a40','#e00b27'],
-					backgroundColor : 'transparent',
-					fontName:'Noto Sans KR',
-					fontSize:'13',
-				};
-				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-				chart.draw(data, options);
 			}
-			
-		}
-	});
-}
-/*
- * 함수 작성자 : 백상우
- */	
+		});
+	}
+ 
+
 function callGraphAge(no){
 	//alert("Age and no : "+no);
 	$("#chart_div").html("");
@@ -167,11 +236,11 @@ function callGraphAge(no){
 			function drawMultSeries() {
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', '음료수 종류');
-				data.addColumn('number', '10');
-				data.addColumn('number', '20');
-				data.addColumn('number', '30');
-				data.addColumn('number', '40');
-				data.addColumn('number', '50');
+				data.addColumn('number', '10대');
+				data.addColumn('number', '20대');
+				data.addColumn('number', '30대');
+				data.addColumn('number', '40대');
+				data.addColumn('number', '50대');
 				data.addRows(jdata.length);
 				for (i = 0; i < jdata.length; i++) {
 					data.setCell(i, 0, jdata[i].drinkName);
@@ -183,70 +252,94 @@ function callGraphAge(no){
 				}
 
 				var options = {
+					height : 350,
+					animation: { startup: true, duration: 2500, easing: 'out' },
 					chart : {
-						title : '성별 음료 매출'
+						title : '남녀별 음료 매출'
 					},
-					colors:[ '#525861', '#6c6d78','#8a8c99', '#b2b9d2', '#cfd5e6'],
-					backgroundColor : 'transparent',
-					fontName:'Noto Sans KR',
-					fontSize:'13',
-				};
+					vAxis : {
+							title : "판매수",
+							textStyle : {
+				    		    color: 'black',
+				    		    fontSize: 14,
+				    		    bold: false,
+				    		    italic: false
+							},
+							gridlines : {
+								color : 'black',
+								count : 6
+							},
+							titleTextStyle: {
+				    		    color: 'black',
+				    		    fontSize: 16,
+				    		    bold: false,
+				    		    italic: true
+				    		  }
+						},
+						chartArea:{
+ 							width: '80%',
+ 							height: '70%'
+ 						},
+						title : '성별 음료 매출',
+						colors:[ '#525861', '#6c6d78','#8a8c99', '#b2b9d2', '#cfd5e6'],
+						backgroundColor : 'transparent',
+						fontName:'Noto Sans KR',
+						fontSize:'13'
+					}
 				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 				chart.draw(data, options);
+				};
+			
 			}
-		}
-	});
-}
+		});
+	}
+
 </script>
 </head>
 
 <body>
 	<div id="wrapper">
-		<nav class="navbar navbar-default navbar-cls-top " role="navigation"
-			style="margin-bottom: 0">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".sidebar-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.html"><img
-				src="/resources/assets/img/lotte-logo.png" alt="lotte logo"
-				align="middle"
-				style="width: 50px; position: relative; top: 50%; transform: translateY(-50%);" /></a>
-		</div>
-		<div>
-
-			<div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
+		 <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="/resources/assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a> 
+            </div>
+ 
+  <div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
             <span style="color:#ED3A2E; font-size:30pt; font-weight:600;">L.SMO</span>
-      </div>    
-		</nav>
-		<!-- /. NAV TOP  -->
-		<nav class="navbar-default navbar-side" role="navigation">
-		<div class="sidebar-collapse">
-			<ul class="nav" id="main-menu">
+      </div>     
+        </nav>   
+  
+  
+           <!-- /. NAV TOP  -->
+                <nav class="navbar-default navbar-side" role="navigation" >
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+					
+                    <li>
+                        <a class="active-menu"  onclick="moveHome(this.id)" id="navi1"><i class="fa fa-home fa-3x"></i> <br>Home</a>
+                    </li>
+                     <li>
+                        <a  class="text-center" onclick="moveMember(this.id)" id="navi2"><i class="fa fa-users fa-3x"></i> <br>Member</a>
+                    </li>
+                     <li>
+                        <a  class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
+                    </li>
+						   <li  >
+						   <a  class="text-center"  onclick="moveAnalysis()"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
+                    </li>	
+                    
+                    <li><a class="text-center" onclick="moveRank()"><i
+						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
+                </ul>
+            </div>
+        </nav>  
 
-				<li><a class="text-center" onclick="moveHome(this.id)"
-					id="navi1"><i class="fa fa-home fa-3x"></i> <br>Home</a></li>
-				<li><a class="text-center" onclick="moveMember(this.id)"
-					id="navi2"><i class="fa fa-users fa-3x"></i> <br>Member</a></li>
-				<li><a class="active-menu" onclick="moveMachine()" id="navi3"><i
-						class="fa fa-calculator fa-3x"></i> <br>Machine</a></li>
-				<li><a class="text-center" onclick="moveHome()" id="navi4"><i
-						class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a></li>
-
-				<li><a class="text-center" onclick="moveRank()"><i
-						class="fa fa-chart-bar fa-3x"></i> <br>Rank</a></li>
-				<li><a class="text-center" onclick="moveHome()" id="navi5"><i
-						class="fa fa-chart-line fa-3x"></i> <br>Sales</a></li>
-				<li><a class="text-center" onclick="moveHome()" id="navi6"><i
-						class="fa fa-bullhorn fa-3x"></i> <br>Notice </a></li>
-			</ul>
-
-		</div>
-
-		</nav>
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<div id="page-inner">
@@ -273,7 +366,8 @@ function callGraphAge(no){
 							</div>
 							<div>
 								<div class="row">
-									<div style="max-height: 755px; overflow-y: scroll; horizontal-align:center; padding:15px;">
+									<div
+										style="max-height: 755px; overflow-y: scroll; horizontal-align: center; padding: 15px;">
 										<table class="table table-hover">
 											<thead>
 												<tr>
@@ -286,7 +380,7 @@ function callGraphAge(no){
 											<tbody>
 												<c:forEach var="vMachine" items="${item}">
 													<tr class="data" id="${vMachine.vendingId}"
-														onclick='callDrinks("${vMachine.vendingId}")'
+														onclick='callDrinks(${vMachine.vendingId})'
 														style="text-align: center">
 														<td>${vMachine.vendingId}</td>
 														<td>${vMachine.vendingLocation}</td>
@@ -315,14 +409,16 @@ function callGraphAge(no){
 									<div class="row">
 										<div class="col-md-6 col-sm-6 col-xs-6">
 											<div class="notice-blue">
-												<i class="fa fa-wrench fa-2x" 	style="width: 30px; height: 30px; color: white"></i> 
-												<span style="margin-left: 10px; font-size: 13pt;; color: white; "></span>
+												<i class="fa fa-wrench fa-2x"
+													style="width: 30px; height: 30px; color: white"></i> <span
+													style="margin-left: 10px; font-size: 13pt;; color: white;"></span>
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-6">
 											<div class="notice-red">
-												<i class="fa fa-cart-arrow-down fa-2x" style="width: 30px; height: 30px; color: white"></i> 
-												<span style="margin-left: 10px; font-size: 13pt; color: white;"></span>
+												<i class="fa fa-cart-arrow-down fa-2x"
+													style="width: 30px; height: 30px; color: white"></i> <span
+													style="margin-left: 10px; font-size: 13pt; color: white;"></span>
 											</div>
 										</div>
 									</div>
@@ -331,7 +427,7 @@ function callGraphAge(no){
 							<hr />
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="row">
-									<div class="panel panel-back noti-box" style="height:350px;">
+									<div class="panel panel-back noti-box" style="height: 350px;">
 										<div class="text-box">
 											<p class="main-text">자판기별 재고 현황</p>
 											<hr />
@@ -349,13 +445,19 @@ function callGraphAge(no){
 								<div class="row">
 									<div class="panel panel-back noti-box">
 										<div class="text-box">
-											<p class="main-text" style="display:inline;margin-right:25px;">자판기별 판매 현황</p>
-											<div id="chart-btn" style="display:inline; float:right;">
-												<input type="button"  onclick="callGraphAge('${machineNum}')" class="btn-machine vm-realtime-btn" id="btn-age" value="연령별 판매 현황" style="float:right"> 
-												<span class="vm-realtime-btn" style="float:right">|</span>
-												<input type="button" onclick="callGraphGender('${machineNum}')" class="btn-machine vm-realtime-btn" id="btn-gender" value="성별 판매 현황"></div><hr />
-											<div id="chart_div" style="font-weight:600">
+											<p class="main-text"
+												style="display: inline; margin-right: 25px;">자판기별 판매 현황</p>
+											<div id="chart-btn" style="display: inline; float: right;">
+												<input type="button" onclick="callGraphAge('${machineNum}')"
+													class="btn-machine vm-realtime-btn" id="btn-age"
+													value="연령별 판매 현황" style="float: right"> <span
+													class="vm-realtime-btn" style="float: right">|</span> <input
+													type="button" onclick="callGraphGender('${machineNum}')"
+													class="btn-machine vm-realtime-btn" id="btn-gender"
+													value="성별 판매 현황">
 											</div>
+											<hr />
+											<div id="chart_div" style="font-weight: 600"></div>
 										</div>
 									</div>
 								</div>
