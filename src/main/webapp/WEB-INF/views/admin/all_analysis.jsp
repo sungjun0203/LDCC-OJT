@@ -163,50 +163,46 @@ function drawMaterial() {
 </head>
 <body>
 <div id="wrapper">
-	<nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-		<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="index.html"><img src="/resources/assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width: 50px; position: relative; top: 50%; transform: translateY(-50%);"/></a>
-	</div>
-	<div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
-		<span style="color:#ED3A2E; font-size:30pt; font-weight:600;">L.SMO</span>
-	</div>
-	</nav>
-	<!-- /. NAV TOP  -->
-	<nav class="navbar-default navbar-side" role="navigation">
-	<div class="sidebar-collapse">
-		<ul class="nav" id="main-menu">
-			<li>
-			<a class="text-center" onclick="moveHome(this.id)" id="navi1"><i class="fa fa-home fa-3x"></i><br>
-			Home</a>
-			</li>
-			<li>
-			<a class="text-center" onclick="moveMember(this.id)" id="navi2"><i class="fa fa-users fa-3x"></i><br>
-			Member</a>
-			</li>
-			<li>
-			<a class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i><br>
-			Machine</a>
-			</li>
-			<li>
-			<a class="text-center" onclick="moveHome()" id="navi4"><i class="fa fa-chart-pie fa-3x"></i><br>
-			Analysis</a>
-			</li>
-			<li><a class="active-menu" onclick="moveRank()"><i class="fa fa-chart-bar fa-3x"></i><br>
-			Rank</a></li>
-			<li>
-			<a class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i><br>
-			Sales</a>
-			</li>
-			<li>
-			<a class="text-center" onclick="moveHome()" id="navi6"><i class="fa fa-bullhorn fa-3x"></i><br>
-			Notice </a>
-			</li>
-		</ul>
-	</div>
-	</nav>
+	 <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="/resources/assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a> 
+            </div>
+ 
+  <div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
+            <span style="color:#ED3A2E; font-size:30pt; font-weight:600;">L.SMO</span>
+      </div>     
+        </nav>   
+  
+  
+           <!-- /. NAV TOP  -->
+                <nav class="navbar-default navbar-side" role="navigation" >
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+					
+                    <li>
+                        <a class="active-menu"  onclick="moveHome(this.id)" id="navi1"><i class="fa fa-home fa-3x"></i> <br>Home</a>
+                    </li>
+                     <li>
+                        <a  class="text-center" onclick="moveMember(this.id)" id="navi2"><i class="fa fa-users fa-3x"></i> <br>Member</a>
+                    </li>
+                     <li>
+                        <a  class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
+                    </li>
+						   <li  >
+						   <a  class="text-center"  onclick="moveAnalysis()"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
+                    </li>	
+                    
+                    <li><a class="text-center" onclick="moveRank()"><i
+						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
+                </ul>
+            </div>
+        </nav>  
 	<!-- /. NAV SIDE  -->
 	<div id="page-wrapper">
 		<div id="page-inner">

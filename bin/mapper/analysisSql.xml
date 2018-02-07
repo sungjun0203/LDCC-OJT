@@ -6,9 +6,10 @@
 
 
 	<select id="getVendingMachineRanking" resultType="com.lotte.vending.VendingDto">
-		select sellinfo.vending_id, count(sellinfo.drink_id) as 'sales'
-		from sellinfo inner join drinks on sellinfo.drink_id = drinks.drink_id
-		group by sellinfo.vending_id order by sales desc
+		select vending.vending_id,vending_location,vending_field,count(sellinfo.vending_id) as 'sales'
+		from vending left join sellinfo on vending.vending_id=sellinfo.vending_id
+		group by vending.vending_id
+		order by count(sellinfo.vending_id) desc
 
 	</select>
 
