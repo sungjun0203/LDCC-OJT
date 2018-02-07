@@ -27,13 +27,13 @@ function drawChart() {
   var options = {
 		sliceVisibilityThreshold: .2,
     	legend:'none',
-    	fontName:'Noto Sans KR',
-    	fontSize:17,
     	slices: {
-            0: { color: '#292c44' },
-            1: { color: '#ff5349' }
+            0: { color: '#1a2a40' },
+            1: { color: '#e00b27' }
       },
     	backgroundColor:'transparent',
+    	fontName:'Noto Sans KR',
+		fontSize:'15',
 	    chartArea:{width:'100%',height:'100%'},
 	    pieSliceText:'label',
 	    pieSliceTextStyle:{fontSize:'15',},
@@ -74,6 +74,7 @@ function drawChart() {
         	  ["${womanSellRank.drinkName}",  ${womanSellRank.drinkPrice}, ${womanSellRank.sellCnt}, ${womanSellRank.drinkPrice} * ${womanSellRank.sellCnt}],
      		</c:forEach>
         ]);
+        
         var table = new google.visualization.Table(document.getElementById('womanSellRank'));
         table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
       }
@@ -83,31 +84,22 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawMaterial);
 function drawMaterial() {
       var data = new google.visualization.DataTable();
-      data.addColumn('string', '지역');
+      data.addColumn('string', '');
       data.addColumn('number', '판매량');
       data.addRows([
     	 	 <c:forEach var="locationSellRank" items="${locationSellRank}">
         		["${locationSellRank.vending_location}", ${locationSellRank.cnt}],
         	</c:forEach>
       ]);
+      
       var options = {
-        title: 'Motivation and Energy Level Throughout the Day',
-        hAxis: {
-          title: 'Time of Day',
-          format: 'h:mm a',
-          viewWindow: {
-            min: [7, 30, 0],
-            max: [17, 30, 0]
-          }
-        },
-        vAxis: {
-          title: 'Rating (scale of 1-10)'
-        },
-        colors: ['#292c44'],
-        backgroundColor: 'transparent'
+			colors: ['#454545'],
+    	    backgroundColor: 'transparent',
+    	    fontName:'Noto Sans KR',
+    		fontSize:'13',
       };
-      var materialChart = new google.charts.Bar(document.getElementById('locationSellRank'));
-      materialChart.draw(data, options);
+ 	     var materialChart = new google.charts.Bar(document.getElementById('locationSellRank'));
+    	 materialChart.draw(data, options);
     }
 </script>
 <script>
@@ -115,7 +107,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 google.charts.setOnLoadCallback(drawMaterial);
 function drawMaterial() {
       var data = new google.visualization.DataTable();
-      data.addColumn('string', '위치');
+      data.addColumn('string', '');
       data.addColumn('number', '판매량');
       data.addRows([
     	 	 <c:forEach var="fieldSellRank" items="${fieldSellRank}">
@@ -123,9 +115,7 @@ function drawMaterial() {
         	</c:forEach>
       ]);
       var options = {
-        title: 'Motivation and Energy Level Throughout the Day',
         hAxis: {
-          title: 'Time of Day',
           format: 'h:mm a',
           viewWindow: {
             min: [7, 30, 0],
@@ -135,8 +125,10 @@ function drawMaterial() {
         vAxis: {
           title: 'Rating (scale of 1-10)'
         },
-        colors: ['#292c44'],
-        backgroundColor: 'transparent'
+        colors: ['#454545'],
+        backgroundColor: 'transparent',
+        fontName:'Noto Sans KR',
+		fontSize:'13',
       };
       var materialChart = new google.charts.Bar(document.getElementById('fieldSellRank'));
       materialChart.draw(data, options);
@@ -160,6 +152,9 @@ function drawMaterial() {
                   min: 0
               }
           },
+          backgroundColor:'transparent',
+          fontName:'Noto Sans KR',
+			fontSize:'13',
         };
         var chart = new google.visualization.LineChart(document.getElementById('timeSellChart'));
         chart.draw(data, options);
@@ -218,7 +213,7 @@ function drawMaterial() {
 			<div class="row">
 				<div class="col-md-12">
 					<h2>랭킹</h2>
-					<h5>칠성에서 음료 개발 및 마케팅 정보로 활용할 수 있는 자판기 판매 분석 랭킹 보는곳이라는 말을 예쁘게 고쳐주세요.</h5>
+					<h5>세부 항목별 판매 현황을 보여줍니다.</h5>
 				</div>
 			</div>
 			<!-- /. ROW  -->
@@ -279,15 +274,12 @@ function drawMaterial() {
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="panel panel-back noti-box">
-						<!--                <span class="icon-box bg-color-blue">
-                    <i class="fa fa-warning"></i>
-                </span>-->
 						<div class="text-box">
 							<p class="main-text">
 								지역별 판매 랭킹
 							</p>
 							<hr/>
-							<div id="locationSellRank">
+							<div id="locationSellRank" style="font-family: 'Noto Sans KR'; font-weight:600">
 							</div>
 						</div>
 					</div>
@@ -298,15 +290,12 @@ function drawMaterial() {
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="panel panel-back noti-box">
-						<!--                <span class="icon-box bg-color-blue">
-                    <i class="fa fa-warning"></i>
-                </span>-->
 						<div class="text-box">
 							<p class="main-text">
 								위치별 판매 랭킹
 							</p>
 							<hr/>
-							<div id="fieldSellRank">
+							<div id="fieldSellRank" style="font-family: 'Noto Sans KR'; font-weight:600">
 							</div>
 						</div>
 					</div>
@@ -317,13 +306,10 @@ function drawMaterial() {
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="panel panel-back noti-box">
-						<!--                <span class="icon-box bg-color-blue">
-                    <i class="fa fa-warning"></i>
-                </span>-->
 							<div class="text-box">
 								<p class="main-text">시간대별 판매 랭킹</p>
 								<hr />
-								 <div id="timeSellChart"></div>
+								 <div id="timeSellChart" style="font-weight:600"></div>
 							</div>
 						</div>
 					</div>

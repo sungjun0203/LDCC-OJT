@@ -24,11 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FaceApiService {
 
-	public static final String subscriptionKey = "d5617c8889434123bfb79e7c1fe55808";
-	public static final String uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
+	public static final String subscriptionKey = "e02f25431e33433996a7ec0d3c265d9c";
+	public static final String uriBase = "https://eastasia.api.cognitive.microsoft.com/face/v1.0/detect";
 
-	public HashMap<String,Object> faceAnalysis(@RequestParam("file") MultipartFile file) {
 		
+	public HashMap<String,Object> faceAnalysis(@RequestParam("file") MultipartFile file) {
 		System.out.println("hello");
 		
 		
@@ -81,17 +81,21 @@ public class FaceApiService {
 				}
 				
 				JSONArray arr = new JSONArray(jsonString);
-				JSONObject faceAttributes = arr.getJSONObject(0).getJSONObject("faceAttributes");;
+				JSONObject faceAttributes = arr.getJSONObject(0).getJSONObject("faceAttributes");
+				
+				System.out.println("?null 아니니??");
 				
 				String gender = faceAttributes.getString("gender");
 				String age = faceAttributes.getString("age");
 				
 				faceResult.put("age", age);
 				faceResult.put("gender",gender);
+				
 			}
 			else {
-				faceResult.put("age", null);
-				faceResult.put("gender",null);
+				System.out.println("????????????????????????????????????????");
+				faceResult.put("age", "not");
+				faceResult.put("gender","not");
 			}
 
 		} catch (Exception e) {

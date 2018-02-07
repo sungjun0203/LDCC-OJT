@@ -8,13 +8,29 @@ public class SellDto {
 	Integer sellId;
 	Integer vendingId;
 	Integer drinkId;
+	String drinkName;
 	Integer customerAge;
 	String customerGender;
 	Integer customerCount;
-	String sellDate;
+	Integer sellDate;
+	Integer sellDate1;
 	DrinkDto drinkDto;
 	VendingDto vendingDto;
 	
+	
+	
+	public String getDrinkName() {
+		return drinkName;
+	}
+	public void setDrinkName(String drinkName) {
+		this.drinkName = drinkName;
+	}
+	public Integer getSellDate1() {
+		return sellDate1;
+	}
+	public void setSellDate1(Integer sellDate1) {
+		this.sellDate1 = sellDate1;
+	}
 	public Integer getSellId() {
 		return sellId;
 	}
@@ -51,10 +67,11 @@ public class SellDto {
 	public void setCustomerCount(Integer customerCount) {
 		this.customerCount = customerCount;
 	}
-	public String getSellDate() {
+	
+	public Integer getSellDate() {
 		return sellDate;
 	}
-	public void setSellDate(String sellDate) {
+	public void setSellDate(Integer sellDate) {
 		this.sellDate = sellDate;
 	}
 	public DrinkDto getDrinkDto() {

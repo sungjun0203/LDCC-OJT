@@ -104,7 +104,7 @@ body {
 	
 			var gender = $('input:radio[name=genderRadio]:checked').val();
 			
-			$("#gender").val(gender);
+			$("#faceGender").val(gender);
 			
 			$("#userInputForm").attr("action","/user/vending");
 			$("#userInputForm").submit();
@@ -169,13 +169,13 @@ body {
 
 		<form id="userInputForm">
 
-			<input type="hidden" id="gender" name="gender"> <span
+			<input type="hidden" id="faceGender" name="faceGender"> <span
 				class="badge badge-primary"
 				style="margin-top: 20px; margin-bottom: 05px">성별</span>
 
 			<div class="card border-primary mb-3" style="max-width: 20rem;">
 				<div class="radio_container">
-					<ul class="list" id="radioValue">
+					<ul class="list" id="genderList" >
 						<li class="list__item"><input type="radio" class="radio-btn"
 							name="genderRadio" id="a-opt" value="male" CHECKED /> <label
 							for="a-opt" class="label">Man</label></li>
@@ -193,8 +193,8 @@ body {
 
 
 			<div class="form-group">
-				<select class="form-control" id="age" name="age">
-					<option value="01">01 ~ 10</option>
+				<select class="form-control" id="faceAge" name="faceAge">
+					<option value="0">01 ~ 10</option>
 					<option value="10">10 ~ 20</option>
 					<option value="20">20 ~ 30</option>
 					<option value="30">30 ~ 40</option>

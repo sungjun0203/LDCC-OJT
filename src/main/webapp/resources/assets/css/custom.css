@@ -901,18 +901,18 @@ line-height: 1.428571429;
     machine notice   
     =============================================*/
 .notice-red{
-    background-color: #E6182E;
+    background-color: #ff5349;
     height: 50px;
-    margin-top:20px;
+/*     margin-top:10px; */
     margin-bottom: 15px;
     padding:10px;
     border-radius:10px;
 }
 
 .notice-blue{
-    background-color: #00B3D9;
+    background-color: #292c44;
     height: 50px;
-    margin-top:20px;
+/*     margin-top:10px; */
     margin-bottom: 15px;
     padding:10px;
     border-radius:10px;
@@ -998,5 +998,25 @@ input:checked + .slider:before {
 
 /* font */
 .ns { font-family: 'Noto Sans KR'; }
+
+
+
+/* vm-realtime-btn */
+.vm-realtime-btn{
+	border:none; 
+/* 	float:right;  */
+	background-color:transparent; 
+	font-family:Noto Sans KR; 
+	font-weight:600; 
+	color:#454545;
+}
+
+.salescontent{
+	background-color:#454545; 
+	color:#fff; 
+	padding-bottom:10px;
+	border-radius:5px; 
+	font-weight:500;
+}
 
 >>>>>>> branch 'master' of https://github.com/sungjun0203/LDCC-OJT.git

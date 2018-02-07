@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lotte.drink.DrinkDto;
 import com.lotte.member.MemberDao;
 import com.lotte.member.MemberDto;
 import com.lotte.sell.SellDao;
+import com.lotte.util.CommonDao;
 import com.lotte.util.KakaoApiService;
 import com.lotte.vending.VendingDao;
 import com.lotte.vending.VendingDto;
@@ -32,6 +34,9 @@ public class UserService {
 	
 	@Autowired
 	SellDao sellDao;
+	
+	@Autowired
+	CommonDao commonDao;
 	
 	
 	public String userLoginCheck(HttpServletRequest request) {
@@ -58,15 +63,19 @@ public class UserService {
 		VendingDto vendingInfo  = vendingDao.getVMInfo(vendingId);
 		
 		
+		
+		
+		
 		if(asInfo!=null) {
 			
-				
 				String msg = "[LSMO] 자판기 고장 알림 안내  "
 						+ "담당 자판기의 고장 상황 안내 드립니다. "
 						+ "담당자: " + asInfo.get(0).getAsName() + " "  + " (관리구역: " + vendingInfo.getVendingLocation()+ " ) "
 						+ "문제상황 : 고장";
 				
-				KakaoApiService.sendMesageAPI(asInfo.get(0).getAsPhone(), msg);
+				if(vendingInfo.getSended()=="미전송") {
+					KakaoApiService.sendMesageAPI(asInfo.get(0).getAsPhone(), msg);
+				}
 				
 				HashMap<String,Object> errorInfo = new HashMap<String,Object> ();
 				
@@ -110,7 +119,8 @@ public class UserService {
 		
 		Integer age = 0;
 		
-		if(vendingSubmitInfo.get("faceAge")!=null) {
+		
+		if(vendingSubmitInfo.get("faceAge").toString().length()>0) {
 			
 			Double tempAge = Double.parseDouble((String) vendingSubmitInfo.get("faceAge"));
 			int intAge = Integer.parseInt(String.valueOf(Math.round(tempAge)));
@@ -159,11 +169,12 @@ public class UserService {
 		
 		
 		
-		
-		
-		
 	}
 	
+	public ArrayList<DrinkDto> getDrinkAnalysis(HashMap<String,Object> info){
+		
+		return commonDao.getDrinkAnalysis(info);
+	}
 	
 
 }

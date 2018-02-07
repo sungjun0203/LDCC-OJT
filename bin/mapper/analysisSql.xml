@@ -49,19 +49,34 @@
 		select * from drinks where drink_id=#{drinkId};
 	</select>
 
-	<select id="getTopDrinkInfo" parameterType="com.lotte.vending.VendingDto"
-		resultType="HashMap">
-		select date_format(timetable.timefield,"%H:00:00") as
-		'sell_date',ifnull(sellinfo.drink_id,#{drinkId}) as 'drink_id'
-		,(select drinks.drink_name
-		from drinks where drink_id=#{drinkId}
-		) as 'drink_name' ,count(sellinfo.drink_id) as 'sales'
-		from timetable left join sellinfo on
-		date_format(timetable.timefield,"%H:00:00")=date_format(sellinfo.sell_date,"%H:00:00")
-		and sellinfo.drink_id=#{drinkId} and sellinfo.vending_id=#{vendingId}
-		group by sell_date;
-	</select>
+ <select id="getTopDrinkInfoByTime" parameterType="com.lotte.vending.VendingDto" resultType="com.lotte.sell.SellDto">
 
+select date_format(timetable.timefield,"%H") as 'sell_date1',ifnull(sellinfo.drink_id,#{drinkId})  as 'drink_id' ,(select drinks.drink_name
+from drinks where drink_id=#{drinkId}
+) as 'drink_name' ,count(sellinfo.drink_id) as 'customer_count'
+from timetable left join sellinfo on date_format(timetable.timefield,"%H:00:00")=date_format(sellinfo.sell_date,"%H:00:00")   and  sellinfo.drink_id=#{drinkId} and sellinfo.vending_id=#{vendingId}
+group by sell_date1
+
+</select>
+
+
+
+ <select id="getTopDrinkInfoByMonth" parameterType="com.lotte.vending.VendingDto" resultType="com.lotte.sell.SellDto">
+
+select month.month as 'sell_date1',ifnull(sellinfo.drink_id,#{drinkId})  as 'drink_id'  ,(select drinks.drink_name
+from drinks where drink_id=#{drinkId}
+) as 'drink_name', count(sellinfo.drink_id) as 'customer_count'
+from month
+ left join sellinfo on 
+month.month=date_format(sellinfo.sell_date,"%m")
+  and sellinfo.drink_id=#{drinkId}
+  and
+ sellinfo.vending_id=#{vendingId}
+group by sell_date1;
+
+</select>
+
+<select id="getTopThreeDrinkId" parameterType="Integer"  resultType="Integer">
 	<!-- <select id="getTopDrinkInfo" parameterType="com.lotte.vending.VendingDto" 
 		resultType="HashMap"> select date_format(timetable.timefield,"%H:00:00") 
 		as 'sell_date',count(sellinfo.drink_id) as 'sales' from timetable left join 
@@ -69,8 +84,6 @@
 		and sellinfo.drink_id=#{drinkId} and sellinfo.vending_id=#{vendingId} group 
 		by sell_date; </select> -->
 		
-	<select id="getTopThreeDrinkId" parameterType="Integer"
-		resultType="Integer">
 		select drink_id
 		from sellinfo
 		where vending_id = #{vendingId}

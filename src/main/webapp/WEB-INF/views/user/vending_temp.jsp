@@ -26,10 +26,7 @@ var troubleCheckValue = false;
 function drinkSelect(id){
 	troubleCheck();
 	
-	alert(troubleCheckValue);
-	
 	if(troubleCheckValue==false){
-		
 		vendingStockCheck(id);
 	}
 	
@@ -129,7 +126,6 @@ function vendingStockCheck(id){
 			}
 			
 			else{
-				alert($("#faceGender").val());
 				
 				$.ajax({
 					url : "/user/vendingSubmit",
@@ -146,7 +142,31 @@ function vendingStockCheck(id){
 					success : function() {
 						
 						swal("음료 주문완료", "감사합니다.","success");
-									
+						
+						
+						swal({
+							  title: '음료 주문 완료',
+							  text: "감사합니다.",
+							  type: 'success',
+							  showCancelButton: true,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  confirmButtonText: '종료',
+							  cancelButtonText: '계속 주문',
+							  confirmButtonClass: 'btn btn-danger',
+							  cancelButtonClass: 'btn btn-success',
+							  buttonsStyling: false,
+							  reverseButtons: true
+							}).then((result) => {
+							  if (result.value) {
+								  location.href="/"
+							  // result.dismiss can be 'cancel', 'overlay',
+							  // 'close', and 'timer'
+							  } else if (result.dismiss === 'cancel') {
+							    	
+							  }
+							})
+						
 					},
 					error : function(request, status, error) {
 						alert("code:" + request.status + "\n" + "error:" + error);
@@ -490,8 +510,28 @@ function vendingStockCheck(id){
 
 $( document ).ready(function() {
 	
-	swal("얼굴 분석 완료", "<strong> 당신의 성별은 :  ${faceResult.gender} <br> 당신의 나이는 : ${faceResult.age}<strong>", "success");
 	
+	if(${checkHuman}==true){
+		
+		if("${faceResult.gender}"=="male"){
+			genderValue="남";
+		}
+		else{
+			genderValue="여";
+		}
+		
+		var tempMsg = "추천 음료 : ";
+		
+		<c:forEach var="drinkAnalysis" items="${drinkAnalysis}" >
+			
+			tempMsg+=" ${drinkAnalysis.drinkName} ";
+		</c:forEach>
+		
+		swal(genderValue + " / 나이 : ${faceResult.age}" , "<strong>" + tempMsg +"</strong>", "success");
+	}
+	else{
+		swal("얼굴 분석 실패", "당신은 사람이 아니네유..", "error");
+	}
 	
 });
 

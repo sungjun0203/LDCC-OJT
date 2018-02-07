@@ -9,11 +9,32 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript"
-src="https://www.gstatic.com/charts/loader.js"></script>
+	src="https://www.gstatic.com/charts/loader.js"></script>
 
 <!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
 <!-- 템플릿 공통 끝 -->
+
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+div {
+	font-family: 'Noto Sans KR';
+}
+
+p {
+	font-family: 'Noto Sans KR';
+}
+
+h2 {
+	font-family: 'Noto Sans KR';
+}
+
+h5 {
+	font-family: 'Noto Sans KR';
+}
+</style>
+
 <style>
 th {
 	text-align: center;
@@ -21,8 +42,7 @@ th {
 
 .cImg {
 	width: 60px;
-}
-
+}`
 </style>
 <script>
 /*
@@ -64,6 +84,9 @@ function callState(no){
 				$(".notice-red > ").html(no+"번 자판기 재고 상태 : 양호");
 				$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 양호");
 			}
+			
+		},
+		error : function(err){
 		}
 	});
 }	
@@ -81,10 +104,10 @@ function callDrinks(no){
 			var show_ul = "";
 			for (var i = 0; i < data.length; i++) {
 				var img = data[i].drinkName + '.png';
-				show_ul += "<td class='drinkImg' id='"+data[i].picId+"' style='text-align:center'><img class='cImg' src='./././"+data[i].drinkPicSrc+"'/><br/>"
-						+ data[i].drinkPicName
+				show_ul += "<td class='drinkImg' id='"+data[i].picId+"'valign='bottom' style='text-align:center; border:none; height:50%;'><img class='cImg' src='./././"+data[i].drinkPicSrc+"' style='height:150px;'/><br/>"
+						+ "<hr/><p class='salescontent'>" + data[i].drinkPicName
 						+ "<br/>재고 수 : "
-						+ data[i].stockQuantity + "</td>"
+						+ data[i].stockQuantity + "</span></td>"
 			}
 			$(".tb-stocks > ").find("tr").html(show_ul);
 			callGraphGender(no);
@@ -191,7 +214,7 @@ function callDrinks(no){
 					var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 					chart.draw(data, options);
 				}
-				
+
 			}
 		});
 	}
@@ -256,14 +279,21 @@ function callGraphAge(no){
 						chartArea:{
  							width: '80%',
  							height: '70%'
- 						}
-				};
+ 						},
+						title : '성별 음료 매출',
+						colors:[ '#525861', '#6c6d78','#8a8c99', '#b2b9d2', '#cfd5e6'],
+						backgroundColor : 'transparent',
+						fontName:'Noto Sans KR',
+						fontSize:'13'
+					}
 				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 				chart.draw(data, options);
+				};
+			
 			}
-		}
-	});
-}
+		});
+	}
+
 </script>
 </head>
 
@@ -286,12 +316,8 @@ function callGraphAge(no){
 		<div>
 
 			<div
-				style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px; position: relative; top: 50%;">
-				<a href="#"> <i class="fa fa-bell fa-2x"
-					style="position: relative; top: 50%; transform: translateY(25%); color: #424242"></i><span
-					class="notice-badge badge">3</span></a> <span style="margin: 3px;"></span>
-				<img src="/resources/assets/img/profile.jpg"
-					style="width: 50px; height: 50px; border-radius: 50%;" />
+				style="color: white; padding: 15px 50px 5px 50px; float: left; font-size: 16px; position: relative; top: 50%;">
+				<span style="color: #ED3A2E; font-size: 30pt; font-weight: 600;">L.SMO</span>
 			</div>
 		</nav>
 		<!-- /. NAV TOP  -->
@@ -332,7 +358,7 @@ function callGraphAge(no){
 				<div class="row">
 					<div class="col-md-4 col-sm-12 col-xs-12">
 
-						<div class="panel panel-back noti-box" style="height: 680px;">
+						<div class="panel panel-back noti-box" style=""min-height: 650px;">
 							<!--     <span class="icon-box bg-color-red set-icon">
                     <i class="fa fa-envelope-o"></i>
                 </span>-->
@@ -343,7 +369,8 @@ function callGraphAge(no){
 							</div>
 							<div>
 								<div class="row">
-									<div style="height: 635px; overflow-y: scroll;">
+									<div
+										style="max-height: 755px; overflow-y: scroll; horizontal-align: center; padding: 15px;">
 										<table class="table table-hover">
 											<thead>
 												<tr>
@@ -386,15 +413,15 @@ function callGraphAge(no){
 										<div class="col-md-6 col-sm-6 col-xs-6">
 											<div class="notice-blue">
 												<i class="fa fa-wrench fa-2x"
-													style="width: 30px; height: 30px; color: black"></i> <span
-													style="margin-left: 10px; font-size: 15pt; color: white;"></span>
+													style="width: 30px; height: 30px; color: white"></i> <span
+													style="margin-left: 10px; font-size: 13pt;; color: white;"></span>
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-6">
 											<div class="notice-red">
 												<i class="fa fa-cart-arrow-down fa-2x"
-													style="width: 30px; height: 30px; color: black"></i> <span
-													style="margin-left: 10px; font-size: 15pt; color: white;"></span>
+													style="width: 30px; height: 30px; color: white"></i> <span
+													style="margin-left: 10px; font-size: 13pt; color: white;"></span>
 											</div>
 										</div>
 									</div>
@@ -403,11 +430,11 @@ function callGraphAge(no){
 							<hr />
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="row">
-									<div class="panel panel-back noti-box">
+									<div class="panel panel-back noti-box" style="height: 350px;">
 										<div class="text-box">
 											<p class="main-text">자판기별 재고 현황</p>
 											<hr />
-											<table class="table table-hover tb-stocks" id=>
+											<table class="table table-hover tb-stocks">
 												<tbody>
 													<tr></tr>
 												</tbody>
@@ -421,12 +448,19 @@ function callGraphAge(no){
 								<div class="row">
 									<div class="panel panel-back noti-box">
 										<div class="text-box">
-											<p class="main-text" style="display:inline;margin-right:25px;">자판기별 판매 현황</p>
-											<div id="chart-btn" style="display:inline">
-												<input type="button"  onclick="callGraphGender('${machineNum}')" class="btn-machine" id="btn-gender" value="성별 판매 현황"> 
-												<input type="button" onclick="callGraphAge('${machineNum}')" class="btn-machine" id="btn-age" value="나이별 판매 현황"></div><hr />
-											<div id="chart_div">
+											<p class="main-text"
+												style="display: inline; margin-right: 25px;">자판기별 판매 현황</p>
+											<div id="chart-btn" style="display: inline; float: right;">
+												<input type="button" onclick="callGraphAge('${machineNum}')"
+													class="btn-machine vm-realtime-btn" id="btn-age"
+													value="연령별 판매 현황" style="float: right"> <span
+													class="vm-realtime-btn" style="float: right">|</span> <input
+													type="button" onclick="callGraphGender('${machineNum}')"
+													class="btn-machine vm-realtime-btn" id="btn-gender"
+													value="성별 판매 현황">
 											</div>
+											<hr />
+											<div id="chart_div" style="font-weight: 600"></div>
 										</div>
 									</div>
 								</div>

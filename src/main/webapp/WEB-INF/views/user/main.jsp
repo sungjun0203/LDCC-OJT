@@ -29,7 +29,9 @@
 			<div class="card text-white bg-primary">
 			  <div class="card-header">얼굴인식 이용한 자판기 결제</div>
 			  <div class="card-body">
-				    <p class="card-text">현재 API는 무료로 사용하는 API로 <br>분당 20개의 트랜잭션이 걸려있습니다. <br><br>인증된 회원만 사용가능합니다.</p>
+				    <p class="card-text"> 사용자의 성별과 나이를 분석합니다. <br><br> 많이 사용하면 과금되기 때문에 <br> 롯데 회원만 사용 가능합니다.</p>
+				    <p class="card-text" style="font-size:7px; color:red">  LOTTE Infinity는 데이터 분석 및 음료 추천을 위하여 개인정보를 처리합니다.  &nbsp; 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지
+											않습니다.</p>
 			  </div>
 			</div>
 		</div>
@@ -40,7 +42,7 @@
 		<div class="card text-white bg-info ">
 		  <div class="card-header">일반 자판기 결제</div>
 		  <div class="card-body">
-		    <p class="card-text">얼굴인식을 했다는 가정하에 <br>데이터를 직접 입력 한 후 <br>자판기를 이용합니다.</p>
+		    <p class="card-text">얼굴인식을 했다는 가정하에 <br>데이터를 직접 입력 후 자판기를 이용합니다.</p>
 		  </div>
 		</div>
 		<div class="col-lg-2"></div>
