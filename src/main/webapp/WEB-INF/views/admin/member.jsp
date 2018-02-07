@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,10 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <title>Insert title here</title>
-
-<!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
-<!-- 템플릿 공통 끝 -->
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 		  div { font-family: 'Noto Sans KR'; }
@@ -18,9 +16,33 @@
 		  h2 {font-family: 'Noto Sans KR'; }
 		  h5 {font-family: 'Noto Sans KR'; }
 </style>
-
-
 <script>
+function detailed(no){
+	$.ajax({
+		url : "/member/detailed",
+		dataType : "json",
+		type : "POST",
+		data : "asId="+no,
+		success : function(data) {
+			console.log(data);
+			var show_ul = "";
+			for(var i = 0; i<data.length; i++){
+				show_ul += "<tr><td>"+data[i].vendingId+"</td><td>"+data[i].asLocation+"</td><td>"+data[i].vendingLocation+", "+data[i].vendingField+"</td></tr>";
+				
+			}
+			$('#default-text').remove();
+			$("#memberTable > ").find("tbody").eq(1).html(show_ul);		
+			
+			
+			
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "error:" + error);
+		}
+	});
+	
+}
+
 function memberSubmit(){
 	
 	var asName = $("#asName").val();
@@ -74,17 +96,10 @@ function memberDelete(id){
 	
 	
 }
-
-
 </script>
-
-
-
 </head>
-
 <body>
-
-		<div id="wrapper">
+	<div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -95,9 +110,8 @@ function memberDelete(id){
                 </button>
                 <a class="navbar-brand" href="index.html"><img src="/resources/assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a> 
             </div>
-            <div>
+     <div>
   
- 
 <div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
             <span style="color:#ED3A2E; font-size:30pt; font-weight:600;">L.SMO</span>
       </div>     
@@ -153,10 +167,7 @@ function memberDelete(id){
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10">
-															<button type="button" class="btn btn-default"
-									style="margin-bottom: 20px; margin-right: 10px; float: right; background-color: #EDEDED" data-toggle="modal" data-target="#myModal">추가</button>
-									
-									
+									<button type="button" class="btn btn-default" style="margin-left: 59%; float: left; background-color: #EDEDED" data-toggle="modal" data-target="#myModal">추가</button>
 							</div>
 							<div class="col-md-1"></div>
 							</div>
@@ -197,9 +208,10 @@ function memberDelete(id){
 						</div>
 						
 						
+						
 						<div class="row" id="memberTable">
 							<div class="col-md-1"></div>
-							<div class="col-md-10" style="height: 650px; overflow-y: scroll;">
+							<div class="col-md-10" style="width: 56.333333%; height: 650px; overflow-y: scroll;">
 								<table class="table table-hover" style="font-size:13pt;">
 									<thead>
 										<tr>
@@ -213,7 +225,7 @@ function memberDelete(id){
 									<tbody>
 										<c:forEach var="member" items="${memberList}">
 
-											<tr>
+											<tr onclick="detailed(${member.asId})">
 												<td>${member.asId}</td>
 												<td>${member.asName}</td>
 												<td>${member.asPhone}</td>
@@ -227,17 +239,31 @@ function memberDelete(id){
 								</table>
 								<div class="col-md-1"></div>
 							</div>
+							<div class="col-md-10" style="width:40.333333%;height: 650px; overflow-y: scroll;">
+								<table class="table table-hover" style="font-size:13pt;">
+									<thead>
+										<tr>
+											<th>자판기 번호</th>
+											<th>관리 구역</th>
+											<th>자판기 위치</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+								<div class="col-md-1"><p><h2 id="default-text" style="color:black;text-align:center;">직원 목록에서 직원을 선택해주세요.</h2>
+								</div>
+							</div>
+							</div>
 						</div>
 					</div>
 					</div>
 				</div>
 				<!-- /. ROW  -->
 				<hr />
-
 			</div>
 			<!-- /. PAGE INNER  -->
 		</div>
-
 </body>
 
 </html>

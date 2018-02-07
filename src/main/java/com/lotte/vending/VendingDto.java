@@ -16,6 +16,9 @@ public class VendingDto {
 	private int stockQuantity;
 	private String drinkName;
 	private String drinkPic;
+	private int picId;
+	private String drinkPicName;
+	private String drinkPicSrc;
 	
 	private int countForMale;
 	private int countForFemale;
@@ -25,9 +28,38 @@ public class VendingDto {
 	private int countForThrity;
 	private int countForForthy;
 	
+	int	saleNum;
 	
-	
-	
+	public DrinkDto getDrinkDto() {
+		return drinkDto;
+	}
+	public void setDrinkDto(DrinkDto drinkDto) {
+		this.drinkDto = drinkDto;
+	}
+	public int getPicId() {
+		return picId;
+	}
+	public void setPicId(int picId) {
+		this.picId = picId;
+	}
+	public String getDrinkPicName() {
+		return drinkPicName;
+	}
+	public void setDrinkPicName(String drinkPicName) {
+		this.drinkPicName = drinkPicName;
+	}
+	public String getDrinkPicSrc() {
+		return drinkPicSrc;
+	}
+	public void setDrinkPicSrc(String drinkPicSrc) {
+		this.drinkPicSrc = drinkPicSrc;
+	}
+	public int getSaleNum() {
+		return saleNum;
+	}
+	public void setSaleNum(int saleNum) {
+		this.saleNum = saleNum;
+	}
 	public String getDrinkPic() {
 		return drinkPic;
 	}

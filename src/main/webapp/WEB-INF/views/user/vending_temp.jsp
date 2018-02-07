@@ -26,9 +26,13 @@ var troubleCheckValue = false;
 function drinkSelect(id){
 	troubleCheck();
 	
+	alert(troubleCheckValue);
+	
 	if(troubleCheckValue==false){
-		$("#selectDrinkId").val(id);
+		
+		vendingStockCheck(id);
 	}
+	
 	
 }
 
@@ -70,10 +74,91 @@ function troubleCheck(){
 
 function vendingTrouble(){
 	
-	swal("고장.. 전원Off", "죄송합니다 다음에 이용해주세요","error")
-	.then((value) => {
-		$("#vendingMachineInfo").attr("action","/user/vendingTrouble");
-		$("#vendingMachineInfo").submit();
+	
+	var vendingId = $("#vendingId").val();
+	
+	$.ajax({
+		url : "/user/troubleCheck",
+		dataType : "text",
+		type : "POST",
+		data : {
+			"vendingId" : vendingId
+		},
+		success : function(data) {
+			
+			if(data>0){
+				swal("이미 고장난 자판기입니다.", "죄송합니다 다음에 이용해주세요","error")
+				.then((value) => {
+					location.href="/"
+				});
+			}
+			else{
+				swal("고장.. 전원Off", "죄송합니다 다음에 이용해주세요","error")
+				.then((value) => {
+					$("#vendingMachineInfo").attr("action","/user/vendingTrouble");
+					$("#vendingMachineInfo").submit();
+				});
+			}
+
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "error:" + error);
+		}
+	});
+	
+}
+
+
+
+function vendingStockCheck(id){
+	
+	var vendingId = $("#vendingId").val();
+	
+	$.ajax({
+		url : "/user/vendingStockCheck",
+		dataType : "json",
+		type : "POST",
+		data : {
+			"vendingId" : vendingId,
+			"selectDrinkId" : id
+		},
+		success : function(data) {
+			
+			if(data.stock_quantity==0){
+				swal("죄송합니다.", "음료수의 재고가 없습니다.","error");
+			}
+			
+			else{
+				alert($("#faceGender").val());
+				
+				$.ajax({
+					url : "/user/vendingSubmit",
+					dataType : "text",
+					type : "POST",
+					data : {
+						"vendingId" : vendingId,
+						"selectDrinkId" : id,
+						"faceAge" : $("#faceAge").val(),
+						"faceGender" : $("#faceGender").val(),
+						"stock" : data.stock_quantity,
+						"sendCheck" : data.sended
+					},
+					success : function() {
+						
+						swal("음료 주문완료", "감사합니다.","success");
+									
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "error:" + error);
+					}
+				});
+				
+			}
+						
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "error:" + error);
+		}
 	});
 	
 }
@@ -85,12 +170,15 @@ function vendingTrouble(){
 <body>
 
 
-
 	<form id="vendingMachineInfo">
-		<input type="hidden" id="selectDrinkId" name="selectDrinkId" >
+	
+		<input type="hidden" id="faceGender" name="faceGender" value="${faceResult.gender}">
+		<input type="hidden" id="faceAge" name="faceAge" value="${faceResult.age}">
+		<input type="hidden" id="selectDrinkId" name="selectDrinkId">
 		<c:forEach var="drinksInfo" items="${drinksInfo}" begin="0" end="0"
 			step="1" varStatus="status">
-			<input type="hidden" id="vendingId" name="vendingId" value=${drinksInfo.vending_id}>
+			<input type="hidden" id="vendingId" name="vendingId"
+				value=${drinksInfo.vending_id}>
 		</c:forEach>
 		<div class="row" id="vmbgimg"
 			style="overflow-x: hidden; background-color: #018226;">
@@ -369,7 +457,7 @@ function vendingTrouble(){
 							</c:when>
 
 							<c:otherwise>
-								<button  type="button"class="vm_button" style="margin-left: 6%;"
+								<button type="button" class="vm_button" style="margin-left: 6%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>

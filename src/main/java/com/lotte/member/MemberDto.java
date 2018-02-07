@@ -7,6 +7,28 @@ public class MemberDto {
 	String asPhone;
 	String asLocation;
 	
+	String vendingId;
+	String vendingLocation;
+	String vendingField;
+	
+	public String getVendingId() {
+		return vendingId;
+	}
+	public void setVendingId(String vendingId) {
+		this.vendingId = vendingId;
+	}
+	public String getVendingLocation() {
+		return vendingLocation;
+	}
+	public void setVendingLocation(String vendingLocation) {
+		this.vendingLocation = vendingLocation;
+	}
+	public String getVendingField() {
+		return vendingField;
+	}
+	public void setVendingField(String vendingField) {
+		this.vendingField = vendingField;
+	}
 	public Integer getAsId() {
 		return asId;
 	}

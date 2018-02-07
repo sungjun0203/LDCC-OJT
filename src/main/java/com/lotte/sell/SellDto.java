@@ -1,6 +1,7 @@
 package com.lotte.sell;
 
-import java.util.Date;
+import com.lotte.drink.DrinkDto;
+import com.lotte.vending.VendingDto;
 
 public class SellDto {
 	
@@ -10,17 +11,10 @@ public class SellDto {
 	Integer customerAge;
 	String customerGender;
 	Integer customerCount;
-	Date sellDate;
-
+	String sellDate;
+	DrinkDto drinkDto;
+	VendingDto vendingDto;
 	
-	
- 
-	public Integer getCustomerCount() {
-		return customerCount;
-	}
-	public void setCustomerCount(Integer customerCount) {
-		this.customerCount = customerCount;
-	}
 	public Integer getSellId() {
 		return sellId;
 	}
@@ -51,11 +45,30 @@ public class SellDto {
 	public void setCustomerGender(String customerGender) {
 		this.customerGender = customerGender;
 	}
-	public Date getSellDate() {
+	public Integer getCustomerCount() {
+		return customerCount;
+	}
+	public void setCustomerCount(Integer customerCount) {
+		this.customerCount = customerCount;
+	}
+	public String getSellDate() {
 		return sellDate;
 	}
-	public void setSellDate(Date sellDate) {
+	public void setSellDate(String sellDate) {
 		this.sellDate = sellDate;
 	}
+	public DrinkDto getDrinkDto() {
+		return drinkDto;
+	}
+	public void setDrinkDto(DrinkDto drinkDto) {
+		this.drinkDto = drinkDto;
+	}
+	public VendingDto getVendingDto() {
+		return vendingDto;
+	}
+	public void setVendingDto(VendingDto vendingDto) {
+		this.vendingDto = vendingDto;
+	}
+	
 	
 }

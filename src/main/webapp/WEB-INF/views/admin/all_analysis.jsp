@@ -1,14 +1,12 @@
-<%@ page language="java" contenttype="text/html; charset=UTF-8" pageencoding="UTF-8" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <title>Insert title here</title>
-<!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
-<!-- 템플릿 공통 끝 -->
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 		  div { font-family: 'Noto Sans KR'; }
@@ -16,8 +14,7 @@
 		  h2 {font-family: 'Noto Sans KR'; }
 		  h5 {font-family: 'Noto Sans KR'; }
 </style>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
-	</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawChart);

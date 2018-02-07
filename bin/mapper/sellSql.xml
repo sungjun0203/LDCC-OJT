@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.lotte.sell.SellDao">
+
+	<insert id="sellSubmit" parameterType="HashMap" >
+		INSERT INTO sellinfo
+		values(0,#{vendingId},#{drinkId},sysdate(),#{age},#{gender});
+	</insert>
+	
+	<insert id="stockSubmit" parameterType="HashMap" >
+		update stocks 
+		set stock_quantity = stock_quantity-1
+		where vending_id = #{vendingId} and drink_id=#{drinkId};
+	</insert>
+	
+	<update id="kakaoSubmit" parameterType="HashMap" >
+		update stocks 
+		set stock_quantity = stock_quantity-1, sended="전송"
+		where vending_id = #{vendingId} and drink_id=#{drinkId};
+	</update>
+	
+
+</mapper>
+
+
+        
+   

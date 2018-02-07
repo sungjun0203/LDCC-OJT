@@ -23,10 +23,6 @@ public interface AllAnalysisDao {
 	
 	public void timeSellViewCreate(HashMap<String,Object> viewInfo);
 	
-	
-	
-	
-	
 	public ArrayList<HashMap<String,Object>> allSalesInfo(HashMap<String,Object> viewInfo);
 	public void viewCreate(HashMap<String,Object> viewInfo);
 	public void viewDelete(HashMap<String,Object> viewInfo);

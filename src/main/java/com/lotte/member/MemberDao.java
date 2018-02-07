@@ -1,3 +1,4 @@
+
 package com.lotte.member;
 
 
@@ -13,9 +14,9 @@ public interface MemberDao {
 	
 	void memberAdd(MemberDto memberDto);
 	void memberDelete(MemberDto memberDto);
-	
-	
+	public ArrayList<MemberDto> detailed(int asId);
 	ArrayList<MemberDto> getMemberList(Integer vendingId);
 	
 }
+
 

@@ -6,7 +6,7 @@ public class AllAnalysisDto {
 	String drinkName;
 	Integer drinkPrice;
 	String drinkCategory;
-	
+
 	
 	public Integer getDrinkId() {
 		return drinkId;

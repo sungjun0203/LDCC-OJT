@@ -25,6 +25,9 @@ th {
 
 </style>
 <script>
+/*
+ * 함수 작성자 : 백상우
+ */
 	var machineNum = parseInt("${machineNum}");
 	if(machineNum == 0) {
 		callDrinks(1);
@@ -32,20 +35,41 @@ th {
 	if(machineNum != 0){
 		callDrinks(machineNum);
 	}
-	
+/*
+ * 함수 작성자 : 백상우
+ */	
 function callState(no){
 	$.ajax({
 		type : 'GET',
-		url : 'getState',
+		url : 'getVendingState',
 		data : 'vendingId=' + no,
 		dataType : 'json',
 		success : function(data) {
+			//alert("callState("+no+")"+" call");
 			console.log(data);
+			if(data.state == "고장"){
+				//alert("고장");
+				$(".notice-blue > ").html(data.vending_id+"번 자판기 작동 상태 : 고장");
+				$(".notice-red > ").html(data.vending_id+"번 자판기 재고 상태 : 양호");
+
+			}
+			if(data.state == "재고"){
+				//alert("재고");
+				$(".notice-red > ").html(data.vending_id+"번 자판기 재고 상태 : 재고 부족");
+				$(".notice-blue > ").html(data.vending_id+"번 자판기 자판기 작동 상태 : 양호");
+			}
 			
+			
+		},
+		error : function(err){
+			$(".notice-red > ").html(no+"번 자판기 재고 상태 : 양호");
+			$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 양호");
 		}
 	});
 }	
-		
+/*
+ * 함수 작성자 : 백상우
+ */			
 function callDrinks(no){
 	$.ajax({
 		type : 'GET',
@@ -56,9 +80,9 @@ function callDrinks(no){
 			$(".empty > h2").remove();
 			var show_ul = "";
 			for (var i = 0; i < data.length; i++) {
-				var img = data[i].drinkName + '.jpg';
-				show_ul += "<td class='drinkImg' id='"+data[i].drinkId+"' style='text-align:center'><img class='cImg' src='./././"+data[i].drinkPic+"'/><br/>"
-						+ data[i].drinkName
+				var img = data[i].drinkName + '.png';
+				show_ul += "<td class='drinkImg' id='"+data[i].picId+"' style='text-align:center'><img class='cImg' src='./././"+data[i].drinkPicSrc+"'/><br/>"
+						+ data[i].drinkPicName
 						+ "<br/>재고 수 : "
 						+ data[i].stockQuantity + "</td>"
 			}
@@ -66,15 +90,17 @@ function callDrinks(no){
 			callGraphGender(no);
 			$("#btn-gender").attr("onclick","callGraphGender("+no+")");
 			$("#btn-age").attr("onclick","callGraphAge("+no+")");
+			callState(no);
 		}
 	});
-
 }
-	
+/*
+ * 함수 작성자 : 백상우
+ */		
 function callGraphGender(no){
-	alert("Gender and no : "+no);
+	//alert("Gender and no : "+no);
 	$("#chart_div").html("");
-	alert("gender");
+	//alert("gender");
 	$.ajax({
 		type : 'GET',
 		url : 'getDrinkSales',
@@ -109,11 +135,12 @@ function callGraphGender(no){
 		}
 	});
 }
-
+/*
+ * 함수 작성자 : 백상우
+ */	
 function callGraphAge(no){
-	alert("Age and no : "+no);
+	//alert("Age and no : "+no);
 	$("#chart_div").html("");
-	alert("Age");
 	$.ajax({
 		type : 'GET',
 		url : 'getDrinkSales',
@@ -234,7 +261,7 @@ function callGraphAge(no){
 							</div>
 							<div>
 								<div class="row">
-									<div style="height: 760px; overflow-y: scroll;">
+									<div style="height: 635px; overflow-y: scroll;">
 										<table class="table table-hover">
 											<thead>
 												<tr>
@@ -278,16 +305,14 @@ function callGraphAge(no){
 											<div class="notice-blue">
 												<i class="fa fa-wrench fa-2x"
 													style="width: 30px; height: 30px; color: black"></i> <span
-													style="margin-left: 10px; font-size: 15pt; color: black;">기기가
-													정상 작동중입니다.</span>
+													style="margin-left: 10px; font-size: 15pt; color: white;"></span>
 											</div>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-6">
 											<div class="notice-red">
 												<i class="fa fa-cart-arrow-down fa-2x"
 													style="width: 30px; height: 30px; color: black"></i> <span
-													style="margin-left: 10px; font-size: 15pt; color: black;">재고가
-													부족합니다.</span>
+													style="margin-left: 10px; font-size: 15pt; color: white;"></span>
 											</div>
 										</div>
 									</div>

@@ -1,3 +1,4 @@
+
 package com.lotte.vending;
 
 import java.util.ArrayList;
@@ -39,8 +40,14 @@ public class VendingService {
 	}
 
 	
-	
-	
+	public HashMap<String,Object> getVendingState(int vendingId){
+		HashMap<String,Object> list = vDao.getVendingState(vendingId);
+		return list;
+	}
+	public ArrayList<VendingDto> getLocation(String vendingLocation){
+		ArrayList<VendingDto> list = vDao.getLocation(vendingLocation);
+		return list;
+	}
 	
 	
 	
