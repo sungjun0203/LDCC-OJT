@@ -69,17 +69,13 @@
       var data = new google.visualization.DataTable();
       data.addColumn('number', '시간');
       data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink1Name}');
-      <c:if test="${drinkSalesGraphInfoByTimeList[0].drink2Name!=null}">
-      	data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink2Name}');
-     	 data.addColumn('number', '${drinkSalesGraphInfoByTimeList[0].drink3Name}');
-      </c:if>
       data.addRows([
     	  
 		/* <c:forEach var="drinkSalesGraphInfoByTime" items="${drinkSalesGraphInfoByTimeList}">
 		  	 	 	[${drinkSalesGraphInfoByTime.sellDate}, ${drinkSalesGraphInfoByTime.drink1}, ${drinkSalesGraphInfoByTime.drink2}, ${drinkSalesGraphInfoByTime.drink3}],
 		</c:forEach>  */
 		<c:forEach var="drinkSalesGraphInfoByMonth" items="${drinkSalesGraphInfoByMonthList}">
-	 	 	[${drinkSalesGraphInfoByMonth.sellDate}, ${drinkSalesGraphInfoByMonth.drink1}, ${drinkSalesGraphInfoByMonth.drink2}, ${drinkSalesGraphInfoByMonth.drink3}],
+	 	 	[${drinkSalesGraphInfoByMonth.sellDate}, ${drinkSalesGraphInfoByMonth.drink1}],
 		</c:forEach>
 /*        [1,  37.8, 80.8, 41.8],
         [2,  30.9, 69.5, 32.4],

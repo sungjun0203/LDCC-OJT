@@ -54,9 +54,9 @@ public class AnalysisController {
 		mv.addObject("vendingId", vendingDto.getVendingId());
 		ArrayList<DrinkDto> drinkRankingList = analysisService.getDrinkRankingById(vendingDto);
 		mv.addObject("drinkRankingList", drinkRankingList);
-		ArrayList<TopSellVO> drinkSalesGraphInfoByTimeList=analysisService.getDrinkSalesGraphByTime(vendingDto);
+		ArrayList<TopSellVO> drinkSalesGraphInfoByTimeList=analysisService.getDrinkSalesGraphByTimeByDrinkId(vendingDto);
 		mv.addObject("drinkSalesGraphInfoByTimeList",drinkSalesGraphInfoByTimeList);
-		ArrayList<TopSellVO> drinkSalesGraphInfoByMonthList=analysisService.getDrinkSalesGraphByMonth(vendingDto);
+		ArrayList<TopSellVO> drinkSalesGraphInfoByMonthList=analysisService.getDrinkSalesGraphByMonthByDrinkId(vendingDto);
 		mv.addObject("drinkSalesGraphInfoByMonthList",drinkSalesGraphInfoByMonthList);
 		d.addAttribute("location",analysisService.getLocation());
 
@@ -83,6 +83,8 @@ public class AnalysisController {
 			mv.addObject("drinkName",analysisService.getDrinkInfoByDrinkId(vendingDto).getDrinkName() );
 			ArrayList<TopSellVO> drinkSalesGraphInfoByTimeList=analysisService.getDrinkSalesGraphByTimeByDrinkId(vendingDto);
 			mv.addObject("drinkSalesGraphInfoByTimeList",drinkSalesGraphInfoByTimeList);
+			ArrayList<TopSellVO> drinkSalesGraphInfoByMonthList=analysisService.getDrinkSalesGraphByMonthByDrinkId(vendingDto);
+			mv.addObject("drinkSalesGraphInfoByMonthList",drinkSalesGraphInfoByMonthList);
 		return mv;
 	}
 }
