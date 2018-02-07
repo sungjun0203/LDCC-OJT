@@ -1,7 +1,6 @@
 package com.lotte.analysis;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +9,7 @@ import com.lotte.drink.DrinkDto;
 import com.lotte.sell.CustomerService;
 import com.lotte.sell.CustomerVO;
 import com.lotte.sell.SellDto;
+import com.lotte.sell.TopSellVO;
 import com.lotte.vending.VendingDto;
 
 @Service
@@ -109,36 +109,219 @@ public class AnalysisService {
 	}
 	
 	
-/*	public ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraph(VendingDto vendingDto){
+	public ArrayList<TopSellVO> getDrinkSalesGraphByMonth(VendingDto vendingDto){
+		System.out.println("month시작----------------------------");
 		Integer vendingId=vendingDto.getVendingId();
-		ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId);
-		ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraphInfo = new ArrayList<ArrayList<HashMap<String,Object>>>();
-		for (int i=0; i<TopThreeDrinkId.size();i++){ 
+		ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId); //TOP3음료 아이디 뽑아오기
+		ArrayList<ArrayList<SellDto>> drinkSalesGraphInfo = new ArrayList<ArrayList<SellDto>>(); //top3 db에서 뽑은 값
+		
+		ArrayList<TopSellVO> reDrinkSalesGraphInfo = new ArrayList<TopSellVO>();
+		for (int i=0; i<TopThreeDrinkId.size();i++){  // TOP3음료 아이디 뽑고 List로 만들기
 			VendingDto newVending=new VendingDto();
 			newVending.setVendingId(vendingId);
 			newVending.setDrinkId(TopThreeDrinkId.get(i));
-			getDrinkSalesGraphInfo.add(analysisDao.getTopDrinkInfo(newVending));
-			System.out.println("TOP3: "+TopThreeDrinkId.get(i));
+			ArrayList<SellDto> sell=analysisDao.getTopDrinkInfoByMonth(newVending); //시간대별 판매리스트
+			drinkSalesGraphInfo.add(sell);
 		}
-		return getDrinkSalesGraphInfo; 
-	}*/
-	
-	//
-	// 시간, 음료1, 음료2, 음료
-	public ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraph(VendingDto vendingDto){
-		Integer vendingId=vendingDto.getVendingId();
-		ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId);
-		ArrayList<ArrayList<HashMap<String,Object>>> getDrinkSalesGraphInfo = new ArrayList<ArrayList<HashMap<String,Object>>>();
-		for (int i=0; i<TopThreeDrinkId.size();i++){ 
-			VendingDto newVending=new VendingDto();
-			newVending.setVendingId(vendingId);
-			newVending.setDrinkId(TopThreeDrinkId.get(i));
-			getDrinkSalesGraphInfo.add(analysisDao.getTopDrinkInfo(newVending));
+		for(int k=0; k<drinkSalesGraphInfo.size(); k++){
+			for(int i=0; i<drinkSalesGraphInfo.get(k).size(); i++){
+				System.out.println("데이터 : " + drinkSalesGraphInfo.get(k).get(i).getSellDate1()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getCustomerCount()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getDrinkName());
+			}
+			System.out.println("----------------------------");
 		}
-		ArrayList<SellDto> oneDrink = new ArrayList<SellDto>();
-		ArrayList<SellDto> twoDrink = new ArrayList<SellDto>();
-		ArrayList<SellDto> threeDrink = new ArrayList<SellDto>();
-		return getDrinkSalesGraphInfo; 
+		
+		for(int i=0; i<12;i++){
+			TopSellVO topSellVO = new TopSellVO();
+			topSellVO.setSellDate(i+1);
+			Integer data = 0;
+			String dataName="";
+			for(int k=0; k<drinkSalesGraphInfo.size();k++){
+				data=drinkSalesGraphInfo.get(k).get(i).getCustomerCount();
+				dataName=drinkSalesGraphInfo.get(k).get(i).getDrinkName();
+				if(k==0){
+					topSellVO.setDrink1(data);
+					topSellVO.setDrink1Name(dataName);
+				}else if(k==1){
+					topSellVO.setDrink2(data);
+					topSellVO.setDrink2Name(dataName);
+				}else{
+					topSellVO.setDrink3(data);
+					topSellVO.setDrink3Name(dataName);
+				}
+			}
+			reDrinkSalesGraphInfo.add(topSellVO);
+		}
+		
+		for(int i=0; i<reDrinkSalesGraphInfo.size(); i++){
+				System.out.println("데이터 : " + reDrinkSalesGraphInfo.get(i).getSellDate()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink1()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink2()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink3());
+				System.out.println("데이터 : " + reDrinkSalesGraphInfo.get(i).getSellDate()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink1Name()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink2Name()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink3Name());
+			System.out.println("----------------------------");
+		}
+		
+		return reDrinkSalesGraphInfo; 
 	}
 	
+	public ArrayList<TopSellVO> getDrinkSalesGraphByTime(VendingDto vendingDto){
+		System.out.println("time시작----------------------------");
+		Integer vendingId=vendingDto.getVendingId();
+		ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId); //TOP3음료 아이디 뽑아오기
+		ArrayList<ArrayList<SellDto>> drinkSalesGraphInfo = new ArrayList<ArrayList<SellDto>>(); //top3 db에서 뽑은 값
+		
+		ArrayList<TopSellVO> reDrinkSalesGraphInfo = new ArrayList<TopSellVO>();
+		for (int i=0; i<TopThreeDrinkId.size();i++){  // TOP3음료 아이디 뽑고 List로 만들기
+			VendingDto newVending=new VendingDto();
+			newVending.setVendingId(vendingId);
+			newVending.setDrinkId(TopThreeDrinkId.get(i));
+			ArrayList<SellDto> sell=analysisDao.getTopDrinkInfoByTime(newVending); //시간대별 판매리스트
+			drinkSalesGraphInfo.add(sell);
+		}
+
+				for(int k=0; k<drinkSalesGraphInfo.size(); k++){
+		for(int i=0; i<drinkSalesGraphInfo.get(k).size(); i++){
+			System.out.println("데이터 : " + drinkSalesGraphInfo.get(k).get(i).getSellDate1()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getCustomerCount()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getDrinkName());
+		}
+		System.out.println("----------------------------");
+	}
+		
+		
+		for(int i=0; i<24;i++){
+			TopSellVO topSellVO = new TopSellVO();
+			topSellVO.setSellDate(i);
+			Integer data = 0;
+			String dataName="";
+			for(int k=0; k<drinkSalesGraphInfo.size();k++){
+				data=drinkSalesGraphInfo.get(k).get(i).getCustomerCount();
+				dataName=drinkSalesGraphInfo.get(k).get(i).getDrinkName();
+				if(k==0){
+					topSellVO.setDrink1(data);
+					topSellVO.setDrink1Name(dataName);
+				}else if(k==1){
+					topSellVO.setDrink2(data);
+					topSellVO.setDrink2Name(dataName);
+				}else{
+					topSellVO.setDrink3(data);
+					topSellVO.setDrink3Name(dataName);
+				}
+			}
+			reDrinkSalesGraphInfo.add(topSellVO);
+		}
+		for(int i=0; i<reDrinkSalesGraphInfo.size(); i++){
+			System.out.println("데이터 : " + reDrinkSalesGraphInfo.get(i).getSellDate()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink1()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink2()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink3());
+			System.out.println("데이터 : " + reDrinkSalesGraphInfo.get(i).getSellDate()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink1Name()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink2Name()+ "   ,  " + reDrinkSalesGraphInfo.get(i).getDrink3Name());
+		System.out.println("----------------------------");
+	}
+		return reDrinkSalesGraphInfo; 
+	}
+	
+	public ArrayList<TopSellVO> getDrinkSalesGraphByTimeByDrinkId(VendingDto vendingDto){
+		
+		Integer vendingId=vendingDto.getVendingId();
+		ArrayList<ArrayList<SellDto>> drinkSalesGraphInfo = new ArrayList<ArrayList<SellDto>>(); //top3 db에서 뽑은 값
+		ArrayList<TopSellVO> reDrinkSalesGraphInfo = new ArrayList<TopSellVO>();
+		
+		if(vendingDto.getDrinkId()!=0){ //드링크선택시
+			ArrayList<SellDto> sell=analysisDao.getTopDrinkInfoByTime(vendingDto);
+			drinkSalesGraphInfo.add(sell);
+		}else{ //선택안할경우
+			ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId); //TOP3음료 아이디 뽑아오기
+			
+			for (int i=0; i<TopThreeDrinkId.size();i++){  // TOP3음료 아이디 뽑고 List로 만들기
+				VendingDto newVending=new VendingDto();
+				newVending.setVendingId(vendingId);
+				newVending.setDrinkId(TopThreeDrinkId.get(i));
+				ArrayList<SellDto> sell=analysisDao.getTopDrinkInfoByTime(newVending); //시간대별 판매리스트
+				drinkSalesGraphInfo.add(sell);
+			}
+		}
+		
+				for(int k=0; k<drinkSalesGraphInfo.size(); k++){
+		for(int i=0; i<drinkSalesGraphInfo.get(k).size(); i++){
+			System.out.println("데이터 : " + drinkSalesGraphInfo.get(k).get(i).getSellDate1()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getCustomerCount()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getDrinkName());
+		}
+		System.out.println("----------------------------");
+	}
+		
+		
+		
+		for(int i=0; i<24;i++){
+			TopSellVO topSellVO = new TopSellVO();
+			topSellVO.setSellDate(i);
+			Integer data = 0;
+			String dataName="";
+			for(int k=0; k<drinkSalesGraphInfo.size();k++){
+				data=drinkSalesGraphInfo.get(k).get(i).getCustomerCount();
+				dataName=drinkSalesGraphInfo.get(k).get(i).getDrinkName();
+				if(k==0){
+					topSellVO.setDrink1(data);
+					topSellVO.setDrink1Name(dataName);
+				}else if(k==1){
+					topSellVO.setDrink2(data);
+					topSellVO.setDrink2Name(dataName);
+				}else{
+					topSellVO.setDrink3(data);
+					topSellVO.setDrink3Name(dataName);
+				}
+			}
+			reDrinkSalesGraphInfo.add(topSellVO);
+		}
+
+		return reDrinkSalesGraphInfo; 
+	}
+	
+	
+	
+	public ArrayList<TopSellVO> getDrinkSalesGraphByMonthByDrinkId(VendingDto vendingDto){
+		
+		Integer vendingId=vendingDto.getVendingId();
+		ArrayList<ArrayList<SellDto>> drinkSalesGraphInfo = new ArrayList<ArrayList<SellDto>>(); //top3 db에서 뽑은 값
+		ArrayList<TopSellVO> reDrinkSalesGraphInfo = new ArrayList<TopSellVO>();
+		
+		if(vendingDto.getDrinkId()!=0){ //드링크선택시
+			ArrayList<SellDto> sell=analysisDao.getTopDrinkInfoByMonth(vendingDto);
+			drinkSalesGraphInfo.add(sell);
+		}else{ //선택안할경우
+			ArrayList<Integer> TopThreeDrinkId = analysisDao.getTopThreeDrinkId(vendingId); //TOP3음료 아이디 뽑아오기
+			
+			for (int i=0; i<TopThreeDrinkId.size();i++){  // TOP3음료 아이디 뽑고 List로 만들기
+				VendingDto newVending=new VendingDto();
+				newVending.setVendingId(vendingId);
+				newVending.setDrinkId(TopThreeDrinkId.get(i));
+				ArrayList<SellDto> sell=analysisDao.getTopDrinkInfoByMonth(newVending); //시간대별 판매리스트
+				drinkSalesGraphInfo.add(sell);
+			}
+		}
+		
+				for(int k=0; k<drinkSalesGraphInfo.size(); k++){
+		for(int i=0; i<drinkSalesGraphInfo.get(k).size(); i++){
+			System.out.println("데이터 : " + drinkSalesGraphInfo.get(k).get(i).getSellDate1()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getCustomerCount()+ "   ,  " + drinkSalesGraphInfo.get(k).get(i).getDrinkName());
+		}
+		System.out.println("----------------------------");
+	}
+		
+		
+		
+		for(int i=0; i<12;i++){
+			TopSellVO topSellVO = new TopSellVO();
+			topSellVO.setSellDate(i+1);
+			Integer data = 0;
+			String dataName="";
+			for(int k=0; k<drinkSalesGraphInfo.size();k++){
+				data=drinkSalesGraphInfo.get(k).get(i).getCustomerCount();
+				dataName=drinkSalesGraphInfo.get(k).get(i).getDrinkName();
+				if(k==0){
+					topSellVO.setDrink1(data);
+					topSellVO.setDrink1Name(dataName);
+				}else if(k==1){
+					topSellVO.setDrink2(data);
+					topSellVO.setDrink2Name(dataName);
+				}else{
+					topSellVO.setDrink3(data);
+					topSellVO.setDrink3Name(dataName);
+				}
+			}
+			reDrinkSalesGraphInfo.add(topSellVO);
+		}
+
+		return reDrinkSalesGraphInfo; 
+	}
 }
