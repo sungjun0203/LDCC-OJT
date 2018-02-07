@@ -7,64 +7,48 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <title>Insert title here</title>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
 <!-- 템플릿 공통 끝 -->
-
-
-
-
-    
 </head>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-	function getDrinkRanking(id){
-		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
-	}
-	function getAgeAndGender(drinkId, vendingId){
-		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+vendingId+"&drinkId="+drinkId;
-	}
-
-    
+function getDrinkRanking(id){
+	location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
+}
+function getAgeAndGender(drinkId, vendingId){
+	location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+vendingId+"&drinkId="+drinkId;
+}
 </script>
-
-   <script type="text/javascript">
-  google.charts.load('current', {'packages':['bar']});
-  google.charts.setOnLoadCallback(drawStuff);
-  
-  
-
+<script type="text/javascript">
+google.charts.load('current', {'packages':['bar']});
+google.charts.setOnLoadCallback(drawStuff);
   function drawStuff() {
-
-	  var drinkName='${drinkName}';
+    var drinkName='${drinkName}';
     var data = new google.visualization.arrayToDataTable([
     	 ['', 'Male', 'Female'],
     	
        	<c:forEach var="ageAndGenderList" items="${ageAndGenderList}">
   	 	 	["${ageAndGenderList.customerAge}",${ageAndGenderList.maleCount}, ${ageAndGenderList.femaleCount}],
 		</c:forEach>
-  
-
     ]);
     var options = {
-    		width: 800,
-
-      bars: 'horizontal', // Required for Material Bar Charts.
-      backgroundColor: 'transparent',
-      fontName:'Noto Sans KR',
+    		animation: { startup: true, duration: 2500, easing: 'out' },
+   		width: 800,
+		
+     	 bars: 'horizontal', // Required for Material Bar Charts.
+     	 backgroundColor: 'transparent',
+     	 fontName:'Noto Sans KR',
 		fontSize:'13',
 		showRowNumber: true, width: '100%', height: '100%'
     };
-
   var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
   chart.draw(data, options);
-};
+}
   </script> 
  <script type="text/javascript">
       google.charts.load('current', {'packages':['line']});
       google.charts.setOnLoadCallback(drawChart);
-
     function drawChart() {
 
       var data = new google.visualization.DataTable();
@@ -79,7 +63,7 @@
       ]);
 
       var options = {
-
+		animation: { startup: true, duration: 2500, easing: 'out' },
         width: 900,
         height: 500,
         axes: {
@@ -116,6 +100,7 @@
       ]);
 
       var options = {
+		animation: { startup: true, duration: 2500, easing: 'out' },
         width: 900,
         height: 500,
         axes: {
@@ -172,8 +157,8 @@
 						   <a  class="text-center"  onclick="moveAnalysis()"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
                     </li>	
                     
-                    <li><a class="text-center" onclick="moveRank()"><i
-						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
+                    <li><a class="text-center" onclick="moveRank()"><i class="fa fa-chart-bar fa-3x" ></i> <br>RANK</a></li>
+                      			
                 </ul>
             </div>
         </nav>  
@@ -265,7 +250,12 @@
 						</div>
 						</div>
 						</div>
-
+						
+						
+				</div>
+				
+				
+				
 		</div>	
 				<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">

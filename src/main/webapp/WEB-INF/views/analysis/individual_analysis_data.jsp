@@ -17,6 +17,7 @@
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
+
 <script type="text/javascript">
 	function getDrinkRanking(id){
 		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
@@ -82,11 +83,7 @@ function getDrinkRanking(id){
 				]);
 			</c:if>
       var options = {
-/* 		chartArea : {
-			width : '55%',
-			height : '70%'
-		},    		 */  
-
+		animation: { startup: true, duration: 2500, easing: 'out' },
         width: 900,
         height: 500,
         axes: {
@@ -158,7 +155,7 @@ function getDrinkRanking(id){
 				]);
 			</c:if>
       var options = {
-
+		animation: { startup: true, duration: 2500, easing: 'out' },
         width: 900,
         height: 500,
         axes: {
@@ -222,6 +219,7 @@ function getDrinkRanking(id){
                 </ul>
             </div>
         </nav>  
+
 		<!-- /. NAV SIDE  -->
 	<div id="page-wrapper">
 			<div id="page-inner">
