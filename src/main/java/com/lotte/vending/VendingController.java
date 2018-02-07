@@ -37,17 +37,20 @@ public class VendingController {
 	public ArrayList<VendingDto> getStocks(@RequestParam("vendingId") int vendingId, HttpSession ses) {
 		
 		return vService.getStocks(vendingId);
+		
+		
 	}
 	
 	@RequestMapping("/getDrinkSales")
 	@ResponseBody
 	public ArrayList<VendingDto> getDrinkSales(@RequestParam("vendingId") int vendingId) {
+		System.out.println("vendingId : "+vendingId);
 		return vService.getDrinkSales(vendingId);
 	}
 	@RequestMapping("/getVendingState")
 	@ResponseBody
-	public HashMap<String,Object> getVendingState(@RequestParam("vendingId") int vendingId) {
-		HashMap<String,Object> test = vService.getVendingState(vendingId);
+	public ArrayList<HashMap<String, Object>> getVendingState(@RequestParam("vendingId") int vendingId) {
+		ArrayList<HashMap<String, Object>> test = vService.getVendingState(vendingId);
 		return test;
 	}
 	

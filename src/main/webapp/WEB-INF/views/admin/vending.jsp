@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
+src="https://www.gstatic.com/charts/loader.js"></script>
 
 <!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
@@ -45,25 +45,25 @@ function callState(no){
 		data : 'vendingId=' + no,
 		dataType : 'json',
 		success : function(data) {
-			//alert("callState("+no+")"+" call");
-			console.log(data);
-			if(data.state == "고장"){
-				//alert("고장");
-				$(".notice-blue > ").html(data.vending_id+"번 자판기 작동 상태 : 고장");
-				$(".notice-red > ").html(data.vending_id+"번 자판기 재고 상태 : 양호");
+			if(data.length == 1){
+				if(data[0].state == "고장"){
+					$(".notice-blue > ").html(no+"번 자판기 작동 상태 : 고장");
+					$(".notice-red > ").html(no+"번 자판기 재고 상태 : 양호");
 
+				}
+				if(data[0].state == "재고"){
+					$(".notice-red > ").html(no+"번 자판기 재고 상태 : 재고 부족");
+					$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 양호");
+				}	
 			}
-			if(data.state == "재고"){
-				//alert("재고");
-				$(".notice-red > ").html(data.vending_id+"번 자판기 재고 상태 : 재고 부족");
-				$(".notice-blue > ").html(data.vending_id+"번 자판기 자판기 작동 상태 : 양호");
+			if(data.length == 2){
+				$(".notice-red > ").html(no+"번 자판기 재고 상태 : 고장");
+				$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 재고 부족");
 			}
-			
-			
-		},
-		error : function(err){
-			$(".notice-red > ").html(no+"번 자판기 재고 상태 : 양호");
-			$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 양호");
+			if(data.length == 0){
+				$(".notice-red > ").html(no+"번 자판기 재고 상태 : 양호");
+				$(".notice-blue > ").html(no+"번 자판기 자판기 작동 상태 : 양호");
+			}
 		}
 	});
 }	
@@ -77,7 +77,7 @@ function callDrinks(no){
 		data : 'vendingId=' + no,
 		dataType : 'json',
 		success : function(data) {
-			$(".empty > h2").remove();
+			//$(".empty > h2").remove();
 			var show_ul = "";
 			for (var i = 0; i < data.length; i++) {
 				var img = data[i].drinkName + '.png';
@@ -91,53 +91,112 @@ function callDrinks(no){
 			$("#btn-gender").attr("onclick","callGraphGender("+no+")");
 			$("#btn-age").attr("onclick","callGraphAge("+no+")");
 			callState(no);
+		},
+		error:function(error){
+			console.log("정상 에러 : " + error);
 		}
 	});
 }
 /*
  * 함수 작성자 : 백상우
  */		
-function callGraphGender(no){
-	//alert("Gender and no : "+no);
-	$("#chart_div").html("");
-	//alert("gender");
-	$.ajax({
-		type : 'GET',
-		url : 'getDrinkSales',
-		data : 'vendingId=' + no,
-		dataType : 'json',
-		success : function(jdata) {
-			google.charts.load('current', {
-				packages : [ 'corechart', 'bar' ]
-			});
-			google.charts.setOnLoadCallback(drawMultSeries);
-			function drawMultSeries() {
-				var data = new google.visualization.DataTable();
-				data.addColumn('string', '음료수 종류');
-				data.addColumn('number', '남');
-				data.addColumn('number', '여');
-				data.addRows(jdata.length);
-				for (i = 0; i < jdata.length; i++) {
-					data.setCell(i, 0, jdata[i].drinkName);
-					data.setCell(i, 1, jdata[i].countForMale);
-					data.setCell(i, 2, jdata[i].countForFemale);
-				}
-
-				var options = {
-					chart : {
-						title : '남녀별 음료 매출'
+ 
+ function callGraphGender(no){
+		$("#chart_div").html("");
+		$.ajax({
+			type : 'GET',
+			url : 'getDrinkSales',
+			data : 'vendingId=' + no,
+			dataType : 'json',
+			success : function(jdata) {
+				console.log(jdata);
+				google.charts.load('current', {'packages':['line', 'corechart']});
+				google.charts.setOnLoadCallback(drawMultSeries);
+				function drawMultSeries() {
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', '음료수 종류');
+					data.addColumn('number', '남');
+					data.addColumn('number', '여');
+					data.addRows(jdata.length);
+					for (i = 0; i < jdata.length; i++) {
+						data.setCell(i, 0, jdata[i].drinkName);
+						data.setCell(i, 1, jdata[i].countForMale);
+						data.setCell(i, 2, jdata[i].countForFemale);
 					}
-				};
-				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-				chart.draw(data, options);
+
+					var options = {
+	 						height : 350,
+	 						color : 'black',
+	 						animation: { startup: true, duration: 2500, easing: 'out' },
+	 						crosshair:{
+	 							orientation:'both',
+	 							trigger:'both'
+	 						  },
+	 						legend:{
+	 							position: 'top',
+								  textStyle:{
+	 				    		    color: 'black',
+	 				    		    fontSize: 12,
+	 				    		    bold: false,
+	 				    		    italic: false
+	 							  }
+	 						  },
+	 						 lineWidth: 5,
+	 						  pointSize: 20,
+	 						  dataOpacity: 0.01,
+	 						backgroundColor: { fill:'transparent' },
+	 						chartArea:{
+	 							width: '85%',
+	 							height: '70%'
+	 						},
+	 						hAxis : {
+	 							title : '음료수 종류',
+	 							textStyle : {
+	 				    		    color: 'black',
+	 				    		    fontSize: 14,
+	 				    		    bold: false,
+	 				    		    italic: false
+	 							},
+	 							titleTextStyle: {
+	 				    		    color: 'black',
+	 				    		    fontSize: 18,
+	 				    		    bold: false,
+	 				    		    italic: true
+	 				    		  },
+	 							gridlines : {
+	 								color : 'black'
+	 							},
+
+	 						},
+	 						vAxis : {
+	 							title : "판매수",
+	 							textStyle : {
+	 				    		    color: 'black',
+	 				    		    fontSize: 14,
+	 				    		    bold: false,
+	 				    		    italic: false
+	 							},
+	 							gridlines : {
+	 								color : 'black',
+	 								count : 6
+	 							},
+	 							titleTextStyle: {
+	 				    		    color: 'black',
+	 				    		    fontSize: 16,
+	 				    		    bold: false,
+	 				    		    italic: true
+	 				    		  }
+	 						}
+	 					};
+					var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+					chart.draw(data, options);
+				}
+				
 			}
-			
-		}
-	});
-}
-/*
- * 함수 작성자 : 백상우
- */	
+		});
+	}
+ 
+
 function callGraphAge(no){
 	//alert("Age and no : "+no);
 	$("#chart_div").html("");
@@ -154,11 +213,11 @@ function callGraphAge(no){
 			function drawMultSeries() {
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', '음료수 종류');
-				data.addColumn('number', '10');
-				data.addColumn('number', '20');
-				data.addColumn('number', '30');
-				data.addColumn('number', '40');
-				data.addColumn('number', '50');
+				data.addColumn('number', '10대');
+				data.addColumn('number', '20대');
+				data.addColumn('number', '30대');
+				data.addColumn('number', '40대');
+				data.addColumn('number', '50대');
 				data.addRows(jdata.length);
 				for (i = 0; i < jdata.length; i++) {
 					data.setCell(i, 0, jdata[i].drinkName);
@@ -170,9 +229,34 @@ function callGraphAge(no){
 				}
 
 				var options = {
+					height : 350,
+					animation: { startup: true, duration: 2500, easing: 'out' },
 					chart : {
 						title : '남녀별 음료 매출'
-					}
+					},
+					vAxis : {
+							title : "판매수",
+							textStyle : {
+				    		    color: 'black',
+				    		    fontSize: 14,
+				    		    bold: false,
+				    		    italic: false
+							},
+							gridlines : {
+								color : 'black',
+								count : 6
+							},
+							titleTextStyle: {
+				    		    color: 'black',
+				    		    fontSize: 16,
+				    		    bold: false,
+				    		    italic: true
+				    		  }
+						},
+						chartArea:{
+ 							width: '80%',
+ 							height: '70%'
+ 						}
 				};
 				var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 				chart.draw(data, options);
@@ -223,7 +307,6 @@ function callGraphAge(no){
 						class="fa fa-calculator fa-3x"></i> <br>Machine</a></li>
 				<li><a class="text-center" onclick="moveHome()" id="navi4"><i
 						class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a></li>
-
 				<li><a class="text-center" onclick="moveRank()"><i
 						class="fa fa-chart-bar fa-3x"></i> <br>Rank</a></li>
 				<li><a class="text-center" onclick="moveHome()" id="navi5"><i
@@ -231,7 +314,6 @@ function callGraphAge(no){
 				<li><a class="text-center" onclick="moveHome()" id="navi6"><i
 						class="fa fa-bullhorn fa-3x"></i> <br>Notice </a></li>
 			</ul>
-
 		</div>
 
 		</nav>
@@ -274,7 +356,7 @@ function callGraphAge(no){
 											<tbody>
 												<c:forEach var="vMachine" items="${item}">
 													<tr class="data" id="${vMachine.vendingId}"
-														onclick='callDrinks("${vMachine.vendingId}")'
+														onclick='callDrinks(${vMachine.vendingId})'
 														style="text-align: center">
 														<td>${vMachine.vendingId}</td>
 														<td>${vMachine.vendingLocation}</td>

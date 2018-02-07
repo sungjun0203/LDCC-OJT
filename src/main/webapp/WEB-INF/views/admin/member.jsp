@@ -133,18 +133,10 @@ function memberDelete(id){
                         <a  class="text-center" onclick="moveMachine()" id="navi3"><i class="fa fa-calculator fa-3x"></i> <br>Machine</a>
                     </li>
 						   <li  >
-                        <a  class="text-center" onclick="moveHome()" id="navi4"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
+                        <a  class="text-center" onclick="moveAnalysis()" id="navi4"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
                     </li>
                      <li><a class="text-center" onclick="moveRank()"><i
 						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
-                      <li  >
-                        <a  class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
-                    </li>
-                    <li  >
-                        <a  class="text-center" onclick="moveHome()" id="navi6"><i class="fa fa-bullhorn fa-3x"></i> <br>Notice </a>
-                    </li>				
-					
-					                   
                 </ul>
                
             </div>

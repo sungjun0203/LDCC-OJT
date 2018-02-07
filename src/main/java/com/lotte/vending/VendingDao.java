@@ -19,7 +19,7 @@ public interface VendingDao {
 
 	ArrayList<HashMap<String, Object>> problemVending();
 
-	HashMap<String, Object> getVendingState(int vendingId);
+	ArrayList<HashMap<String, Object>> getVendingState(int vendingId);
 
 	ArrayList<VendingDto> getLocation(String vendingLocation);
 
