@@ -33,21 +33,23 @@ google.charts.setOnLoadCallback(drawStuff);
 		</c:forEach>
     ]);
     var options = {
-    		animation: { startup: true, duration: 2500, easing: 'out' },
+    		 animation:{
+    		        duration: 1000,
+    		        easing: 'out',
+    		      },
    		width: 800,
-		
      	 bars: 'horizontal', // Required for Material Bar Charts.
      	 backgroundColor: 'transparent',
      	 fontName:'Noto Sans KR',
 		fontSize:'13',
-		showRowNumber: true, width: '100%', height: '100%'
+		showRowNumber: true, width: '100%', height: '100%',
     };
   var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
   chart.draw(data, options);
 }
   </script> 
  <script type="text/javascript">
-      google.charts.load('current', {'packages':['line']});
+       google.charts.load('current', {'packages':['line']});
       google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
 
@@ -79,7 +81,8 @@ google.charts.setOnLoadCallback(drawStuff);
       var chart = new google.charts.Line(document.getElementById('line_top_x'));
 
       chart.draw(data, options);
-    }
+    } 
+    
   </script>
       
        <script type="text/javascript">
@@ -193,6 +196,8 @@ google.charts.setOnLoadCallback(drawStuff);
 											<tr>
 												<th>자판기ID</th>
 												<th>판매량</th>
+												<th>자판기 위치</th>
+												<th>자판기 필드</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -202,6 +207,8 @@ google.charts.setOnLoadCallback(drawStuff);
 													onclick="getDrinkRanking(this.id)">
 													<td>${vendingDto.vendingId}</td>
 													<td>${vendingDto.sales}</td>
+													<td>${vendingDto.vendingLocation}</td>
+													<td>${vendingDto.vendingField}</td>
 												</tr>
 
 											</c:forEach>
@@ -229,6 +236,7 @@ google.charts.setOnLoadCallback(drawStuff);
 											<tr>
 												<th>음료</th>
 												<th>판매량</th>
+												<th>음료 카테고리</th>
 											</tr>
 										</thead>
 										<tbody id="drinksRanking">
@@ -239,6 +247,7 @@ google.charts.setOnLoadCallback(drawStuff);
 														onclick="getAgeAndGender(this.id,${vendingId})">
 														<td>${drinkRank.drinkName}</td>
 														<td>${drinkRank.sales}</td>
+														<td>${drinkRank.drinkCategory}</td>
 													</tr>
 												</c:forEach>
 											</c:if>
