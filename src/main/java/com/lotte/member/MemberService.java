@@ -27,5 +27,9 @@ public class MemberService {
 	public void memberDelete(MemberDto memberDto) {
 		memberDao.memberDelete(memberDto);
 	}
+	
+	public ArrayList<MemberDto> detailed(int asId) {
+		return memberDao.detailed(asId);
+	}
 
 }

@@ -16,6 +16,8 @@ public interface AnalysisDao {
 	ArrayList<DrinkDto> getDrinkRankingById(VendingDto vendingDto);
 	
 	ArrayList<CustomerVO> getAgeAndGenderInfo(VendingDto vendingDto);
+	ArrayList<VendingDto> getLocation();
+	ArrayList<VendingDto> getField(String vendingLocation);
 	
 	 //추가
 	Integer getTotalVendingCount();

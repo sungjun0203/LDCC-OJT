@@ -26,11 +26,13 @@ var troubleCheckValue = false;
 function drinkSelect(id){
 	troubleCheck();
 	
+	alert(troubleCheckValue);
+	
 	if(troubleCheckValue==false){
-		$("#selectDrinkId").val(id);
+		
+		vendingStockCheck(id);
 	}
 	
-	alert(id);
 	
 }
 
@@ -55,14 +57,7 @@ function troubleCheck(){
 				});
 			}
 			else{
-				
-				
 				troubleCheckValue=false;
-				
-				$("#vendingMachineInfo").attr("action","/user/vendingSubmit");
-				$("#vendingMachineInfo").submit();
-				
-				
 			}
 
 		},
@@ -112,6 +107,61 @@ function vendingTrouble(){
 	});
 	
 }
+
+
+
+function vendingStockCheck(id){
+	
+	var vendingId = $("#vendingId").val();
+	
+	$.ajax({
+		url : "/user/vendingStockCheck",
+		dataType : "json",
+		type : "POST",
+		data : {
+			"vendingId" : vendingId,
+			"selectDrinkId" : id
+		},
+		success : function(data) {
+			
+			if(data.stock_quantity==0){
+				swal("죄송합니다.", "음료수의 재고가 없습니다.","error");
+			}
+			
+			else{
+				alert($("#faceGender").val());
+				
+				$.ajax({
+					url : "/user/vendingSubmit",
+					dataType : "text",
+					type : "POST",
+					data : {
+						"vendingId" : vendingId,
+						"selectDrinkId" : id,
+						"faceAge" : $("#faceAge").val(),
+						"faceGender" : $("#faceGender").val(),
+						"stock" : data.stock_quantity,
+						"sendCheck" : data.sended
+					},
+					success : function() {
+						
+						swal("음료 주문완료", "감사합니다.","success");
+									
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "error:" + error);
+					}
+				});
+				
+			}
+						
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "error:" + error);
+		}
+	});
+	
+}
 </script>
 
 
@@ -122,8 +172,8 @@ function vendingTrouble(){
 
 	<form id="vendingMachineInfo">
 	
-		<input type="hidden" id="faceGender" name="faceGender" value="${faceResult.age}">
-		<input type="hidden" id="faceAge" name="faceAge" value="${faceResult.gender}">
+		<input type="hidden" id="faceGender" name="faceGender" value="${faceResult.gender}">
+		<input type="hidden" id="faceAge" name="faceAge" value="${faceResult.age}">
 		<input type="hidden" id="selectDrinkId" name="selectDrinkId">
 		<c:forEach var="drinksInfo" items="${drinksInfo}" begin="0" end="0"
 			step="1" varStatus="status">

@@ -43,6 +43,15 @@ public class AnalysisService {
 		return reAgeAndGenderList;
 	}
 	
+	public ArrayList<VendingDto> getLocation() {
+		return analysisDao.getLocation();
+	}
+	
+	
+	public ArrayList<VendingDto> getField(String vendingLocation) {
+		return analysisDao.getField(vendingLocation);
+	}
+
 	//추가
 	
 	public ArrayList<VendingDto> getVendingMachineRanking(){

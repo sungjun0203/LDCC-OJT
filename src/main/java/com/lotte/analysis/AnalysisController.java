@@ -2,9 +2,14 @@ package com.lotte.analysis;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lotte.drink.DrinkDto;
@@ -41,7 +46,8 @@ public class AnalysisController {
 	
 	
 	@RequestMapping("analysis/getIndividualAnalysisData.do")
-	public ModelAndView getIndividualAnalysisData(VendingDto vendingDto){
+	public ModelAndView getIndividualAnalysisData(VendingDto vendingDto, Model d){
+		
 		ModelAndView mv = new ModelAndView("analysis/individual_analysis_data");
 		ArrayList<VendingDto> vmRankingList = analysisService.getVendingMachineRanking();
 		mv.addObject("vmRankingList", vmRankingList);
@@ -52,8 +58,16 @@ public class AnalysisController {
 		mv.addObject("drinkSalesGraphInfoByTimeList",drinkSalesGraphInfoByTimeList);
 		ArrayList<TopSellVO> drinkSalesGraphInfoByMonthList=analysisService.getDrinkSalesGraphByMonth(vendingDto);
 		mv.addObject("drinkSalesGraphInfoByMonthList",drinkSalesGraphInfoByMonthList);
+		d.addAttribute("location",analysisService.getLocation());
 
 		return mv;
+	}
+	
+	@RequestMapping("analysis/getField")
+	@ResponseBody
+	public ArrayList<VendingDto> getField(@RequestParam("vendingLocation") String vendingLocation, HttpSession ses) {
+		
+		return analysisService.getField(vendingLocation);
 	}
 	
 	@RequestMapping("analysis/getIndividualAnalysisData_test.do")

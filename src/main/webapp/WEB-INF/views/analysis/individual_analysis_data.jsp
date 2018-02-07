@@ -12,12 +12,53 @@
 <jsp:include page="../common/template_common.jsp"></jsp:include>
 <!-- 템플릿 공통 끝 -->
 
-
-
-
-    
 </head>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+$(function(){
+	var loc = "";
+	var field = "";
+	$("#sl_fi").change(function(){
+		field = $("#sl_fi option:selected").val();
+		 $.ajax({
+			 type:"post",
+			 url: "getBev",
+			 dataType:"json",
+			 data : "vendingLocation="+loc+""
+			 success:function(data){
+				//console.log(data);
+				$("#sl_fi").children().remove();
+				var show_ul = "<option var='all'>전체보기</option>";
+				for(var i=0; i<data.length; i++){
+					show_ul += "<option var='"+data[i].vendingField+"'>"+data[i].vendingField+"</option>";
+				}
+				$("#sl_fi").append(show_ul);
+	         }
+		 });	
+	});
+	
+	$("#sl_lo").change(function(){
+		loc = $("#sl_lo option:selected").val();
+		 $.ajax({
+			 type:"post",
+			 url: "getField",
+			 dataType:"json",
+			 data : "vendingLocation="+loc,
+			 success:function(data){
+				//console.log(data);
+				$("#sl_fi").children().remove();
+				var show_ul = "<option var='all'>전체보기</option>";
+				for(var i=0; i<data.length; i++){
+					show_ul += "<option var='"+data[i].vendingField+"'>"+data[i].vendingField+"</option>";
+				}
+				$("#sl_fi").append(show_ul);
+	         }
+		 });	
+	});
+});
+</script>
+
 <script type="text/javascript">
 	function getDrinkRanking(id){
 		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
@@ -26,15 +67,19 @@
 		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+vendingId+"&drinkId="+drinkId;
 	}
 
-    
+function getDrinkRanking(id){
+	location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
+}
 </script>
 
 <!--   <script type="text/javascript">
   google.charts.load('current', {'packages':['bar']});
   google.charts.setOnLoadCallback(drawStuff);
+=======
+>>>>>>> branch 'master' of https://github.com/sungjun0203/LDCC-OJT.git
   
   
-
+<script type="text/javascript">
   function drawStuff() {
 
 	  var drinkName='${drinkName}';
@@ -200,9 +245,6 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 					
 					<div class="col-md-3 col-sm-3 col-xs-3">
 						<div class="panel panel-back noti-box" style="height: 600px;">
-							<!--     <span class="icon-box bg-color-red set-icon">
-                    <i class="fa fa-envelope-o"></i>
-                </span>-->
 							<div class="text-box">
 								<p class="main-text">자판기 번호 :  ${vendingId} / 음료 판매 순위</p>
 								<hr />
@@ -239,6 +281,37 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 					<div class="col-md-6 col-sm-6 col-xs-6">
 					<div id="line_top_x"style="width: 300px; height: 500px;"></div>
 					</div>
+
+						</div>
+					</div>
+					
+					
+					<div class="col-md-3 col-sm-3 col-xs-3">
+						<div class="panel panel-back noti-box" style="height: 600px;">
+							<div class="text-box">
+								<p class="main-text"> 위치 및 필드별 음료 매출 순위</p>
+								<hr />
+								지역 선택<select id="sl_lo">
+									<option value="location">지역</option>
+									<option id="all" value="all">전체보기</option>
+									<c:forEach var="loc" items="${location}">
+									<option value="${loc.vendingLocation}">${loc.vendingLocation}</option>
+									</c:forEach>
+								</select>
+								필드 선택<select id="sl_fi">
+									<option value="field">필드</option>
+									<option id="all" value="all">전체보기</option>
+								</select>
+								<div class="row">
+								<div style="height: 500px; overflow-y: scroll;">
+											<table class="table table-hover">
+												
+											</table>
+									</div>
+								</div>
+								<!-- <p class="text-muted">Messages</p>-->
+							</div>
+
 						</div>
 					</div>
 					
