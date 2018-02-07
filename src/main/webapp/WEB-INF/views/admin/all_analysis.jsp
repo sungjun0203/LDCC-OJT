@@ -196,14 +196,7 @@ function drawMaterial() {
 			</li>
 			<li><a class="active-menu" onclick="moveRank()"><i class="fa fa-chart-bar fa-3x"></i><br>
 			Rank</a></li>
-			<li>
-			<a class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i><br>
-			Sales</a>
-			</li>
-			<li>
-			<a class="text-center" onclick="moveHome()" id="navi6"><i class="fa fa-bullhorn fa-3x"></i><br>
-			Notice </a>
-			</li>
+			
 		</ul>
 	</div>
 	</nav>

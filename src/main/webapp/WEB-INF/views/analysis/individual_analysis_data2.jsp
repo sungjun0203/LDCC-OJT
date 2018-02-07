@@ -7,64 +7,48 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <title>Insert title here</title>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!-- 템플릿 공통 -->
 <jsp:include page="../common/template_common.jsp"></jsp:include>
 <!-- 템플릿 공통 끝 -->
-
-
-
-
-    
 </head>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-	function getDrinkRanking(id){
-		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
-	}
-	function getAgeAndGender(drinkId, vendingId){
-		location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+vendingId+"&drinkId="+drinkId;
-	}
-
-    
+function getDrinkRanking(id){
+	location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData.do?vendingId="+id;
+}
+function getAgeAndGender(drinkId, vendingId){
+	location.href="${pageContext.request.contextPath}/analysis/getIndividualAnalysisData_test.do?vendingId="+vendingId+"&drinkId="+drinkId;
+}
 </script>
-
-   <script type="text/javascript">
-  google.charts.load('current', {'packages':['bar']});
-  google.charts.setOnLoadCallback(drawStuff);
-  
-  
-
+<script type="text/javascript">
+google.charts.load('current', {'packages':['bar']});
+google.charts.setOnLoadCallback(drawStuff);
   function drawStuff() {
-
-	  var drinkName='${drinkName}';
+    var drinkName='${drinkName}';
     var data = new google.visualization.arrayToDataTable([
     	 ['', 'Male', 'Female'],
     	
        	<c:forEach var="ageAndGenderList" items="${ageAndGenderList}">
   	 	 	["${ageAndGenderList.customerAge}",${ageAndGenderList.maleCount}, ${ageAndGenderList.femaleCount}],
 		</c:forEach>
-  
-
     ]);
     var options = {
-    		width: 800,
-
-      bars: 'horizontal', // Required for Material Bar Charts.
-      backgroundColor: 'transparent',
-      fontName:'Noto Sans KR',
+    		animation: { startup: true, duration: 2500, easing: 'out' },
+   		width: 800,
+		
+     	 bars: 'horizontal', // Required for Material Bar Charts.
+     	 backgroundColor: 'transparent',
+     	 fontName:'Noto Sans KR',
 		fontSize:'13',
 		showRowNumber: true, width: '100%', height: '100%'
     };
-
   var chart = new google.charts.Bar(document.getElementById('dual_x_div'));
   chart.draw(data, options);
-};
+}
   </script> 
  <script type="text/javascript">
       google.charts.load('current', {'packages':['line']});
       google.charts.setOnLoadCallback(drawChart);
-
     function drawChart() {
 
       var data = new google.visualization.DataTable();
@@ -79,7 +63,7 @@
       ]);
 
       var options = {
-
+		animation: { startup: true, duration: 2500, easing: 'out' },
         width: 900,
         height: 500,
         axes: {
@@ -116,7 +100,7 @@
       ]);
 
       var options = {
-
+		animation: { startup: true, duration: 2500, easing: 'out' },
         width: 900,
         height: 500,
         axes: {
@@ -172,13 +156,8 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                     </li>	
                     
                     <li><a class="text-center" onclick="moveRank()"><i
-						class="fa fa-chart-bar fa-3x" ></i> <br>분석</a></li>
-                      <li  >
-                        <a  class="text-center" onclick="moveHome()" id="navi5"><i class="fa fa-chart-line fa-3x"></i> <br>Sales</a>
-                    </li>
-                    <li  >
-                        <a  class="text-center" onclick="moveHome()" id="navi6"><i class="fa fa-bullhorn fa-3x"></i> <br>Notice </a>
-                    </li>				
+						class="fa fa-chart-bar fa-3x" ></i> <br>RANK</a></li>
+                      			
                 </ul>
             </div>
         </nav> 
@@ -198,7 +177,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 				
 				<hr/>
 				<div class="row">
-								<div class="col-md-3 col-sm-3 col-xs-3">
+								<div class="col-md-6 col-sm-6 col-xs-6">
 					<div class="panel panel-back noti-box" style="height: 600px;">
 						<!--     <span class="icon-box bg-color-red set-icon">
                     <i class="fa fa-envelope-o"></i>
@@ -237,7 +216,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 				</div>
 				
 				
-				<div class="col-md-3 col-sm-3 col-xs-3">
+				<div class="col-md-6 col-sm-6 col-xs-6">
 					<div class="panel panel-back noti-box" style="height: 600px;">
 						<div class="text-box">
 							<p class="main-text">자판기 번호 : ${vendingId} / 음료 판매 순위</p>
@@ -271,32 +250,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 						</div>
 						</div>
 						
-						<div class="col-md-3 col-sm-3 col-xs-3">
-					<div class="panel panel-back noti-box" style="height: 600px;">
-						<div class="text-box">
-							<p class="main-text">위치 및 필드별 음료 매출 순위</p>
-							<hr />
-							지역 선택<select id="sl_lo">
-								<option value="location">지역</option>
-								<option id="all" value="all">전체보기</option>
-								<c:forEach var="loc" items="${location}">
-									<option value="${loc.vendingLocation}">${loc.vendingLocation}</option>
-								</c:forEach>
-							</select> 필드 선택<select id="sl_fi">
-								<option value="field">필드</option>
-								<option id="all" value="all">전체보기</option>
-							</select>
-							<div class="row">
-								<div style="height: 500px; overflow-y: scroll;">
-									<table class="table table-hover">
-
-									</table>
-								</div>
-							</div>
-							<!-- <p class="text-muted">Messages</p>-->
-						</div>
-
-					</div>
+						
 				</div>
 				
 				

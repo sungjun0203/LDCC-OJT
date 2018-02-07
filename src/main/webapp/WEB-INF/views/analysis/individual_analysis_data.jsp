@@ -18,45 +18,8 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(function(){
-	var loc = "";
-	var field = "";
-	$("#sl_fi").change(function(){
-		field = $("#sl_fi option:selected").val();
-		 $.ajax({
-			 type:"post",
-			 url: "getBev",
-			 dataType:"json",
-			 data : "vendingLocation="+loc+""
-			 success:function(data){
-				//console.log(data);
-				$("#sl_fi").children().remove();
-				var show_ul = "<option var='all'>전체보기</option>";
-				for(var i=0; i<data.length; i++){
-					show_ul += "<option var='"+data[i].vendingField+"'>"+data[i].vendingField+"</option>";
-				}
-				$("#sl_fi").append(show_ul);
-	         }
-		 });	
-	});
 	
-	$("#sl_lo").change(function(){
-		loc = $("#sl_lo option:selected").val();
-		 $.ajax({
-			 type:"post",
-			 url: "getField",
-			 dataType:"json",
-			 data : "vendingLocation="+loc,
-			 success:function(data){
-				//console.log(data);
-				$("#sl_fi").children().remove();
-				var show_ul = "<option var='all'>전체보기</option>";
-				for(var i=0; i<data.length; i++){
-					show_ul += "<option var='"+data[i].vendingField+"'>"+data[i].vendingField+"</option>";
-				}
-				$("#sl_fi").append(show_ul);
-	         }
-		 });	
-	});
+	
 });
 </script>
 
@@ -125,11 +88,7 @@ function getDrinkRanking(id){
 				]);
 			</c:if>
       var options = {
-/* 		chartArea : {
-			width : '55%',
-			height : '70%'
-		},    		 */  
-
+		animation: { startup: true, duration: 2500, easing: 'out' },
         width: 900,
         height: 500,
         axes: {
@@ -201,7 +160,7 @@ function getDrinkRanking(id){
 				]);
 			</c:if>
       var options = {
-
+		animation: { startup: true, duration: 2500, easing: 'out' },
         width: 900,
         height: 500,
         axes: {
@@ -261,10 +220,7 @@ function getDrinkRanking(id){
 
 				<li><a class="text-center" onclick="moveRank()"><i
 						class="fa fa-chart-bar fa-3x"></i> <br>분석</a></li>
-				<li><a class="text-center" onclick="moveHome()" id="navi5"><i
-						class="fa fa-chart-line fa-3x"></i> <br>Sales</a></li>
-				<li><a class="text-center" onclick="moveHome()" id="navi6"><i
-						class="fa fa-bullhorn fa-3x"></i> <br>Notice </a></li>
+
 			</ul>
 		</div>
 		</nav>
@@ -284,7 +240,7 @@ function getDrinkRanking(id){
 				
 				<hr/>
 				<div class="row">
-								<div class="col-md-3 col-sm-3 col-xs-3">
+								<div class="col-md-6 col-sm-6 col-xs-6">
 					<div class="panel panel-back noti-box" style="height: 600px;">
 						<!--     <span class="icon-box bg-color-red set-icon">
                     <i class="fa fa-envelope-o"></i>
@@ -323,7 +279,7 @@ function getDrinkRanking(id){
 				</div>
 				
 				
-				<div class="col-md-3 col-sm-3 col-xs-3">
+				<div class="col-md-6 col-sm-6 col-xs-6">
 					<div class="panel panel-back noti-box" style="height: 600px;">
 						<div class="text-box">
 							<p class="main-text">자판기 번호 : ${vendingId} / 음료 판매 순위</p>
@@ -357,27 +313,7 @@ function getDrinkRanking(id){
 						</div>
 						</div>
 						
-						<div class="col-md-3 col-sm-3 col-xs-3">
-					<div class="panel panel-back noti-box" style="height: 600px;">
-						<div class="text-box">
-							<p class="main-text">위치 및 필드별 음료 매출 순위</p>
-							<hr />
-							지역 선택<select id="sl_lo">
-								<option value="location">지역</option>
-								<option id="all" value="all">전체보기</option>
-								<c:forEach var="loc" items="${location}">
-									<option value="${loc.vendingLocation}">${loc.vendingLocation}</option>
-								</c:forEach>
-							</select> 필드 선택<select id="sl_fi">
-								<option value="field">필드</option>
-								<option id="all" value="all">전체보기</option>
-							</select>
-
-							<!-- <p class="text-muted">Messages</p>-->
-						</div>
-
-					</div>
-				</div>
+				
 		</div>	
 				<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
