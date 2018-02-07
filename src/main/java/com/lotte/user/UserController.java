@@ -161,9 +161,6 @@ public class UserController {
 			model.addAttribute("drinkAnalysis", userService.getDrinkAnalysis(info));
 		}
 		
-		
-		
-		System.out.println(checkHuman);
 		model.addAttribute("checkHuman", checkHuman);
 		model.addAttribute("faceResult", faceResult);
 		
@@ -174,9 +171,7 @@ public class UserController {
 	public ModelAndView vendingTrouble(HttpServletRequest request) throws Exception {
 		
 		Integer vendingId = Integer.parseInt(request.getParameter("vendingId"));
-		
 		userService.vendingTrouble(vendingId);
-		
 		
 		return new ModelAndView("/user/main");
 		
@@ -203,9 +198,6 @@ public class UserController {
 		vendingSubmitInfo.put("vendingId",  request.getParameter("vendingId"));
 		vendingSubmitInfo.put("stock",  request.getParameter("stock"));
 		vendingSubmitInfo.put("sendCheck",  request.getParameter("sendCheck"));
-		
-		System.out.println(request.getParameter("sendCheck"));
-		
 		
 		userService.vendingSubmit(vendingSubmitInfo);
 		

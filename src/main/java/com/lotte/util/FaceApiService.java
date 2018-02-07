@@ -29,11 +29,8 @@ public class FaceApiService {
 
 		
 	public HashMap<String,Object> faceAnalysis(@RequestParam("file") MultipartFile file) {
-		System.out.println("hello");
-		
 		
 		HashMap<String,Object> faceResult = new HashMap<String,Object>();
-
 		HttpClient httpclient = new DefaultHttpClient();
 
 		try {
@@ -54,31 +51,16 @@ public class FaceApiService {
 
 			// Request body.
 
-			System.out.println(file.getName());
-
 			FileEntity reqEntity = new FileEntity(convert(file), ContentType.APPLICATION_OCTET_STREAM);
 			request.setEntity(reqEntity);
 
 			HttpResponse response = httpclient.execute(request);
 			HttpEntity entity = response.getEntity();
-			System.out.println(response.getStatusLine());
 
 			if (entity != null) {
 				// Format and display the JSON response.
-				System.out.println("REST Response:\n");
 
 				String jsonString = EntityUtils.toString(entity).trim();
-
-				if (jsonString.charAt(0) == '[') {
-					JSONArray jsonArray = new JSONArray(jsonString);
-					System.out.println(jsonArray.toString(2));
-				} else if (jsonString.charAt(0) == '{') {
-					JSONObject jsonObject = new JSONObject(jsonString);
-
-					System.out.println(jsonObject.toString(2));
-				} else {
-					System.out.println(jsonString);
-				}
 				
 				JSONArray arr = new JSONArray(jsonString);
 				JSONObject faceAttributes = arr.getJSONObject(0).getJSONObject("faceAttributes");
@@ -86,28 +68,35 @@ public class FaceApiService {
 				String gender = faceAttributes.getString("gender");
 				Integer age = faceAttributes.getInt("age");
 				
-				System.out.println("gender : "  + faceAttributes.getString("gender"));
-				
 				faceResult.put("age", Integer.toString(age));
 				faceResult.put("gender",gender);
 				
+				System.out.println("gender : " + gender);
+				System.out.println("age : " + age);
+				
 			}
 			else {
-				System.out.println("????????????????????????????????????????");
 				faceResult.put("age", "not");
 				faceResult.put("gender","not");
+				
+				System.out.println("ageHash : " +faceResult.get("age"));
+				System.out.println("genderHash : " +faceResult.get("gender"));
+				
 			}
+			
+			
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			// Display error message.
-			System.out.println(e.getMessage());
 		}
 		
 		return faceResult;
 	}
 
 	public File convert(MultipartFile file) throws IOException {
-		File convFile = new File(file.getOriginalFilename());
+		File convFile = new File("/usr/ldcc/"+file.getOriginalFilename());
+		System.out.println(file.getOriginalFilename());
 		convFile.createNewFile();
 		FileOutputStream fos = new FileOutputStream(convFile);
 		fos.write(file.getBytes());

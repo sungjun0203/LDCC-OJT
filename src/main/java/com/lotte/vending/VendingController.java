@@ -44,7 +44,6 @@ public class VendingController {
 	@RequestMapping("/getDrinkSales")
 	@ResponseBody
 	public ArrayList<VendingDto> getDrinkSales(@RequestParam("vendingId") int vendingId) {
-		System.out.println("vendingId : "+vendingId);
 		return vService.getDrinkSales(vendingId);
 	}
 	@RequestMapping("/getVendingState")

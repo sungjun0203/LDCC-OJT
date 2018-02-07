@@ -21,8 +21,6 @@ public class CommonService {
 	
 	public ArrayList<Integer> getVendingId(String vendingLocation){
 		
-		System.out.println(commonDao.getVendingId(vendingLocation).get(0));
-		
 		return commonDao.getVendingId(vendingLocation);
 	}
 	

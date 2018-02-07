@@ -64,8 +64,6 @@ public class AllAnalysisService {
 		HashMap<String,Object> viewInfo = new HashMap<String,Object>();
 		viewInfo.put("viewNm", timeConvert);
 		
-		System.out.println("view : " + timeConvert);
-		
 		allAnalysisDao.timeSellViewCreate(viewInfo);
 		ArrayList<HashMap<String,Object>> timeSellRank = allAnalysisDao.timeSellRank(viewInfo);
 		allAnalysisDao.viewDelete(viewInfo);

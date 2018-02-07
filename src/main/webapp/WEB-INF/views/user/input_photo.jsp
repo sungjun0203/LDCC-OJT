@@ -97,7 +97,7 @@
 			<p class="text-muted">* 얼굴인식은 원본으로 진행됩니다.</p>
 
 			<div class="div_mid" style="width: 100%">
-				<input type="file" id="btn_file" name="file" align="middle" /> <img
+				<input type="file" id="file" name="file" align="middle" /> <img
 					id="img_preview" src="#"
 					style="visibility: hidden; text-align: center" />
 			</div>
@@ -138,9 +138,16 @@
 	}
 
 	function photoSubmit() {
+		
+		if($("#vendingNumber").val()==null || $("#file").val().length<1){
+			swal("에러", "모든 값을 선택해주세요!","error");
+		}
 
-		$("#photoForm").attr("action", "/user/faceVending");
-		$("#photoForm").submit();
+		else{
+			$("#photoForm").attr("action", "/user/faceVending");
+			$("#photoForm").submit();
+		}
+		
 	}
 </script>
 

@@ -38,9 +38,7 @@ public class KakaoApiService {
 			try {
 				if (res.getStatusLine().getStatusCode() == 200) {
 					org.apache.http.HttpEntity entity2 = (org.apache.http.HttpEntity) res.getEntity();
-					System.out.println(EntityUtils.toString(entity2));
 				} else {
-					System.out.println("eerr");
 				}
 			} finally {
 				res.close();

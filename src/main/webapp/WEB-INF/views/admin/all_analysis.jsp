@@ -171,7 +171,7 @@ function drawMaterial() {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="/resources/assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a> 
+                <a class="navbar-brand"><img src="/resources/assets/img/lotte-logo.png" alt="lotte logo" align="middle" style="width:50px;position: relative;top: 50%;transform:translateY(-50%);"/></a> 
             </div>
  
   <div style="color: white;padding: 15px 50px 5px 50px;float: left;font-size: 16px; position: relative;top: 50%;">
@@ -186,7 +186,7 @@ function drawMaterial() {
                 <ul class="nav" id="main-menu">
 					
                     <li>
-                        <a class="active-menu"  onclick="moveHome(this.id)" id="navi1"><i class="fa fa-home fa-3x"></i> <br>Home</a>
+                        <a class="text-center"  onclick="moveHome(this.id)" id="navi1"><i class="fa fa-home fa-3x"></i> <br>Home</a>
                     </li>
                      <li>
                         <a  class="text-center" onclick="moveMember(this.id)" id="navi2"><i class="fa fa-users fa-3x"></i> <br>Member</a>
@@ -198,7 +198,7 @@ function drawMaterial() {
 						   <a  class="text-center"  onclick="moveAnalysis()"><i class="fa fa-chart-pie fa-3x"></i> <br>Analysis</a>
                     </li>	
                     
-                    <li><a class="text-center" onclick="moveRank()"><i
+                    <li><a class="active-menu" onclick="moveRank()"><i
 						class="fa fa-chart-bar fa-3x" ></i> <br>Rank</a></li>
                 </ul>
             </div>

@@ -148,8 +148,6 @@ public class UserService {
 		
 		HashMap<String,Object> imgInfo = userDao.imgInfo(sellInfo);
 		
-		System.out.println(imgInfo);
-		
 		String msg = "[LSMO] 자판기 제고 알림 안내" + "          자판기 번호 : " + imgInfo.get("vendingId") + "          자판기 위치 : " + imgInfo.get("location") +
 				"          음료명 : " + imgInfo.get("drinkName") + "          남은 개수 : " + imgInfo.get("stock");
 		
@@ -157,7 +155,6 @@ public class UserService {
 			
 			sellDao.kakaoSubmit(sellInfo);
 			kakaoApiService.sendMesageAPI(asInfo.get(0).getAsPhone(), msg);
-			System.out.println("카카오 전송");
 		}
 		
 		else {
