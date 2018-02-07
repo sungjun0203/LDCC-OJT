@@ -83,12 +83,12 @@ public class FaceApiService {
 				JSONArray arr = new JSONArray(jsonString);
 				JSONObject faceAttributes = arr.getJSONObject(0).getJSONObject("faceAttributes");
 				
-				System.out.println("?null 아니니??");
-				
 				String gender = faceAttributes.getString("gender");
-				String age = faceAttributes.getString("age");
+				Integer age = faceAttributes.getInt("age");
 				
-				faceResult.put("age", age);
+				System.out.println("gender : "  + faceAttributes.getString("gender"));
+				
+				faceResult.put("age", Integer.toString(age));
 				faceResult.put("gender",gender);
 				
 			}

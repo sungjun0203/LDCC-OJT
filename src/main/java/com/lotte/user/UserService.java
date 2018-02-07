@@ -145,7 +145,13 @@ public class UserService {
 		sellInfo.put("drinkId",drinkId);
 		sellInfo.put("vendingId",vendingId);
 		
-		String msg = "[LSMO] 자판기 제고 알림 안내" + "음료명 : abcd" + "음료명 : abcd" + "음료명 : abcd"  ;
+		
+		HashMap<String,Object> imgInfo = userDao.imgInfo(sellInfo);
+		
+		System.out.println(imgInfo);
+		
+		String msg = "[LSMO] 자판기 제고 알림 안내" + "          자판기 번호 : " + imgInfo.get("vendingId") + "          자판기 위치 : " + imgInfo.get("location") +
+				"          음료명 : " + imgInfo.get("drinkName") + "          남은 개수 : " + imgInfo.get("stock");
 		
 		if(stock <=4 && vendingSubmitInfo.get("sendCheck").equals("미전송")) {
 			
@@ -159,14 +165,6 @@ public class UserService {
 		}
 		
 		sellDao.sellSubmit(sellInfo);
-		
-		
-		
-		
-		
-		System.out.println("gender : " + gender);
-		System.out.println("Age : " +  age);
-		
 		
 		
 	}

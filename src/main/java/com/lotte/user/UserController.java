@@ -139,9 +139,7 @@ public class UserController {
 			checkHuman = "false";
 		}
 		else {
-			
-			
-			
+			checkHuman = "true";
 			HashMap<String,Object> info = new HashMap<String,Object>();
 			
 			if(faceResult.get("gender").equals("male")) {
@@ -160,12 +158,12 @@ public class UserController {
 			info.put("age", age);
 			info.put("vendingId", vendingId);
 			
-			System.out.println(info);
-			
 			model.addAttribute("drinkAnalysis", userService.getDrinkAnalysis(info));
 		}
 		
 		
+		
+		System.out.println(checkHuman);
 		model.addAttribute("checkHuman", checkHuman);
 		model.addAttribute("faceResult", faceResult);
 		

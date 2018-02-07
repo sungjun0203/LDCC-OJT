@@ -10,6 +10,15 @@
 		where admin_id=#{id} and admin_password=#{pw}
 	</select>
 	
+	<select id="imgInfo" parameterType="HashMap" resultType="HashMap">
+		SELECT v.vending_id as vendingId , v.vending_location as location, S.STOCK_QUANTITY AS stock , D.DRINK_NAME AS drinkName
+		FROM VENDING V , DRINKS D, STOCKS S
+		WHERE S.DRINK_ID = #{drinkId} AND S.VENDING_ID = #{vendingId} AND
+		S.DRINK_ID = D.DRINK_ID
+		AND S.VENDING_ID = V.VENDING_ID;
+	
+	</select>
+	
 
 </mapper>
 

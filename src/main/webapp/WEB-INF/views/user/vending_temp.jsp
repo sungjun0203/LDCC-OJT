@@ -283,22 +283,34 @@ function vendingStockCheck(id){
 					<c:forEach var="drinksInfo" items="${drinksInfo}" begin="0" end="3"
 						step="1" varStatus="status">
 
-						<c:choose>
 
-							<c:when test="${status.index eq 0}">
-								<button type="button" class="vm_button" style="margin-left: 9%;"
+							<c:if test="${status.index eq 0}">
+							<button type="button" class="vm_button" style="margin-left: 9%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
-							</c:when>
-
-							<c:otherwise>
+							</c:if>
+	
+							<c:if test="${status.index eq 1}">
 								<button type="button" class="vm_button" style="margin-left: 6%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
-							</c:otherwise>
-						</c:choose>
+							</c:if>
+	
+							<c:if test="${status.index eq 2}">
+								<button type="button" class="vm_button" style="margin-left: 6%;"
+									onclick="drinkSelect(${drinksInfo.drink_id})">
+									<span class="slider round"></span>
+								</button>
+							</c:if>
+	
+							<c:if test="${status.index eq 3 }">
+								<button type="button" class="vm_button" style="margin-left: 6%;"
+									onclick="drinkSelect(${drinksInfo.drink_id})">
+									<span class="slider round"></span>
+								</button>
+							</c:if>
 
 
 					</c:forEach>
@@ -375,22 +387,34 @@ function vendingStockCheck(id){
 					<c:forEach var="drinksInfo" items="${drinksInfo}" begin="4" end="8"
 						step="1" varStatus="status">
 
-						<c:choose>
 
-							<c:when test="${status.index eq 4}">
-								<button type="button" class="vm_button" style="margin-left: 9%;"
+							<c:if test="${status.index eq 4}">
+							<button type="button" class="vm_button" style="margin-left: 9%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
-							</c:when>
-
-							<c:otherwise>
+							</c:if>
+	
+							<c:if test="${status.index eq 5}">
 								<button type="button" class="vm_button" style="margin-left: 6%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
-							</c:otherwise>
-						</c:choose>
+							</c:if>
+	
+							<c:if test="${status.index eq 6}">
+								<button type="button" class="vm_button" style="margin-left: 6%;"
+									onclick="drinkSelect(${drinksInfo.drink_id})">
+									<span class="slider round"></span>
+								</button>
+							</c:if>
+	
+							<c:if test="${status.index eq 7 }">
+								<button type="button" class="vm_button" style="margin-left: 6%;"
+									onclick="drinkSelect(${drinksInfo.drink_id})">
+									<span class="slider round"></span>
+								</button>
+							</c:if>
 
 
 					</c:forEach>
@@ -467,23 +491,35 @@ function vendingStockCheck(id){
 					<c:forEach var="drinksInfo" items="${drinksInfo}" begin="8"
 						end="12" step="1" varStatus="status">
 
-						<c:choose>
 
-							<c:when test="${status.index eq 8}">
-								<button type="button" class="vm_button" style="margin-left: 9%;"
+							<c:if test="${status.index eq 8}">
+							<button type="button" class="vm_button" style="margin-left: 9%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
-							</c:when>
-
-							<c:otherwise>
+							</c:if>
+	
+							<c:if test="${status.index eq 9}">
 								<button type="button" class="vm_button" style="margin-left: 6%;"
 									onclick="drinkSelect(${drinksInfo.drink_id})">
 									<span class="slider round"></span>
 								</button>
-							</c:otherwise>
+							</c:if>
+	
+							<c:if test="${status.index eq 10}">
+								<button type="button" class="vm_button" style="margin-left: 6%;"
+									onclick="drinkSelect(${drinksInfo.drink_id})">
+									<span class="slider round"></span>
+								</button>
+							</c:if>
+	
+							<c:if test="${status.index eq 11 }">
+								<button type="button" class="vm_button" style="margin-left: 6%;"
+									onclick="drinkSelect(${drinksInfo.drink_id})">
+									<span class="slider round"></span>
+								</button>
+							</c:if>
 
-						</c:choose>
 
 
 					</c:forEach>
@@ -509,7 +545,6 @@ function vendingStockCheck(id){
 <script>
 
 $( document ).ready(function() {
-	
 	
 	if(${checkHuman}==true){
 		

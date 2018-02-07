@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserDao {
 	
 	Integer userLoginCheck(HashMap<String,Object> userInfo);
-	
+
+	HashMap<String,Object> imgInfo(HashMap<String,Object> imgInfo);
 }
 
