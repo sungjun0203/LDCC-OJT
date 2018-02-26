@@ -6,11 +6,16 @@
 	  
 	   <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Phone Write</a>
+        <a class="nav-link" href="/fuji/main">전화 내용 기록</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Phone List</a>
+        <a class="nav-link" href="/fuji/phoneList">전화 내용 리스트</a>
       </li>
     </ul>
   </div>
 </nav>
+
+<script>
+
+
+</script>

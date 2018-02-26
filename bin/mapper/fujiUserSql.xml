@@ -25,6 +25,29 @@
 		VALUES (0, #{userId}, #{infoDescription},Now());
 	</insert>
 	
+	
+	<select id="getInfoList" resultType="com.lotte.phone.FujiUserDto">
+		select u.*, g.group_name , t.team_name,f.field_name, i.*
+		from fuji_user u, fuji_team t, fuji_group g, fuji_field f, fuji_info i
+		where  date(i.info_time) = date(now())
+			and i.info_user_id = u.user_id
+			and u.user_group = g.group_id
+			and g.group_team = t.team_id
+			and t.team_field = f.field_id; 
+	</select>
+	
+	
+	<insert id="fujiUserEtcAdd" parameterType="com.lotte.phone.FujiUserDto" useGeneratedKeys="true" keyProperty="userId">
+		INSERT INTO FUJI_USER
+		VALUES (0,#{userName},#{userPosition},#{userPhone},37)
+	</insert>
+	
+	<select id="userCheck" parameterType="com.lotte.phone.FujiUserDto" resultType="Integer">
+		select count(*)
+			from fuji_user
+			where user_id=#{userId};
+	</select>
+	
 
 </mapper>
 

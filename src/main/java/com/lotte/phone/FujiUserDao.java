@@ -13,6 +13,12 @@ public interface FujiUserDao {
 	ArrayList<String> getUserName();
 	HashMap<String,Object> getUserInfo(String userName);
 	void fujiPhoneWrite(FujiUserDto fujiUserDto);
+	Integer fujiUserEtcAdd(FujiUserDto fujiUserDto);
 	
+	ArrayList<FujiUserDto> getInfoList();
+	
+	
+	
+	Integer userCheck(FujiUserDto fujiUserDto);
 }
 

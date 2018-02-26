@@ -59,6 +59,8 @@ public class FujiController {
 	@RequestMapping("/phoneList")
 	public ModelAndView fujiPhoneList(Model model) {
 		
+		model.addAttribute("fujiInfoList", phoneService.getInfoList());
+		
 		return new ModelAndView("/fuji/phoneList");
 	}
 	

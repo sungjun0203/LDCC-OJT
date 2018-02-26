@@ -12,6 +12,12 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
+<%
+	if(session.getAttribute("id")!=null){
+		response.sendRedirect("/");  
+	}
+%>
+
 </head>
 
 <body>
@@ -44,20 +50,20 @@
 					<div class="col-sm-3" style="display: inline-block">
 						<div class="form-group">
 							<label for="userField">부문</label> <input type="text"
-								class="form-control" id="userField" placeholder="부문">
+								class="form-control" id="userField" name="userField" placeholder="부문">
 						</div>
 					</div>
 					<div class="col-sm-3" style="display: inline-block">
 						<div class="form-group">
 							<label for="userTeam">팀</label> <input type="text"
-								class="form-control" id="userTeam" placeholder="팀">
+								class="form-control" id="userTeam" name="userTeam" placeholder="팀">
 						</div>
 					</div>
 
 					<div class="col-sm-3" style="display: inline-block">
 						<div class="form-group">
 							<label for="userGroup">담당</label> <input type="text"
-								class="form-control" id="userGroup" placeholder="담당">
+								class="form-control" id="userGroup" name="userGroup" placeholder="담당">
 						</div>
 					</div>
 
@@ -69,7 +75,7 @@
 					<div class="col-lg-3" style="display: inline-block">
 						<div class="form-group">
 							<label for="userPhone">전화번호</label> <input type="text"
-								class="form-control" id="userPhone" placeholder="전화번호">
+								class="form-control" id="userPhone" name="userPhone" placeholder="전화번호">
 						</div>
 
 					</div>

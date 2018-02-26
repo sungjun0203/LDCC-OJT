@@ -11,8 +11,19 @@
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel='stylesheet prefetch'
+	href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css'>
 
+<link rel="stylesheet" href="/resources/css/style.css">
 </head>
+
+<script>
+	$(function() {
+		$("#datepicker").datepicker();
+		$('#datepicker').datepicker('option', 'dateFormat', 'yy-mm-dd');
+		$("#datepicker").datepicker('setDate', new Date());
+	});
+</script>
 
 <body>
 
@@ -22,28 +33,50 @@
 
 
 	<div class="container">
-	
-	
-	
+
+		<div class="col-lg-12 row">
+			<div class="col-lg-6"></div>
+			<div class="col-lg-4">
+				<section class="webdesigntuts-workshop">
+						<input type="search" placeholder="검색">
+						<button>Search</button>
+				</section>
+
+			</div>
+			<div class="col-lg-2" style="text-align: right">
+				<div class="form-group has-success">
+					<input type="text" class="form-control is-valid" id="datepicker"
+						style="text-align: center" onchange="dayChange()">
+				</div>
+			</div>
+		</div>
+
 
 		<table class="table table-hover">
 			<thead>
 				<tr class="table-info" style="text-align: center">
 					<th scope="col" style="width: 5%">번호</th>
 					<th scope="col" style="width: 15%">담당</th>
-					<th scope="col" style="width: 10%">전화번호</th>
 					<th scope="col" style="width: 10%">이름</th>
+					<th scope="col" style="width: 10%">전화번호</th>
+
+					<th scope="col" style="width: 10%">시간</th>
 					<th scope="col" style="width: 50%">내용</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr class="table-light" style="text-align: center">
-					<th scope="row" style="width: 5%">1</th>
-					<td style="width: 15%">크로마키 담당</td>
-					<td style="width: 10%">031-651-8891</td>
-					<td style="width: 10%">박성준</td>
-					<td style="width: 50%">안녕하세요</td>
-				</tr>
+			<tbody id="tBodyHTML">
+
+				<c:forEach var="fujiInfo" items="${fujiInfoList}" varStatus="status">
+					<tr class="table-light" style="text-align: center">
+						<th scope="row" style="width: 5%">${status.count}</th>
+						<td style="width: 15%">${fujiInfo.groupName}</td>
+						<td style="width: 10%">${fujiInfo.userName}</td>
+						<td style="width: 10%">${fujiInfo.userPhone}</td>
+						<td style="width: 20%">${fn:substring(fujiInfo.infoTime,0,16)}</td>
+						<td style="width: 50%">${fujiInfo.infoDescription}</td>
+					</tr>
+
+				</c:forEach>
 			</tbody>
 		</table>
 
@@ -56,7 +89,17 @@
 
 
 <script>
-	</script>
+
+
+function dayChange(){
+	
+	var check = $("#datepicker").val();
+	$("#tBodyHTML").empty();
+	
+	
+}
+	
+</script>
 
 </html>
 
