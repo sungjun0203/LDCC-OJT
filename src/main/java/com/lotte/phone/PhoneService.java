@@ -1,5 +1,8 @@
 package com.lotte.phone;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,17 +30,18 @@ public class PhoneService {
 	
 	public void fujiPhoneWrite(FujiUserDto fujiUserDto) {
 		
-		// 존재여부 확인
-		
 		if(fujiUserDao.userCheck(fujiUserDto)==1) {
 			fujiUserDao.fujiPhoneWrite(fujiUserDto);
 		}
 		else {
+			
+			if(fujiUserDto.getUserPosition()==null) {
+				fujiUserDto.setUserPosition(".");
+			}
 			Integer userKey = fujiUserDao.fujiUserEtcAdd(fujiUserDto);
 			
 			fujiUserDao.fujiPhoneWrite(fujiUserDto);
 		}
-		
 		
 		
 	}
@@ -46,6 +50,20 @@ public class PhoneService {
 	public ArrayList<FujiUserDto> getInfoList(){
 		
 		return fujiUserDao.getInfoList();
+		
+	}
+	
+	public ArrayList<FujiUserDto> getPhoneDateList(String wantDate) throws ParseException{
+		
+		
+		return fujiUserDao.getPhoneDateList(wantDate);
+		
+	}
+	
+	public ArrayList<FujiUserDto> getPhoneSearchList(String searchData) throws ParseException{
+		
+		
+		return fujiUserDao.getPhoneSearchList(searchData);
 		
 	}
 	

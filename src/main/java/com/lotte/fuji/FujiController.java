@@ -1,5 +1,7 @@
 package com.lotte.fuji;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +33,16 @@ public class FujiController {
 	@RequestMapping("/main")
 	public ModelAndView fujiMain(Model model) {
 		
+		return new ModelAndView("/fuji/main");
+		
+	}
+	
+	@RequestMapping("/phoneWrite")
+	public ModelAndView fujiPhoneWrite(Model model) {
+		
 		model.addAttribute("userNmInfo", phoneService.getUserName());
 		
-		return new ModelAndView("/fuji/main");
+		return new ModelAndView("/fuji/phoneWrite");
 	}
 	
 	@ResponseBody
@@ -47,7 +56,7 @@ public class FujiController {
 		
 	}
 	
-	@RequestMapping("/phoneWrite")
+	@RequestMapping("/phoneWriteSubmit")
 	public String fujiPhoneWrite(Model model, FujiUserDto fujiUserDto) {
 		
 		phoneService.fujiPhoneWrite(fujiUserDto);
@@ -64,5 +73,25 @@ public class FujiController {
 		return new ModelAndView("/fuji/phoneList");
 	}
 	
+	
+	@ResponseBody
+	@RequestMapping("/phoneDateList")
+	public ArrayList<FujiUserDto> phoneDateList(HttpServletRequest request) throws ParseException{
+		
+		String wantDate = request.getParameter("wantDate");
+		
+		return phoneService.getPhoneDateList(wantDate);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/phoneSearchList")
+	public ArrayList<FujiUserDto> phoneSearchList(HttpServletRequest request) throws ParseException{
+		
+		String searchData = request.getParameter("searchData");
+		
+		return phoneService.getPhoneSearchList(searchData);
+		
+	}
 	
 }

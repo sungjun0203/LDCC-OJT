@@ -38,8 +38,9 @@
 			<div class="col-lg-6"></div>
 			<div class="col-lg-4">
 				<section class="webdesigntuts-workshop">
-						<input type="search" placeholder="검색">
-						<button>Search</button>
+					<input type="search" placeholder="검색" id="searchInput"
+						name="searchInput" onkeydown="searchInputForm()">
+					<button onclick="searchBtn()">Search</button>
 				</section>
 
 			</div>
@@ -70,12 +71,12 @@
 					<tr class="table-light" style="text-align: center">
 						<th scope="row" style="width: 5%">${status.count}</th>
 						<td style="width: 15%">${fujiInfo.groupName}</td>
-						<td style="width: 10%">${fujiInfo.userName}</td>
-						<td style="width: 10%">${fujiInfo.userPhone}</td>
-						<td style="width: 20%">${fn:substring(fujiInfo.infoTime,0,16)}</td>
+						<td style="width: 10%">${fujiInfo.userName}
+							${fujiInfo.userPosition}</td>
+						<td style="width: 15%">${fujiInfo.userPhone}</td>
+						<td style="width: 15%">${fn:substring(fujiInfo.infoTime,0,16)}</td>
 						<td style="width: 50%">${fujiInfo.infoDescription}</td>
 					</tr>
-
 				</c:forEach>
 			</tbody>
 		</table>
@@ -89,16 +90,109 @@
 
 
 <script>
+	function tableWrite(data) {
 
+		$("#tBodyHTML").append(
+				'<tr class="table-light" style="text-align: center"></tr>')
 
-function dayChange(){
-	
-	var check = $("#datepicker").val();
-	$("#tBodyHTML").empty();
-	
-	
-}
-	
+		for (var i = 0; i < data.length; i++) {
+
+			var date = new Date(data[i].infoTime);
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+			var hour = date.getHours();
+			var min = date.getMinutes();
+			var sec = date.getSeconds();
+			
+			var retVal = year + "-" + (month < 10 ? "0" + month : month) + "-"
+					+ (day < 10 ? "0" + day : day) + " "
+					+ (hour < 10 ? "0" + hour : hour) + ":"
+					+ (min < 10 ? "0" + min : min);
+
+			$("#tBodyHTML").append(
+					'<tr class="table-light" style="text-align: center">' +
+
+					'<th scope="row" style="width: 5%">' + (i + 1) + ' </th> '
+							+ '<td style="width: 15%">' + data[i].groupName
+							+ '</td> ' + '<td style="width: 10%">'
+							+ data[i].userName + '</td>'
+							+ '<td style="width: 15%">' + data[i].userPhone
+							+ '</td>' + '<td style="width: 15%">' + retVal
+							+ '</td> ' + '<td style="width: 50%">'
+							+ data[i].infoDescription + '</td> </th>');
+
+		}
+	}
+
+	function dayChange() {
+
+		var wantDate = $("#datepicker").val();
+		$("#tBodyHTML").empty();
+
+		$.ajax({
+			url : "/fuji/phoneDateList",
+			dataType : "json",
+			type : "GET",
+			data : {
+				"wantDate" : wantDate
+			},
+			success : function(data) {
+				tableWrite(data);
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "error:" + error);
+			}
+		});
+
+	}
+
+	function searchInputForm() {
+		if (event.keyCode == 13) {
+			var searchData = $("#searchInput").val();
+			if (searchData.length > 0) {
+				searchBtn();
+			} else {
+				swal({
+					type : 'error',
+					title : '검색 오류',
+					text : '값을 입력해주세요',
+				})
+			}
+		}
+	}
+
+	function searchBtn() {
+
+		var searchData = $("#searchInput").val();
+
+		if (searchData.length > 0) {
+
+			$("#tBodyHTML").empty();
+
+			$.ajax({
+				url : "/fuji/phoneSearchList",
+				dataType : "json",
+				type : "GET",
+				data : {
+					"searchData" : searchData
+				},
+				success : function(data) {
+					tableWrite(data);
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "error:" + error);
+				}
+			});
+		} else {
+			swal({
+				type : 'error',
+				title : '검색 오류',
+				text : '값을 입력해주세요',
+			})
+		}
+
+	}
 </script>
 
 </html>

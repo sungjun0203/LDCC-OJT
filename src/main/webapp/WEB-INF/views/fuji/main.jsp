@@ -11,6 +11,7 @@
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <%
 	if(session.getAttribute("id")!=null){
@@ -29,86 +30,8 @@
 
 	<div class="container">
 
-		<form id="info" name="info" action="/fuji/phoneWrite">
-		
-		<input type="hidden" id="userId" name="userId">
 
-
-			<div class="col-lg-12">
-
-
-				<div class="col-lg-12">
-
-					<div class="col-sm-2" style="display: inline-block">
-						<div class="form-group">
-							<label for="userName">이름</label> <input type="text"
-								class="form-control" id="userName" name="userName"
-								placeholder="이름" onkeydown="autoComplete();">
-						</div>
-					</div>
-
-					<div class="col-sm-3" style="display: inline-block">
-						<div class="form-group">
-							<label for="userField">부문</label> <input type="text"
-								class="form-control" id="userField" name="userField" placeholder="부문">
-						</div>
-					</div>
-					<div class="col-sm-3" style="display: inline-block">
-						<div class="form-group">
-							<label for="userTeam">팀</label> <input type="text"
-								class="form-control" id="userTeam" name="userTeam" placeholder="팀">
-						</div>
-					</div>
-
-					<div class="col-sm-3" style="display: inline-block">
-						<div class="form-group">
-							<label for="userGroup">담당</label> <input type="text"
-								class="form-control" id="userGroup" name="userGroup" placeholder="담당">
-						</div>
-					</div>
-
-					<div class="col-lg-12"></div>
-
-				</div>
-
-				<div class="col-lg-12">
-					<div class="col-lg-3" style="display: inline-block">
-						<div class="form-group">
-							<label for="userPhone">전화번호</label> <input type="text"
-								class="form-control" id="userPhone" name="userPhone" placeholder="전화번호">
-						</div>
-
-					</div>
-				</div>
-
-				<div class="col-lg-12">
-					<div class="col-lg-2"></div>
-					<div class="col-lg-8">
-						<div class="form-group">
-							<label for="userDescription">전화내용</label>
-							<textarea class="form-control" id="infoDescription" name="infoDescription" rows="3"></textarea>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-12">
-					<div class="col-lg-11"
-						style="display: inline-block; text-align: right">
-						<button type="button" class="btn btn-info"
-							style="display: inline-block" id="submitBtn" onclick="submitOnClick()">등록</button>
-						<button type="button" class="btn btn-warning"
-							style="display: inline-block" id="cancelBtn" onclick="cancelOnClick()">취소</button>
-					</div>
-
-
-				</div>
-
-
-			</div>
-
-		</form>
-
-
+<div id="linechart_material" style="width: 900px; height: 500px"></div>
 		<!-- 푸터 -->
 		<jsp:include page="../fuji/footer.jsp"></jsp:include>
 		<!-- 푸터 끝 -->
@@ -118,80 +41,49 @@
 
 
 <script>
-	var autocomplete_text = new Array();
-	
-	
-	<c:forEach items="${userNmInfo}" var="userNmInfo" varStatus="status">
-	
-		autocomplete_text[${status.index}] = "${fn:trim(userNmInfo)}";
-	</c:forEach>
-	
-	for (var i=0; i<autocomplete_text.length; i++){
-		
-		autocomplete_text[i].replace(/\s/g,'');
-	}
-	
-	
-
-	function autoComplete() {
-		
-
-		$("#userName").autocomplete({
-			source :autocomplete_text,
+			google.charts.load('current', {'packages':['line']});
+			google.charts.setOnLoadCallback(drawChart);
 			
-			select: function( event, ui ) {
-				
-				var userName = ui.item.label;
-				
-				$.ajax({
-					url : "/fuji/phoneAjax",
-					dataType : "json",
-					type : "GET",
-					data : {
-						"userName" : userName
-					},
-					success : function(data) {
-						
-						$("#userField").val(data.field_name.replace(/\s/g,''));
-						$("#userTeam").val(data.team_name);
-						$("#userGroup").val(data.group_name);
-						$("#userPhone").val(data.user_phone.replace(/\s/g,''));
-						$("#userId").val(data.user_id);
-					},
-					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "error:" + error);
-					}
-				});
-				
-	            // 만약 검색리스트에서 선택하였을때 선택한 데이터에 의한 이벤트발생
-	        },
-	        focus: function( event, ui ) {
-	        	return false; 
-	        }
+			function drawChart() {
+			
+			var data = new google.visualization.DataTable();
+			data.addColumn('number', 'Day');
+			data.addColumn('number', 'Guardians of the Galaxy');
+			data.addColumn('number', 'The Avengers');
+			data.addColumn('number', 'Transformers: Age of Extinction');
+			
+			data.addRows([
+			  [1,  37.8, 80.8, 41.8],
+			  [2,  30.9, 69.5, 32.4],
+			  [3,  25.4,   57, 25.7],
+			  [4,  11.7, 18.8, 10.5],
+			  [5,  11.9, 17.6, 10.4],
+			  [6,   8.8, 13.6,  7.7],
+			  [7,   7.6, 12.3,  9.6],
+			  [8,  12.3, 29.2, 10.6],
+			  [9,  16.9, 42.9, 14.8],
+			  [10, 12.8, 30.9, 11.6],
+			  [11,  5.3,  7.9,  4.7],
+			  [12,  6.6,  8.4,  5.2],
+			  [13,  4.8,  6.3,  3.6],
+			  [14,  4.2,  6.2,  3.4]
+			]);
+			
+			var options = {
+			  chart: {
+			    title: 'Box Office Earnings in First Two Weeks of Opening',
+			    subtitle: 'in millions of dollars (USD)'
+			  },
+			  width: 900,
+			  animation: { startup: true, duration: 2500, easing: 'out' },
+			  height: 500
+			};
+			
+			var chart = new google.charts.Line(document.getElementById('linechart_material'));
+			
+			chart.draw(data, google.charts.Line.convertOptions(options));
+			}
 
-
-		});
-
-	}
-	
-	
-	function submitOnClick(){
-		
-		alert();
-		$("#info").submit();
-		
-	}
-	
-	function cancelOnClick(){
-		
-		$("#userField").val("");
-		$("#userTeam").val("");
-		$("#userGroup").val("");
-		$("#userPhone").val("");
-		$("#userId").val("");
-		$("#userName").val("");
-		$("#infoDescription").val("");
-	}
 </script>
 
 </html>

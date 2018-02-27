@@ -1,6 +1,7 @@
 package com.lotte.phone;
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,6 +17,8 @@ public interface FujiUserDao {
 	Integer fujiUserEtcAdd(FujiUserDto fujiUserDto);
 	
 	ArrayList<FujiUserDto> getInfoList();
+	ArrayList<FujiUserDto> getPhoneDateList(String wantDate);
+	ArrayList<FujiUserDto> getPhoneSearchList(String searchData);
 	
 	
 	

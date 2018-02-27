@@ -9,45 +9,87 @@
 		FROM FUJI_USER
 		ORDER BY userName;
 	</select>
-	
+
 	<select id="getUserInfo" resultType="HashMap" parameterType="String">
 		select u.*, g.group_name , t.team_name,f.field_name
-		from fuji_user u, fuji_team t, fuji_group g, fuji_field f
-		where u.user_name LIKE CONCAT('%',#{userName},'%')
-		  and u.user_group = g.group_id
-		        and g.group_team = t.team_id
-		        and t.team_field = f.field_id; 
-	
+		from fuji_user u,
+		fuji_team t, fuji_group g, fuji_field f
+		where u.user_name LIKE
+		CONCAT('%',#{userName},'%')
+		and u.user_group = g.group_id
+		and g.group_team = t.team_id
+		and t.team_field = f.field_id;
+
 	</select>
-	
-	<insert id="fujiPhoneWrite" parameterType = "com.lotte.phone.FujiUserDto">
+
+	<insert id="fujiPhoneWrite" parameterType="com.lotte.phone.FujiUserDto">
 		INSERT INTO FUJI_INFO
 		VALUES (0, #{userId}, #{infoDescription},Now());
 	</insert>
-	
-	
+
+
 	<select id="getInfoList" resultType="com.lotte.phone.FujiUserDto">
+		select u.*, g.group_name ,
+		t.team_name,f.field_name, i.*
+		from fuji_user u, fuji_team t, fuji_group
+		g, fuji_field f, fuji_info i
+		where date(i.info_time) = date(now())
+		and i.info_user_id = u.user_id
+		and u.user_group = g.group_id
+		and g.group_team = t.team_id
+		and t.team_field = f.field_id
+		
+		order by i.info_time asc;
+	</select>
+
+
+	<insert id="fujiUserEtcAdd" parameterType="com.lotte.phone.FujiUserDto"
+		useGeneratedKeys="true" keyProperty="userId">
+		INSERT INTO FUJI_USER
+				VALUES (0,#{userName},#{userPosition},#{userPhone},37)
+		
+	</insert>
+
+	<select id="userCheck" parameterType="com.lotte.phone.FujiUserDto"
+		resultType="Integer">
+		select count(*)
+		from fuji_user
+		where user_id=#{userId};
+	</select>
+
+
+
+
+	<select id="getPhoneDateList" resultType="com.lotte.phone.FujiUserDto" parameterType="String">
 		select u.*, g.group_name , t.team_name,f.field_name, i.*
 		from fuji_user u, fuji_team t, fuji_group g, fuji_field f, fuji_info i
-		where  date(i.info_time) = date(now())
-			and i.info_user_id = u.user_id
-			and u.user_group = g.group_id
-			and g.group_team = t.team_id
-			and t.team_field = f.field_id; 
+		where date(i.info_time) = #{wantDate}
+		and i.info_user_id = u.user_id
+		and u.user_group = g.group_id
+		and g.group_team = t.team_id
+		and t.team_field = f.field_id
+		
+		order by i.info_time asc;
 	</select>
 	
-	
-	<insert id="fujiUserEtcAdd" parameterType="com.lotte.phone.FujiUserDto" useGeneratedKeys="true" keyProperty="userId">
-		INSERT INTO FUJI_USER
-		VALUES (0,#{userName},#{userPosition},#{userPhone},37)
-	</insert>
-	
-	<select id="userCheck" parameterType="com.lotte.phone.FujiUserDto" resultType="Integer">
-		select count(*)
-			from fuji_user
-			where user_id=#{userId};
+	<select id="getPhoneSearchList" resultType="com.lotte.phone.FujiUserDto" parameterType="String">
+		select u.*, g.group_name , t.team_name,f.field_name, i.*
+		from fuji_user u, fuji_team t, fuji_group g, fuji_field f, fuji_info i
+		where i.info_user_id = u.user_id
+		and u.user_group = g.group_id
+		and g.group_team = t.team_id
+		and t.team_field = f.field_id
+        and 
+        	(	u.user_name LIKE CONCAT('%',#{searchData},'%') 
+        		OR g.group_name LIKE CONCAT('%',#{searchData},'%')
+        		OR u.user_phone LIKE CONCAT('%',#{searchData},'%')
+        		OR i.info_description LIKE CONCAT('%',#{searchData},'%')
+        	)
+        	
+        	
+        	order by i.info_time asc;
 	</select>
-	
+
 
 </mapper>
 
