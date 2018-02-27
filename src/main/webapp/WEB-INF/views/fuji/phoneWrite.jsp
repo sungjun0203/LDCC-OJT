@@ -6,18 +6,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<title>Insert title here</title>
+<title>Fuji-Helper</title>
 <jsp:include page="../common/common.jsp"></jsp:include>
 
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 <%
-	if(session.getAttribute("id")!=null){
-		response.sendRedirect("/");  
+	if(session.getAttribute("fujiUser")==null){
+		response.sendRedirect("/fuji/login");  
 	}
 %>
-
 </head>
 
 <body>

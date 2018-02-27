@@ -3,22 +3,20 @@ package com.lotte.fuji;
 public class FujiDto {
 	
 	String adminId;			
-	String adminPw;
+	String adminPassword;
 	String adminPhone;
-	String adminNm;
-	
-	
+	String adminName;
 	public String getAdminId() {
 		return adminId;
 	}
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
 	}
-	public String getAdminPw() {
-		return adminPw;
+	public String getAdminPassword() {
+		return adminPassword;
 	}
-	public void setAdminPw(String adminPw) {
-		this.adminPw = adminPw;
+	public void setAdminPassword(String adminPassword) {
+		this.adminPassword = adminPassword;
 	}
 	public String getAdminPhone() {
 		return adminPhone;
@@ -26,12 +24,14 @@ public class FujiDto {
 	public void setAdminPhone(String adminPhone) {
 		this.adminPhone = adminPhone;
 	}
-	public String getAdminNm() {
-		return adminNm;
+	public String getAdminName() {
+		return adminName;
 	}
-	public void setAdminNm(String adminNm) {
-		this.adminNm = adminNm;
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
 	}
+	
+	
 	
 	
 	

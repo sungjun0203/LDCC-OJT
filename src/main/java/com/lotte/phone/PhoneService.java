@@ -61,10 +61,16 @@ public class PhoneService {
 	}
 	
 	public ArrayList<FujiUserDto> getPhoneSearchList(String searchData) throws ParseException{
-		
-		
 		return fujiUserDao.getPhoneSearchList(searchData);
-		
+	}
+	
+	
+	public ArrayList<FujiUserDto> allUserList() {
+		return fujiUserDao.allUserList();
+	}
+	
+	public void infoDelete(Integer infoId) {
+		fujiUserDao.infoDelete(infoId);
 	}
 	
 	

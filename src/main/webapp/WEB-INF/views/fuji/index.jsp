@@ -170,7 +170,7 @@ body {
 		var userPw = $("#userPw").val();
 
 		$.ajax({
-			url : "/admin/loginCheck",
+			url : "/fuji/loginCheck",
 			dataType : "text",
 			type : "POST",
 			data : {

@@ -11,6 +11,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/fuji/phoneList">전화 내용 리스트</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/fuji/userList">사용자 리스트</a>
+      </li>
     </ul>
   </div>
 </nav>

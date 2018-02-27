@@ -89,6 +89,26 @@
         	
         	order by i.info_time asc;
 	</select>
+	
+	
+	<select id="allUserList" resultType = "com.lotte.phone.FujiUserDto">
+		select u.*, g.*,
+		t.*,f.field_name
+		from fuji_user u, fuji_team t, fuji_group
+		g, fuji_field f
+		where u.user_group = g.group_id
+		and g.group_team = t.team_id
+		and t.team_field = f.field_id
+        
+        order by t.team_name asc;
+	
+	</select>
+	
+	<delete id="infoDelete" parameterType="Integer">
+		delete
+		from fuji_info
+		where info_id=#{infoId}
+	</delete>
 
 
 </mapper>

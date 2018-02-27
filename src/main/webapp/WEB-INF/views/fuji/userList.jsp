@@ -40,52 +40,46 @@
 
 	<div class="container">
 
-		<div class="col-lg-12 row">
-			<div class="col-lg-6"></div>
-			<div class="col-lg-4">
-				<section class="webdesigntuts-workshop">
+		<div class="col-sm-12 row" style="margin-bottom:20px">
+			<div class="col-sm-8"></div>
+			<div class="col-sm-4" >
+				<section class="webdesigntuts-workshop" style="text-align:right">
 					<input type="search" placeholder="검색" id="searchInput"
 						name="searchInput" onkeydown="searchInputForm()">
 					<button onclick="searchBtn()">Search</button>
 				</section>
-
-			</div>
-			<div class="col-lg-2" style="text-align: right">
-				<div class="form-group has-success">
-					<input type="text" class="form-control is-valid" id="datepicker"
-						style="text-align: center" onchange="dayChange()">
-				</div>
 			</div>
 		</div>
 
-
-		<table class="table table-hover" id="bigTable">
+		<table class="table table-hover">
 			<thead>
 				<tr class="table-info" style="text-align: center">
 					<th scope="col" style="width: 5%">번호</th>
-					<th scope="col" style="width: 15%">담당</th>
+					<th scope="col" style="width: 10%">팀</th>
+					<th scope="col" style="width: 10%">담당</th>
+					<th scope="col" style="width: 10%">직위</th>
 					<th scope="col" style="width: 10%">이름</th>
-					<th scope="col" style="width: 10%">전화번호</th>
-
-					<th scope="col" style="width: 10%">시간</th>
-					<th scope="col" style="width: 35%">내용</th>
-					<th scope="col" style="width: 10%">비고</th>
+					<th scope="col" style="width: 10%">번호</th>
+					<th scope="col" style="width: 5%">수정</th>
+					<th scope="col" style="width: 5%">삭제</th>
 				</tr>
 			</thead>
 			<tbody id="tBodyHTML">
-
-				<c:forEach var="fujiInfo" items="${fujiInfoList}" varStatus="status">
+			
+			<c:forEach var="userInfo" items="${allUserList}" varStatus="status">
 					<tr class="table-light" style="text-align: center">
 						<th scope="row" style="width: 5%">${status.count}</th>
-						<td style="width: 15%">${fujiInfo.groupName}</td>
-						<td style="width: 10%">${fujiInfo.userName}
-							${fujiInfo.userPosition}</td>
-						<td style="width: 15%">${fujiInfo.userPhone}</td>
-						<td style="width: 15%">${fn:substring(fujiInfo.infoTime,0,16)}</td>
-						<td style="width: 35%">${fujiInfo.infoDescription}</td>
-						<td style="width: 10%"><button type="button" class="btn btn-outline-warning" onclick="infoDelete(${fujiInfo.infoId})">삭제</button></td>
+						<td style="width: 10%">${userInfo.teamName}</td>
+						<td style="width: 15%">${userInfo.groupName}</td>
+						<td style="width: 5%">${userInfo.userPosition}</td>
+						<td style="width: 10%">${userInfo.userName}</td>
+						<td style="width: 10%">${userInfo.userPhone}</td>
+						<td style="width: 5%"><button type="button" class="btn btn-outline-warning" onclick="userUpdate(${userInfo.userId})">수정</button></td>
+						<td style="width: 5%"><button type="button" class="btn btn-outline-danger">삭제</button></td>
 					</tr>
 				</c:forEach>
+
+				
 			</tbody>
 		</table>
 
@@ -98,33 +92,14 @@
 
 
 <script>
-
-	function infoDelete(data){
-		
-		var confirmValue = confirm("삭제하시겠습니까?");
-		
-		if(confirmValue==true){
-			$.ajax({
-				url : "/fuji/infoDelete",
-				dataType : "text",
-				type : "GET",
-				data : {
-					"infoId" : data
-				},
-				success : function(data) {
-					
-					$("#bigTable").load(window.location.href + " #bigTable");
-				},
-				error : function(request, status, error) {
-					alert("code:" + request.status + "\n" + "error:" + error);
-				}
-			});
-		}
+	function userUpdate(id){
 		
 		
-		
-		
+		alert(id);
 	}
+
+
+
 	function tableWrite(data) {
 
 		$("#tBodyHTML").append(

@@ -17,6 +17,7 @@
 		<package name="com.lotte.index" />
 		<package name="com.lotte.sell" />
 		<package name="com.lotte.phone" />
+		<package name="com.lotte.fuji" />
 		
 	</typeAliases>
 	<mappers>
@@ -31,6 +32,7 @@
 		<mapper resource="mapper/indexSql.xml" />
 		<mapper resource="mapper/sellSql.xml" />
 		<mapper resource="mapper/fujiUserSql.xml" />
+		<mapper resource="mapper/fujiAdminSql.xml" />
 	</mappers>
 </configuration>
 

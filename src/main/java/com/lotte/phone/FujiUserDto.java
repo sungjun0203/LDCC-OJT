@@ -25,6 +25,17 @@ public class FujiUserDto {
 	String infoDescription;
 	
 	Timestamp infoTime;
+	Integer infoId;
+	
+	
+
+	public Integer getInfoId() {
+		return infoId;
+	}
+
+	public void setInfoId(Integer infoId) {
+		this.infoId = infoId;
+	}
 
 	public Timestamp getInfoTime() {
 		return infoTime;

@@ -20,7 +20,9 @@ public interface FujiUserDao {
 	ArrayList<FujiUserDto> getPhoneDateList(String wantDate);
 	ArrayList<FujiUserDto> getPhoneSearchList(String searchData);
 	
+	ArrayList<FujiUserDto> allUserList();
 	
+	void infoDelete(Integer infoId);
 	
 	Integer userCheck(FujiUserDto fujiUserDto);
 }
